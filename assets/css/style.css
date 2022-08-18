@@ -88,15 +88,7 @@
   display: inline-block;
 }
 
-body {
-  background-image: url('file:///Users/r.zhuravel/PhpstormProjects/Projekt1/assets/images/top_background.png');
-  background-repeat: no-repeat;
-}
 
-body{
-  background-color: #f6f6f9;
-
-}
 
 body,
 input,
@@ -120,8 +112,9 @@ option {
 }
 
 #navigationsleiste>a {
-  text-decoration:rgb(11, 11, 11);
+  text-decoration: rgb(11, 11, 11);
 }
+
 .gal1 {
   width: 100px;
   height: 100px;
@@ -143,7 +136,8 @@ option {
 }
 
 
-h4, p {
+h4,
+p {
   display: inline;
   margin: 0;
 }
@@ -168,7 +162,7 @@ h4, p {
 .item {
   width: 100%;
   border-radius: 8px;
-  background-color: rgba(117, 136, 155, 0.55);
+  background-color: #2274a5;
   padding: 15px;
   overflow: hidden;
 }
@@ -218,9 +212,55 @@ h4, p {
   justify-content: center;
 }
 
-
+#sitelogo {
+  height: 150px;
+  width: auto;
+}
 
 img.center {
+  display: block;
+  margin: 0 auto;
+}
 
+body {
+
+  background-color: #B3E5FC;
+
+}
+
+
+.card-1 {
+
+  border: none;
+  border-radius: 10px;
   width: 100%;
+  background-color: #fff;
+}
+
+
+.icons i {
+
+  margin-left: 20px;
+
+}
+
+
+
+
+
+#brrr {
+  background-color: #E7E7E7;
+  border-radius: 8px;
+  border: none;
+  color: black;
+  padding: 20px 30px;
+  text-align: center;
+  display: inline-block;
+  font-size: 15px;
+  transition-duration: 0.2s;
+}
+
+#brrr:hover {
+  background-color: #2274a5;
+  color: white;
 }
