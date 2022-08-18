@@ -96,7 +96,7 @@
                 <img src="/assets/images/spaghetti.jpg" alt="Spaghetti">
                 <div class="flexContainer">
                     <h1 class="rezeptTitel">Spaghetti mit Sauce</h1>
-                    <a class="viewButton" href="#">Speise anzeigen</a>
+                    <button type="button" class="btn btn-dark" href="#">Speise anzeigen</button>
                 </div>
                 <p class="itemData">Kalorien: 200kcal</p>
             </div>
@@ -105,7 +105,7 @@
                 <img src="/assets/images/pommes.jpg" alt="Spaghetti">
                 <div class="flexContainer">
                     <h1 class="rezeptTitel">Pommes mit Ketchup</h1>
-                    <a class="viewButton" href="#">Speise anzeigen</a>
+                    <button type="button" class="btn btn-dark" href="#">Speise anzeigen</button>
                 </div>
                 <p class="itemData">Kalorien: 200kcal</p>
             </div>
@@ -114,7 +114,7 @@
                 <img src="/assets/images/hamburger.jpg" alt="Spaghetti">
                 <div class="lexContainer">
                     <h1 class="rezeptTitel">Hamburger</h1>
-                    <a class="viewButton" href="#">Speise anzeigen</a>
+                    <button type="button" class="btn btn-dark" href="#">Speise anzeigen</button>
                 </div>
                 <p class="itemData">Kalorien: 200kcal</p>
             </div>
@@ -123,7 +123,7 @@
                 <img src="/assets/images/chickenbreast.jpg" alt="Spaghetti">
                 <div class="flexContainer">
                     <h1 class="rezeptTitel">Hähnchenbrust</h1>
-                    <a class="viewButton" href="#">Speise anzeigen</a>
+                    <button type="button" class="btn btn-dark" href="#">Speise anzeigen</button>
                 </div>
                 <p class="itemData">Kalorien: 200kcal</p>
             </div>
@@ -132,7 +132,7 @@
                 <img src="/assets/images/chickenbreast.jpg" alt="Spaghetti">
                 <div class="flexContainer">
                     <h1 class="rezeptTitel">Hähnchenbrust</h1>
-                    <a class="viewButton" href="#">Speise anzeigen</a>
+                    <button type="button" class="btn btn-dark" href="#">Speise anzeigen</button>
                 </div>
                 <p class="itemData">Kalorien: 200kcal</p>
             </div>
@@ -141,7 +141,7 @@
                 <img src="/assets/images/chickenbreast.jpg" alt="Spaghetti">
                 <div class="flexContainer">
                     <h1 class="rezeptTitel">Hähnchenbrust</h1>
-                    <a class="viewButton" href="#">Speise anzeigen</a>
+                    <button type="button" class="btn btn-dark" href="#">Speise anzeigen</button>
                 </div>
                 <p class="itemData">Kalorien: 200kcal</p>
             </div>
