@@ -93,6 +93,11 @@ body {
   background-repeat: no-repeat;
 }
 
+body{
+  background-color: #f6f6f9;
+
+}
+
 body,
 input,
 textarea,
@@ -163,7 +168,7 @@ h4, p {
 .item {
   width: 100%;
   border-radius: 8px;
-  background-color: #2274a5;
+  background-color: rgba(117, 136, 155, 0.55);
   padding: 15px;
   overflow: hidden;
 }

@@ -1,8 +1,9 @@
 <?php
+$globalpath = "/Projekt1";
 function checkLogin()
 {
     if (!isset($_SESSION['user_id'])) {
-        header("Location: login.php");
+        header("Location: singin.view.php");
         die();
     }
 
@@ -10,21 +11,22 @@ function checkLogin()
 
 
 if(isset($_POST['login-submit'])) {
-    require_once './config/db_connect.php';
 
+    $conn = $conn;
     $mail_username = $_POST['mail-username'];
-    $password = $_POST['pwd'];
+    $pwd = $_POST['pwd'];
 
-    if(empty($mail_username) || empty($password)){
-        header("Location: ../login.php?error=emptyfields");
+    if(empty($mail_username) || empty($pwd)){
+        header("Location: ../singin.view.php?error=emptyfields");
         exit();
 
     } else {
+        require_once __DIR__ . "/../config/db_connect.php";
         $sql = "SELECT * FROM user WHERE user_name=? OR email =?;";
         $stmt = mysqli_stmt_init($conn);
 
         if(!mysqli_stmt_prepare($stmt, $sql)){
-            header("Location: ../login.php?error=sqlerror");
+            header("Location: ../singin.view.php?error=sqlerror");
             exit();
 
         } else {
@@ -33,10 +35,10 @@ if(isset($_POST['login-submit'])) {
             $result = mysqli_stmt_get_result($stmt);
 
             if($row= mysqli_fetch_assoc($result)){
-                $pwdCheck = password_verify($password, $row['pwd']);
+                $pwdCheck = password_verify($pwd, $row['password']);
 
                 if($pwdCheck == false){
-                    header("Location: ../login.php?error=wrongpwd");
+                    header("Location: ../singin.view.php?error=wrongpwd");
                     exit();
 
                 } else {
@@ -53,7 +55,7 @@ if(isset($_POST['login-submit'])) {
                 }
 
             } else {
-                header("Location: ../login.php?error=nouser");
+                header("Location: $globalpath/views/singin.view.php?error=nouser");
                 exit();
             }
         }
