@@ -35,7 +35,7 @@ if(isset($_POST['login-submit'])) {
             $result = mysqli_stmt_get_result($stmt);
 
             if($row= mysqli_fetch_assoc($result)){
-                $pwdCheck = password_verify($pwd, $row['password']);
+                $pwdCheck = password_verify($pwd, $row['password']); //TODO -------------------------------------------- Password sofort hashen => MD5 Method
 
                 if($pwdCheck == false){
                     header("Location: ../singin.view.php?error=wrongpwd");
