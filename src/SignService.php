@@ -1,6 +1,6 @@
 <?php
 
-class SignupService
+class SignService
 {
     /**
      * @var object|null mysql_connect Objekt

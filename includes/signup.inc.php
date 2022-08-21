@@ -6,7 +6,7 @@ if (!isset($_POST['signup-submit'])) {
 } else {
     require_once __DIR__ . "/../config/db_connect.php";
     require __DIR__ . "/../src/SignService.php";
-    $SignupService = new SignupService();
+    $SignupService = new SignService();
 
     $user_name = $_POST['user_name'];
     $email = $_POST['email'];
