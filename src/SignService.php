@@ -1,6 +1,6 @@
 <?php
 
-class SignupService
+class SignService
 {
     /**
      * @var object|null mysql_connect Objekt
@@ -48,7 +48,7 @@ class SignupService
         return true;
     }
 
-    public function checkPasswords($pwd, $pwd_r): bool
+    public function checkPassword($pwd, $pwd_r): bool
     {
         if($pwd == $pwd_r){
             return true;
@@ -57,23 +57,6 @@ class SignupService
         }
     }
 
-    public function checkUserPassword($user_name, $pwd){
-        $sql = "SELECT password FROM user WHERE user_name=?";
-
-        $stmt = mysqli_stmt_init($this->db_conn);
-
-        if (!mysqli_stmt_prepare($stmt, $sql)) {
-            header("Location: ../signup.php?error=sqlerror");
-            exit();
-
-        } else {
-            mysqli_stmt_bind_param($stmt, "s", $user_name);
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_store_result($stmt);
-            $result = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
-            return ($result == $pwd);
-        }
-    }
 
     /**
      * Prüft, ob der User-Name in Datenbank vorhanden ist.

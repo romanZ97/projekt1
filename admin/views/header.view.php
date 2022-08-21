@@ -1,8 +1,9 @@
+<?php ?>
 <!doctype html>
 <html lang="de">
 
 <head>
-    <title>GastroWeb</title>
+    <title>GastroWebAdmin</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,9 +22,6 @@
                 </a>
                 <ul class="navbar-nav align-items-center p-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Kategorien</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link active" href="#">Speisen</a>
                     </li>
                     <li class="nav-item">
@@ -32,35 +30,11 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="#">Tischreservieren</a>
                     </li>
-                    <li class="nav-item ml-1">
-                        <a class="nav-link align-items-center p-0" href="#" style="margin: 10px">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                 class="bi bi-info-circle-fill" viewBox="0 0 16 16">
-                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-                            </svg>
-                        </a>
-                    </li>
                 </ul>
             </div>
             <ul class="navbar-nav flex-row">
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="margin: 10px">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                             class="bi bi-star-fill" viewBox="0 0 16 16">
-                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                        </svg>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " style="margin: 10px">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                             class="bi bi-basket2-fill" viewBox="0 0 16 16">
-                            <path d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1z"/>
-                        </svg>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    <a class="nav-link dropdown" id="navbarDropdown" role="button" data-toggle="dropdown"
                        data-display="static" aria-haspopup="true" aria-expanded="false" style="margin: 10px">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                              class="bi bi-person-circle" viewBox="0 0 16 16">
