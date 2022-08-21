@@ -120,7 +120,7 @@ class SignService
      * @param $password string Hash
      * @return void
      */
-    public function addUser($user_name, $email, $pwd)
+    public function addUser($user_name, $email, $pwd): void
     {
         $sql = "INSERT INTO user (user_name, email, password, token_password, token_session) VALUES (?, ?, ?, null, null)";
 
@@ -137,4 +137,40 @@ class SignService
         }
     }
 
+// CRYPT Funktionen ....................................................................................................*
+
+    public function encrypt($value): string
+    {
+        return $this->p_encrypt($value);
+    }
+
+    public function decrypt($crypttext)
+    {
+        return $this->p_decrypt($crypttext);
+    }
+
+
+    private function p_encrypt( $value ): string
+    {
+
+        $key = hex2bin(openssl_random_pseudo_bytes(4));
+
+        $cipher = "aes-256-cbc";
+        $ivlen = openssl_cipher_iv_length($cipher);
+        $iv = openssl_random_pseudo_bytes($ivlen);
+
+        $ciphertext = openssl_encrypt($value, $cipher, $key, 0, $iv);
+
+        return( base64_encode($ciphertext . '::' . $iv. '::' .$key) );
+    }
+
+    private function p_decrypt( $ciphertext ): bool|string
+    {
+        $cipher = "aes-256-cbc";
+
+        list($encrypted_data, $iv,$key) = explode('::', base64_decode($ciphertext));
+        return openssl_decrypt($encrypted_data, $cipher, $key, 0, $iv);
+    }
+
 }
+

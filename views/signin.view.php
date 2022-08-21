@@ -1,5 +1,11 @@
 <!DOCTYPE html>
-<?php $globalpath = "/Projekt1"; ?>
+<?php
+session_start();
+$globalpath = "/Projekt1";
+if (isset($_SESSION['user_id'])) {
+    header("Location: $globalpath/index.php");
+}
+?>
 <html lang="de" >
 <head>
     <meta charset="utf-8">

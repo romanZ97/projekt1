@@ -1,17 +1,10 @@
-<?php session_start(); ?>
+<?php session_start();
+if (isset($_SESSION['user_id'])) {
+    require "src/UserService.php";
+    $uS = new UserService($_SESSION['user_id']);
+}
 
-    <main>
-        <div class="wrapper-main">
-            <section class="section-default">
-                <?php
-                require "includes/signin.inc.php";
-                checkLogin();
-                ?>
-            </section>
-        </div>
-    </main>
-
-<?php
+$globalpath = "/Projekt1";
 require "views/header.view.php";
 require "views/dashboard.view.php";
 require "views/footer.view.php";
