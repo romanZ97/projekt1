@@ -1,22 +1,8 @@
 <?php
+require "Main.php";
 
-class SignService
+class SignService extends Main
 {
-    /**
-     * @var object|null mysql_connect Objekt
-     */
-    private $db_conn;
-
-    /**
-     * Konstruktor für die Klasse SignupService
-     *
-     * @throws object $db_conn
-     */
-    public function __construct()
-    {
-        require __DIR__ . "/../config/db_connect.php";
-        $this->db_conn = $conn;
-    }
 
 // Check Funktionen ....................................................................................................*
 
@@ -48,7 +34,7 @@ class SignService
         return true;
     }
 
-    public function checkPassword($pwd, $pwd_r): bool
+    public function checkPassword($pwd, $pwd_r)
     {
         if($pwd == $pwd_r){
             return true;
@@ -67,19 +53,7 @@ class SignService
     public function checkUser($user_name)
     {
         $sql = "SELECT user_name FROM user WHERE user_name=?";
-
-        $stmt = mysqli_stmt_init($this->db_conn);
-
-        if (!mysqli_stmt_prepare($stmt, $sql)) {
-            header("Location: ../signup.php?error=sqlerror");
-            exit();
-
-        } else {
-            mysqli_stmt_bind_param($stmt, "s", $user_name);
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_store_result($stmt);
-            return (mysqli_stmt_num_rows($stmt) > 0);
-        }
+        return (!empty(mysqli_fetch_array($this->loadDataWithParameters($sql,"s",array($user_name)))));
     }
 
 // GETTER ..............................................................................................................*
@@ -94,18 +68,7 @@ class SignService
     public function getUserIdByName($user_name)
     {
         $sql = "SELECT user_id FROM user WHERE user_name=?";
-
-        $stmt = mysqli_stmt_init($this->db_conn);
-
-        if (!mysqli_stmt_prepare($stmt, $sql)) {
-            header("Location: ../index.php?error=sqlerror");
-            exit();
-
-        } else {
-            mysqli_stmt_bind_param($stmt, "s", $user_name);
-            mysqli_stmt_execute($stmt);
-            return mysqli_fetch_assoc(mysqli_stmt_get_result($stmt))['user_id'];
-        }
+        return mysqli_fetch_assoc($this->loadDataWithParameters($sql,"s",array($user_name)))['user_id'];
     }
 
 
@@ -120,26 +83,18 @@ class SignService
      * @param $password string Hash
      * @return void
      */
-    public function addUser($user_name, $email, $pwd): void
+    public function addUser($user_name, $email, $pwd)
     {
-        $sql = "INSERT INTO user (user_name, email, password, token_password, token_session) VALUES (?, ?, ?, null, null)";
+        $sql = "INSERT INTO user (user_name, email, password, token_password) VALUES (?, ?, ?, null)";
 
-        $stmt = mysqli_stmt_init($this->db_conn);
+        $pwd = password_hash($pwd, PASSWORD_DEFAULT);
+        $this->insertData($sql, "sss", array($user_name, $email, $pwd));
 
-        if (!mysqli_stmt_prepare($stmt, $sql)) {
-            header("Location: ../signup.php?error=sqlerror");
-            exit();
-
-        } else {
-            $pwd = password_hash($pwd, PASSWORD_DEFAULT);
-            mysqli_stmt_bind_param($stmt, "sss", $user_name, $email, $pwd);
-            mysqli_stmt_execute($stmt);
-        }
     }
 
 // CRYPT Funktionen ....................................................................................................*
 
-    public function encrypt($value): string
+    public function encrypt($value)
     {
         return $this->p_encrypt($value);
     }
@@ -150,7 +105,7 @@ class SignService
     }
 
 
-    private function p_encrypt( $value ): string
+    private function p_encrypt( $value )
     {
 
         $key = hex2bin(openssl_random_pseudo_bytes(4));
@@ -164,7 +119,7 @@ class SignService
         return( base64_encode($ciphertext . '::' . $iv. '::' .$key) );
     }
 
-    private function p_decrypt( $ciphertext ): bool|string
+    private function p_decrypt( $ciphertext )
     {
         $cipher = "aes-256-cbc";
 

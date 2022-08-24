@@ -14,7 +14,7 @@
             <div class="carousel-item active">
                 <div class="cards-wrapper">
                     <div class="card">
-                        <img src="/assets/images/Bild1.png" class="card-img-top" alt="...">
+                        <img src="<?php echo $globalpath ?>/assets/images/Bild1.png" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Vorspeisen</h5>
                             <p class="card-text">lorem ipsum</p>
@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <div class="card d-none d-md-block">
-                        <img src="/assets/images/Bild2.png" class="card-img-top" alt="...">
+                        <img src="<?php echo $globalpath ?>/assets/images/Bild2.png" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Hauptspeisen</h5>
                             <p class="card-text">lorem ipsum</p>
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="card d-none d-md-block">
-                        <img src="/assets/images/Bild3.png" class="card-img-top" alt="...">
+                        <img src="<?php echo $globalpath ?>/assets/images/Bild3.png" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Dessert</h5>
                             <p class="card-text">lorem ipsum</p>
@@ -43,7 +43,7 @@
             <div class="carousel-item">
                 <div class="cards-wrapper">
                     <div class="card">
-                        <img src="/assets/images/Bild4.png" class="card-img-top" alt="...">
+                        <img src="<?php echo $globalpath ?>/assets/images/Bild4.png" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Vegane Gerichte</h5>
                             <p class="card-text">lorem ipsum</p>
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <div class="card d-none d-md-block">
-                        <img src="/assets/images/Bild5.png" class="card-img-top" alt="...">
+                        <img src="<?php echo $globalpath ?>/assets/images/Bild5.png" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Laktose- und Glutenfrei</h5>
                             <p class="card-text">lorem ipsum</p>
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <div class="card d-none d-md-block">
-                        <img src="/assets/images/Bild2.png" class="card-img-top" alt="...">
+                        <img src="<?php echo $globalpath ?>/assets/images/Bild2.png" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">lorem ipsum</p>
@@ -93,7 +93,7 @@
         <div class="suchergebnisse">
 
             <div class="item">
-                <img src="/assets/images/spaghetti.jpg" alt="Spaghetti">
+                <img src="<?php echo $globalpath ?>/assets/images/spaghetti.jpg" alt="Spaghetti">
                 <div class="flexContainer">
                     <h1 class="rezeptTitel">Spaghetti mit Sauce</h1>
                     <button type="button" class="btn btn-dark" href="#">Speise anzeigen</button>
@@ -102,7 +102,7 @@
             </div>
 
             <div class="item">
-                <img src="/assets/images/pommes.jpg" alt="Spaghetti">
+                <img src="<?php echo $globalpath ?>/assets/images/pommes.jpg" alt="Spaghetti">
                 <div class="flexContainer">
                     <h1 class="rezeptTitel">Pommes mit Ketchup</h1>
                     <button type="button" class="btn btn-dark" href="#">Speise anzeigen</button>
@@ -111,7 +111,7 @@
             </div>
 
             <div class="item">
-                <img src="/assets/images/hamburger.jpg" alt="Spaghetti">
+                <img src="<?php echo $globalpath ?>/assets/images/hamburger.jpg" alt="Spaghetti">
                 <div class="lexContainer">
                     <h1 class="rezeptTitel">Hamburger</h1>
                     <button type="button" class="btn btn-dark" href="#">Speise anzeigen</button>
@@ -120,7 +120,7 @@
             </div>
 
             <div class="item">
-                <img src="/assets/images/chickenbreast.jpg" alt="Spaghetti">
+                <img src="<?php echo $globalpath ?>/assets/images/chickenbreast.jpg" alt="Spaghetti">
                 <div class="flexContainer">
                     <h1 class="rezeptTitel">Hähnchenbrust</h1>
                     <button type="button" class="btn btn-dark" href="#">Speise anzeigen</button>
@@ -129,7 +129,7 @@
             </div>
 
             <div class="item">
-                <img src="/assets/images/chickenbreast.jpg" alt="Spaghetti">
+                <img src="<?php echo $globalpath ?>/assets/images/chickenbreast.jpg" alt="Spaghetti">
                 <div class="flexContainer">
                     <h1 class="rezeptTitel">Hähnchenbrust</h1>
                     <button type="button" class="btn btn-dark" href="#">Speise anzeigen</button>
@@ -138,7 +138,7 @@
             </div>
 
             <div class="item">
-                <img src="/assets/images/chickenbreast.jpg" alt="Spaghetti">
+                <img src="<?php echo $globalpath ?>/assets/images/chickenbreast.jpg" alt="Spaghetti">
                 <div class="flexContainer">
                     <h1 class="rezeptTitel">Hähnchenbrust</h1>
                     <button type="button" class="btn btn-dark" href="#">Speise anzeigen</button>

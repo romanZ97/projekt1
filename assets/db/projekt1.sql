@@ -47,8 +47,8 @@ CREATE TABLE `category` (
                             `category_id` int(11) NOT NULL,
                             `category_name` varchar(255) NOT NULL,
                             `category_image` tinytext NOT NULL,
-                            `category_status` enum('active','inoperative') NOT NULL,
-                            `category_dashboard` enum('show','hide') NOT NULL
+                            `category_status` enum('1','0') NOT NULL,
+                            `category_dashboard` enum('1','0') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -74,8 +74,8 @@ CREATE TABLE `dish` (
                         `dish_name` varchar(255) NOT NULL,
                         `dish_description` text NOT NULL,
                         `dish_price` decimal(10,2) NOT NULL,
-                        `dish_status` enum('active','inopetrative') NOT NULL,
-                        `dish_dashboard` enum('show','hide') NOT NULL,
+                        `dish_status` enum('1','0') NOT NULL,
+                        `dish_dashboard` enum('1','0') NOT NULL,
                         `category_id` int(11) NOT NULL,
                         `meat_type_id` int(11) NOT NULL,
                         `country_id` int(11) NOT NULL,
@@ -107,7 +107,7 @@ CREATE TABLE `order` (
                          `order_id` int(11) NOT NULL,
                          `order_nr` varchar(13) NOT NULL,
                          `order_date` datetime NOT NULL,
-                         `order_status` enum('in work','done') NOT NULL,
+                         `order_status` enum('1','0') NOT NULL,
                          `order_price` decimal(10,2) NOT NULL,
                          `order_count_position` int(11) NOT NULL,
                          `order_vat` decimal(2,2) NOT NULL,
@@ -142,7 +142,7 @@ CREATE TABLE `order_position` (
 CREATE TABLE `reservation` (
                                `reservation_id` int(11) NOT NULL,
                                `reservation_nr` int(11) NOT NULL,
-                               `reservation_status` enum('on wait','done') NOT NULL,
+                               `reservation_status` enum('1','0') NOT NULL,
                                `reservation_date` date NOT NULL,
                                `reservation_time` time NOT NULL,
                                `table_id` int(11) NOT NULL,
@@ -160,7 +160,7 @@ CREATE TABLE `reservation` (
 
 CREATE TABLE `table` (
                          `table_id` int(11) NOT NULL,
-                         `table_status` enum('besetzt','frei') NOT NULL,
+                         `table_status` enum('1','0') NOT NULL,
                          `table_seat_count` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -177,18 +177,17 @@ CREATE TABLE `user` (
                         `user_surname` varchar(80) DEFAULT NULL,
                         `email` varchar(80) NOT NULL,
                         `password` varchar(255) NOT NULL,
-                        `adresse` tinytext DEFAULT NULL,
-                        `kontakt` varchar(80) DEFAULT NULL,
-                        `token_password` tinytext DEFAULT NULL,
-                        `token_session` tinytext DEFAULT NULL
+                        `address` tinytext DEFAULT NULL,
+                        `contact` varchar(80) DEFAULT NULL,
+                        `token_password` tinytext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Daten für Tabelle `user`
 --
 
-INSERT INTO `user` (`user_id`, `user_name`, `user_forename`, `user_surname`, `email`, `password`, `adresse`, `kontakt`, `token_password`, `token_session`) VALUES
-    (1, 'test', NULL, NULL, 'test@test.te', '$2y$10$9ZgF7HyC9X.QO9Jm2k4CW.84eO0rcZ9VjRbLxKrRaxnf4hAK2wjbC', NULL, NULL, NULL, NULL);
+INSERT INTO `user` (`user_id`, `user_name`, `user_forename`, `user_surname`, `email`, `password`, `address`, `contact`, `token_password`) VALUES
+    (1, 'test', NULL, NULL, 'test@test.te', '$2y$10$9ZgF7HyC9X.QO9Jm2k4CW.84eO0rcZ9VjRbLxKrRaxnf4hAK2wjbC', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 

@@ -65,7 +65,7 @@ if(isset($_POST['login-submit'])) {
             $result = mysqli_stmt_get_result($stmt);
 
             if($row= mysqli_fetch_assoc($result)){
-                $pwdCheck = password_verify($pwd, $row['password']); //TODO -------------------------------------------- Password sofort hashen => MD5 Method
+                $pwdCheck = password_verify($pwd, $row['password']);
 
                 if($pwdCheck == false){
                     header("Location: $globalpath/views/signin.view.php?error=wrongpwd");
