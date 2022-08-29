@@ -1,6 +1,6 @@
 <?php
 
-class SignupService
+class SignService
 {
     /**
      * @var object|null mysql_connect Objekt
@@ -48,7 +48,7 @@ class SignupService
         return true;
     }
 
-    public function checkPasswords($pwd, $pwd_r): bool
+    public function checkPassword($pwd, $pwd_r): bool
     {
         if($pwd == $pwd_r){
             return true;
@@ -57,23 +57,6 @@ class SignupService
         }
     }
 
-    public function checkUserPassword($user_name, $pwd){
-        $sql = "SELECT password FROM user WHERE user_name=?";
-
-        $stmt = mysqli_stmt_init($this->db_conn);
-
-        if (!mysqli_stmt_prepare($stmt, $sql)) {
-            header("Location: ../signup.php?error=sqlerror");
-            exit();
-
-        } else {
-            mysqli_stmt_bind_param($stmt, "s", $user_name);
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_store_result($stmt);
-            $result = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
-            return ($result == $pwd);
-        }
-    }
 
     /**
      * Prüft, ob der User-Name in Datenbank vorhanden ist.
@@ -137,7 +120,7 @@ class SignupService
      * @param $password string Hash
      * @return void
      */
-    public function addUser($user_name, $email, $pwd)
+    public function addUser($user_name, $email, $pwd): void
     {
         $sql = "INSERT INTO user (user_name, email, password, token_password, token_session) VALUES (?, ?, ?, null, null)";
 
@@ -154,4 +137,40 @@ class SignupService
         }
     }
 
+// CRYPT Funktionen ....................................................................................................*
+
+    public function encrypt($value): string
+    {
+        return $this->p_encrypt($value);
+    }
+
+    public function decrypt($crypttext)
+    {
+        return $this->p_decrypt($crypttext);
+    }
+
+
+    private function p_encrypt( $value ): string
+    {
+
+        $key = hex2bin(openssl_random_pseudo_bytes(4));
+
+        $cipher = "aes-256-cbc";
+        $ivlen = openssl_cipher_iv_length($cipher);
+        $iv = openssl_random_pseudo_bytes($ivlen);
+
+        $ciphertext = openssl_encrypt($value, $cipher, $key, 0, $iv);
+
+        return( base64_encode($ciphertext . '::' . $iv. '::' .$key) );
+    }
+
+    private function p_decrypt( $ciphertext ): bool|string
+    {
+        $cipher = "aes-256-cbc";
+
+        list($encrypted_data, $iv,$key) = explode('::', base64_decode($ciphertext));
+        return openssl_decrypt($encrypted_data, $cipher, $key, 0, $iv);
+    }
+
 }
+
