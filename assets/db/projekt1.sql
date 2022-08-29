@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 18. Aug 2022 um 21:22
+-- Erstellungszeit: 08. Aug 2022 um 21:43
 -- Server-Version: 10.4.22-MariaDB
 -- PHP-Version: 8.1.2
 
@@ -28,13 +28,13 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin` (
-                         `admin_id` int(11) NOT NULL,
-                         `full_name` tinytext NOT NULL,
-                         `admin_name` varchar(255) NOT NULL,
-                         `email` varchar(255) NOT NULL,
-                         `password` varchar(255) NOT NULL,
-                         `token_password` tinytext NOT NULL,
-                         `token_sassion` tinytext NOT NULL
+  `admin_id` int(11) NOT NULL,
+  `full_name` tinytext NOT NULL,
+  `admin_name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `token_password` tinytext NOT NULL,
+  `token_sassion` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -44,11 +44,11 @@ CREATE TABLE `admin` (
 --
 
 CREATE TABLE `category` (
-                            `category_id` int(11) NOT NULL,
-                            `category_name` varchar(255) NOT NULL,
-                            `category_image` tinytext NOT NULL,
-                            `category_status` enum('active','inoperative') NOT NULL,
-                            `category_dashboard` enum('show','hide') NOT NULL
+  `category_id` int(11) NOT NULL,
+  `category_name` varchar(255) NOT NULL,
+  `category_image` tinytext NOT NULL,
+  `category_status` enum('active','inoperative') NOT NULL,
+  `category_dashboard` enum('show','hide') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -58,9 +58,9 @@ CREATE TABLE `category` (
 --
 
 CREATE TABLE `country` (
-                           `country_id` int(11) NOT NULL,
-                           `country_name` varchar(80) NOT NULL,
-                           `country_short_name` varchar(10) NOT NULL
+  `country_id` int(11) NOT NULL,
+  `country_name` varchar(80) NOT NULL,
+  `country_short_name` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -70,19 +70,19 @@ CREATE TABLE `country` (
 --
 
 CREATE TABLE `dish` (
-                        `dish_id` int(11) NOT NULL,
-                        `dish_name` varchar(255) NOT NULL,
-                        `dish_description` text NOT NULL,
-                        `dish_price` decimal(10,2) NOT NULL,
-                        `dish_status` enum('active','inopetrative') NOT NULL,
-                        `dish_dashboard` enum('show','hide') NOT NULL,
-                        `category_id` int(11) NOT NULL,
-                        `meat_type_id` int(11) NOT NULL,
-                        `country_id` int(11) NOT NULL,
-                        `dish_ch_share` decimal(10,2) DEFAULT NULL,
-                        `dish_p_share` decimal(10,2) DEFAULT NULL,
-                        `dish_f_share` decimal(10,2) DEFAULT NULL,
-                        `dish_image` tinytext NOT NULL
+  `dish_id` int(11) NOT NULL,
+  `dish_name` varchar(255) NOT NULL,
+  `dish_description` text NOT NULL,
+  `dish_price` decimal(10,2) NOT NULL,
+  `dish_status` enum('active','inopetrative') NOT NULL,
+  `dish_dashboard` enum('show','hide') NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `meat_type_id` int(11) NOT NULL,
+  `country_id` int(11) NOT NULL,
+  `dish_ch_share` decimal(10,2) DEFAULT NULL,
+  `dish_p_share` decimal(10,2) DEFAULT NULL,
+  `dish_f_share` decimal(10,2) DEFAULT NULL,
+  `dish_image` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -92,9 +92,9 @@ CREATE TABLE `dish` (
 --
 
 CREATE TABLE `meat_type` (
-                             `meat_type_id` int(11) NOT NULL,
-                             `meat_type_name` varchar(80) NOT NULL,
-                             `meat_type_image` tinytext NOT NULL
+  `meat_type_id` int(11) NOT NULL,
+  `meat_type_name` varchar(80) NOT NULL,
+  `meat_type_image` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -104,19 +104,19 @@ CREATE TABLE `meat_type` (
 --
 
 CREATE TABLE `order` (
-                         `order_id` int(11) NOT NULL,
-                         `order_nr` varchar(13) NOT NULL,
-                         `order_date` datetime NOT NULL,
-                         `order_status` enum('in work','done') NOT NULL,
-                         `order_price` decimal(10,2) NOT NULL,
-                         `order_count_position` int(11) NOT NULL,
-                         `order_vat` decimal(2,2) NOT NULL,
-                         `user_id` int(11) NOT NULL,
-                         `customer_surname` varchar(80) NOT NULL,
-                         `customer_forename` varchar(80) NOT NULL,
-                         `customer_email` varchar(80) NOT NULL,
-                         `customer_address` tinytext NOT NULL,
-                         `customer_contact` varchar(80) NOT NULL
+  `order_id` int(11) NOT NULL,
+  `order_nr` varchar(13) NOT NULL,
+  `order_date` datetime NOT NULL,
+  `order_status` enum('in work','done') NOT NULL,
+  `order_price` decimal(10,2) NOT NULL,
+  `order_count_position` int(11) NOT NULL,
+  `order_vat` decimal(2,2) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `customer_surname` varchar(80) NOT NULL,
+  `customer_forename` varchar(80) NOT NULL,
+  `customer_email` varchar(80) NOT NULL,
+  `customer_address` tinytext NOT NULL,
+  `customer_contact` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -126,11 +126,11 @@ CREATE TABLE `order` (
 --
 
 CREATE TABLE `order_position` (
-                                  `order_position_id` int(11) NOT NULL,
-                                  `order_position_nr` int(11) NOT NULL,
-                                  `order_id` int(11) NOT NULL,
-                                  `dish_id` int(11) NOT NULL,
-                                  `op_dish_price` decimal(10,2) NOT NULL
+  `order_position_id` int(11) NOT NULL,
+  `order_position_nr` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `dish_id` int(11) NOT NULL,
+  `op_dish_price` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -140,16 +140,16 @@ CREATE TABLE `order_position` (
 --
 
 CREATE TABLE `reservation` (
-                               `reservation_id` int(11) NOT NULL,
-                               `reservation_nr` int(11) NOT NULL,
-                               `reservation_status` enum('on wait','done') NOT NULL,
-                               `reservation_date` date NOT NULL,
-                               `reservation_time` time NOT NULL,
-                               `table_id` int(11) NOT NULL,
-                               `user_id` int(11) DEFAULT NULL,
-                               `customer_name` varchar(80) NOT NULL,
-                               `customer_contact` varchar(80) NOT NULL,
-                               `reservation_seat` int(4) NOT NULL
+  `reservation_id` int(11) NOT NULL,
+  `reservation_nr` int(11) NOT NULL,
+  `reservation_status` enum('on wait','done') NOT NULL,
+  `reservation_date` date NOT NULL,
+  `reservation_time` time NOT NULL,
+  `table_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `customer_name` varchar(80) NOT NULL,
+  `customer_contact` varchar(80) NOT NULL,
+  `reservation_seat` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -159,9 +159,9 @@ CREATE TABLE `reservation` (
 --
 
 CREATE TABLE `table` (
-                         `table_id` int(11) NOT NULL,
-                         `table_status` enum('besetzt','frei') NOT NULL,
-                         `table_seat_count` int(11) NOT NULL
+  `table_id` int(11) NOT NULL,
+  `table_status` enum('besetzt','frei') NOT NULL,
+  `table_seat_count` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -171,24 +171,17 @@ CREATE TABLE `table` (
 --
 
 CREATE TABLE `user` (
-                        `user_id` int(11) NOT NULL,
-                        `user_name` varchar(80) NOT NULL,
-                        `user_forename` varchar(80) DEFAULT NULL,
-                        `user_surname` varchar(80) DEFAULT NULL,
-                        `email` varchar(80) NOT NULL,
-                        `password` varchar(255) NOT NULL,
-                        `adresse` tinytext DEFAULT NULL,
-                        `kontakt` varchar(80) DEFAULT NULL,
-                        `token_password` tinytext DEFAULT NULL,
-                        `token_session` tinytext DEFAULT NULL
+  `user_id` int(11) NOT NULL,
+  `user_name` varchar(80) NOT NULL,
+  `user_forename` varchar(80) NOT NULL,
+  `user_surname` varchar(80) NOT NULL,
+  `email` varchar(80) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `adresse` tinytext NOT NULL,
+  `kontakt` varchar(80) NOT NULL,
+  `token_password` tinytext NOT NULL,
+  `token_sassion` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Daten für Tabelle `user`
---
-
-INSERT INTO `user` (`user_id`, `user_name`, `user_forename`, `user_surname`, `email`, `password`, `adresse`, `kontakt`, `token_password`, `token_session`) VALUES
-    (1, 'test', NULL, NULL, 'test@test.te', '$2y$10$9ZgF7HyC9X.QO9Jm2k4CW.84eO0rcZ9VjRbLxKrRaxnf4hAK2wjbC', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -197,9 +190,9 @@ INSERT INTO `user` (`user_id`, `user_name`, `user_forename`, `user_surname`, `em
 --
 
 CREATE TABLE `user_favorit` (
-                                `favorite_id` int(11) NOT NULL,
-                                `user_id` int(11) NOT NULL,
-                                `dish_id` int(11) NOT NULL
+  `favorite_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `dish_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -210,25 +203,25 @@ CREATE TABLE `user_favorit` (
 -- Indizes für die Tabelle `admin`
 --
 ALTER TABLE `admin`
-    ADD PRIMARY KEY (`admin_id`);
+  ADD PRIMARY KEY (`admin_id`);
 
 --
 -- Indizes für die Tabelle `category`
 --
 ALTER TABLE `category`
-    ADD PRIMARY KEY (`category_id`);
+  ADD PRIMARY KEY (`category_id`);
 
 --
 -- Indizes für die Tabelle `country`
 --
 ALTER TABLE `country`
-    ADD PRIMARY KEY (`country_id`);
+  ADD PRIMARY KEY (`country_id`);
 
 --
 -- Indizes für die Tabelle `dish`
 --
 ALTER TABLE `dish`
-    ADD PRIMARY KEY (`dish_id`),
+  ADD PRIMARY KEY (`dish_id`),
   ADD KEY `fk_kategorie_id_speise` (`category_id`),
   ADD KEY `fk_speise_land_speise` (`country_id`),
   ADD KEY `fk_fleisch_art_speise` (`meat_type_id`);
@@ -237,20 +230,20 @@ ALTER TABLE `dish`
 -- Indizes für die Tabelle `meat_type`
 --
 ALTER TABLE `meat_type`
-    ADD PRIMARY KEY (`meat_type_id`);
+  ADD PRIMARY KEY (`meat_type_id`);
 
 --
 -- Indizes für die Tabelle `order`
 --
 ALTER TABLE `order`
-    ADD PRIMARY KEY (`order_id`),
+  ADD PRIMARY KEY (`order_id`),
   ADD KEY `fk_user_id_bestellung` (`user_id`);
 
 --
 -- Indizes für die Tabelle `order_position`
 --
 ALTER TABLE `order_position`
-    ADD PRIMARY KEY (`order_position_id`),
+  ADD PRIMARY KEY (`order_position_id`),
   ADD KEY `fk_bestellung_id_bestellung_position` (`order_id`),
   ADD KEY `fk_gericht_id_bestellung_position` (`dish_id`);
 
@@ -258,26 +251,26 @@ ALTER TABLE `order_position`
 -- Indizes für die Tabelle `reservation`
 --
 ALTER TABLE `reservation`
-    ADD KEY `fk_user_id_reservierung` (`user_id`),
+  ADD KEY `fk_user_id_reservierung` (`user_id`),
   ADD KEY `fk_tisch_id_reservierung` (`table_id`);
 
 --
 -- Indizes für die Tabelle `table`
 --
 ALTER TABLE `table`
-    ADD PRIMARY KEY (`table_id`);
+  ADD PRIMARY KEY (`table_id`);
 
 --
 -- Indizes für die Tabelle `user`
 --
 ALTER TABLE `user`
-    ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- Indizes für die Tabelle `user_favorit`
 --
 ALTER TABLE `user_favorit`
-    ADD PRIMARY KEY (`favorite_id`),
+  ADD PRIMARY KEY (`favorite_id`),
   ADD KEY `fk_user_id_user_favorit` (`user_id`),
   ADD KEY `fk_speise_id_user_favorit` (`dish_id`);
 
@@ -289,61 +282,61 @@ ALTER TABLE `user_favorit`
 -- AUTO_INCREMENT für Tabelle `admin`
 --
 ALTER TABLE `admin`
-    MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `category`
 --
 ALTER TABLE `category`
-    MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `country`
 --
 ALTER TABLE `country`
-    MODIFY `country_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `country_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `dish`
 --
 ALTER TABLE `dish`
-    MODIFY `dish_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `dish_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `meat_type`
 --
 ALTER TABLE `meat_type`
-    MODIFY `meat_type_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `meat_type_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `order`
 --
 ALTER TABLE `order`
-    MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `order_position`
 --
 ALTER TABLE `order_position`
-    MODIFY `order_position_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_position_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `table`
 --
 ALTER TABLE `table`
-    MODIFY `table_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `table_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `user`
 --
 ALTER TABLE `user`
-    MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `user_favorit`
 --
 ALTER TABLE `user_favorit`
-    MODIFY `favorite_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `favorite_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints der exportierten Tabellen
@@ -353,7 +346,7 @@ ALTER TABLE `user_favorit`
 -- Constraints der Tabelle `dish`
 --
 ALTER TABLE `dish`
-    ADD CONSTRAINT `fk_fleisch_art_speise` FOREIGN KEY (`meat_type_id`) REFERENCES `meat_type` (`meat_type_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_fleisch_art_speise` FOREIGN KEY (`meat_type_id`) REFERENCES `meat_type` (`meat_type_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_kategorie_id_speise` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_speise_land_speise` FOREIGN KEY (`country_id`) REFERENCES `country` (`country_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -361,27 +354,27 @@ ALTER TABLE `dish`
 -- Constraints der Tabelle `order`
 --
 ALTER TABLE `order`
-    ADD CONSTRAINT `fk_user_id_bestellung` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_user_id_bestellung` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints der Tabelle `order_position`
 --
 ALTER TABLE `order_position`
-    ADD CONSTRAINT `fk_bestellung_id_bestellung_position` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_bestellung_id_bestellung_position` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_gericht_id_bestellung_position` FOREIGN KEY (`dish_id`) REFERENCES `dish` (`dish_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints der Tabelle `reservation`
 --
 ALTER TABLE `reservation`
-    ADD CONSTRAINT `fk_tisch_id_reservierung` FOREIGN KEY (`table_id`) REFERENCES `table` (`table_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tisch_id_reservierung` FOREIGN KEY (`table_id`) REFERENCES `table` (`table_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_user_id_reservierung` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints der Tabelle `user_favorit`
 --
 ALTER TABLE `user_favorit`
-    ADD CONSTRAINT `fk_speise_id_user_favorit` FOREIGN KEY (`dish_id`) REFERENCES `dish` (`dish_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_speise_id_user_favorit` FOREIGN KEY (`dish_id`) REFERENCES `dish` (`dish_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_user_id_user_favorit` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 

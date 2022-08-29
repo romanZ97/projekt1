@@ -1,10 +1,7 @@
-<?php
-$db_host= "localhost";
-$db_username = "root";
-$db_password = "";
+<?
+$host= "localhost";
+$username = "root";
+$password = "";
 $db = "projekt1";
 
-$conn = mysqli_connect($db_host,$db_username,$db_password,$db);
-if(!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+$conn = mysqli_connect($host,$username,$password,$db);
