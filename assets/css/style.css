@@ -709,3 +709,119 @@ body {
   flex-grow: 1;
   min-height: calc(100vh - 56px);
 }
+
+.uf-dropdown-button{
+  border: 0;
+  background-color: transparent;
+  margin-right: 2px;
+  padding-bottom: 0.3em;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
+.card-sl {
+  height: 100%;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card-image img {
+  max-width: 100%;
+  height: 11vw;
+  object-fit: cover;
+  border-radius: 8px 8px 0px 0;
+}
+
+.card-action {
+  position: relative;
+  float: right;
+  margin-top: -25px;
+  margin-right: 3px;
+  z-index: 2;
+  color: #E26D5C;
+  background: #fff;
+  border-radius: 100%;
+  padding: 15px;
+  font-size: 15px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card-action:hover {
+  color: #fff;
+  background: #E26D5C;
+  /*-webkit-animation: pulse 1.5s infinite;*/
+}
+
+.card-details{
+  height: 40px;
+  margin-bottom: 1em;
+}
+
+.card-heading {
+  font-size: 18px;
+  font-weight: bold;
+  background: #fff;
+  padding: 10px 0 0 10px;
+}
+
+.card-text-left {
+  float: left;
+  padding: 10px 0 10px 10px;
+  background: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  color: #636262;
+}
+
+.card-text-right {
+  float: right;
+  padding: 10px 10px 10px 0;
+  background: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  color: #636262;
+}
+
+.card-button {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  width: 100%;
+  background-color: #1F487E;
+  color: #fff;
+  border-radius: 0 0 8px 8px;
+}
+
+.card-button:hover {
+  text-decoration: none;
+  background-color: #1D3461;
+  color: #fff;
+}
+
+
+/*@-webkit-keyframes pulse {*/
+/*  0% {*/
+/*    -moz-transform: scale(0.9);*/
+/*    -ms-transform: scale(0.9);*/
+/*    -webkit-transform: scale(0.9);*/
+/*    transform: scale(0.9);*/
+/*  }*/
+
+/*  70% {*/
+/*    -moz-transform: scale(1);*/
+/*    -ms-transform: scale(1);*/
+/*    -webkit-transform: scale(1);*/
+/*    transform: scale(1);*/
+/*    box-shadow: 0 0 0 50px rgba(90, 153, 212, 0);*/
+/*  }*/
+
+/*  100% {*/
+/*    -moz-transform: scale(0.9);*/
+/*    -ms-transform: scale(0.9);*/
+/*    -webkit-transform: scale(0.9);*/
+/*    transform: scale(0.9);*/
+/*    box-shadow: 0 0 0 0 rgba(90, 153, 212, 0);*/
+/*  }*/
+/*}*/

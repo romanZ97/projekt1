@@ -22,11 +22,12 @@ class Main
         return $this->p_loadData($query);
     }
 
-    public function insertData($query,$types,$data){
-        $this->p_insertData($query,$types,$data);
+    public function executeQuery($query,$types,$data)
+    {
+        $this->p_executeQuery($query,$types,$data);
     }
 
-    private function p_insertData($query, $types, $data)
+    private function p_executeQuery($query, $types, $data)
     {
         $this->secureQuery($this->conn,$data);
         $stmt = mysqli_stmt_init($this->conn);

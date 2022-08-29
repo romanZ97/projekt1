@@ -1,6 +1,6 @@
 <?php
-
-class DeliveryService
+require "Main.php";
+class DeliveryService extends Main
 {
 
 }

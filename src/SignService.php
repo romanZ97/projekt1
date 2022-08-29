@@ -88,7 +88,7 @@ class SignService extends Main
         $sql = "INSERT INTO user (user_name, email, password, token_password) VALUES (?, ?, ?, null)";
 
         $pwd = password_hash($pwd, PASSWORD_DEFAULT);
-        $this->insertData($sql, "sss", array($user_name, $email, $pwd));
+        $this->executeQuery($sql, "sss", array($user_name, $email, $pwd));
 
     }
 
