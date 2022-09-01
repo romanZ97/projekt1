@@ -1,5 +1,5 @@
 <?php
-//define('SITEURL', 'http://localhost:63342/projekt1/');
+
 $db_host= "localhost";
 $db_username = "root";
 $db_password = "";
