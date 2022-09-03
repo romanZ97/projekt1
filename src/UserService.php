@@ -33,34 +33,34 @@ class UserService extends Main
 //    }
 
 
-    public function deleteUserFavorite($dish_id)
+    public function deleteUserFavorite($food_id)
     {
-        $this->p_deleteUserFavorite($dish_id);
+        $this->p_deleteUserFavorite($food_id);
     }
 
-    public function addUserFavorite($dish_id)
+    public function addUserFavorite($food_id)
     {
-        $this->p_addUserFavorite($this->user_id,$dish_id);
+        $this->p_addUserFavorite($this->user_id,$food_id);
     }
 
-    private function p_deleteUserFavorite($dish_id)
+    private function p_deleteUserFavorite($food_id)
     {
-        $sql = "DELETE FROM `user_favorit` WHERE `dish_id` = ?;";
-        $this->executeQuery($sql,"i", array($dish_id));
+        $sql = "DELETE FROM `user_favorit` WHERE `food_id` = ?;";
+        $this->executeQuery($sql,"i", array($food_id));
     }
 
-    private function p_addUserFavorite($user_id,$dish_id)
+    private function p_addUserFavorite($user_id,$food_id)
     {
-        if(!$this->chekUserFavorite($dish_id)){
-            $sql = "INSERT INTO `user_favorit`(`user_id`, `dish_id`) VALUES (?,?);";
-            $this->executeQuery($sql,"ii", array($user_id,$dish_id));
+        if(!$this->chekUserFavorite($food_id)){
+            $sql = "INSERT INTO `user_favorit`(`user_id`, `food_id`) VALUES (?,?);";
+            $this->executeQuery($sql,"ii", array($user_id,$food_id));
         }
     }
 
-    public function chekUserFavorite($dish_id){
-        $col = array_column($this->user_favorites,"dish_id");
-        $res = in_array($dish_id,$col);
-        return in_array($dish_id,array_column($this->user_favorites,"dish_id"));
+    public function chekUserFavorite($food_id){
+        $col = array_column($this->user_favorites,"food_id");
+        $res = in_array($food_id,$col);
+        return in_array($food_id,array_column($this->user_favorites,"food_id"));
     }
 
 
@@ -70,7 +70,16 @@ class UserService extends Main
     {
         $this->user_id  = $user_id;
 
-        $sql = "SELECT `user_id`, `user_name`, `user_forename`, `user_surname`, `email`, `address`, `contact` FROM `user` WHERE `user_id` = ?";
+        $sql = "SELECT 
+                    `id`, 
+                    `user_name`, 
+                    `user_forename`, 
+                    `user_surname`, 
+                    `email`, 
+                    `address`, 
+                    `contact` 
+                FROM `user` 
+                WHERE `id` = ?";
 
         $result = mysqli_fetch_array($this->loadDataWithParameters($sql,"i", array($user_id)));
         $this->user_name = $result["user_name"];
@@ -97,10 +106,17 @@ class UserService extends Main
 
     private function setUserFavorites($user_id)
     {
-        $sql = "SELECT uf.`dish_id`, d.`dish_name`, d.`category_id`, d.`dish_price`, c.`category_name`, c.`category_icon` FROM `user_favorit`AS uf
-                JOIN `dish` AS d USING (dish_id)
-                JOIN `category` AS c USING (category_id)
-                WHERE `user_id` = ?";
+        $sql = "SELECT 
+                    uf.`food_id`, 
+                    f.`title`, 
+                    f.`category_id`, 
+                    f.`price`, 
+                    c.`category_name`, 
+                    c.`icon_name` 
+                FROM `user_favorit`AS uf
+                JOIN `food` AS f ON f.id = uf.food_id
+                JOIN `category` AS c ON c.id = f.category_id
+                WHERE uf.`user_id` = ?";
 
         $result = $this->loadDataWithParameters($sql,"i", array($user_id));
         foreach ($result as $favorite) {
@@ -110,16 +126,16 @@ class UserService extends Main
 
     private function setUserOrders($user_id)
     {
-        $sql = "SELECT `order_id` FROM `order` WHERE `user_id` = ?";
+        $sql = "SELECT `id` FROM `ordering` WHERE `user_id` = ?";
         $result = $this->loadDataWithParameters($sql,"i", array($user_id));
         foreach ($result as $order) {
-            $this->user_favorites[] = $order;
+            $this->user_orders[] = $order;
         }
     }
 
     private function setUserReservation($user_id)
     {
-        $sql = "SELECT `reservation_id` FROM `reservation` WHERE `user_id` = ?";
+        $sql = "SELECT `id` FROM `reservation` WHERE `user_id` = ?";
         $result = $this->loadDataWithParameters($sql,"i", array($user_id));
         foreach ($result as $reservation) {
             $this->user_favorites[] = $reservation;

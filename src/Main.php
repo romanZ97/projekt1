@@ -54,6 +54,7 @@ class Main
         $stmt = mysqli_stmt_init($this->conn);
 
         if(!mysqli_stmt_prepare($stmt, $query)){
+            //TODO - SetPathForMassage
             header("Location: $this->globalpath/index.php?error=sqlerror");
             exit();
 
@@ -101,5 +102,13 @@ class Main
             if(gettype($value) == "string")
             $query[$key] = mysqli_real_escape_string($conn,$value);
         }
+    }
+
+    public function getglobalpath(){
+        return $this->globalpath;
+    }
+
+    public function getJSON($array){
+        return json_encode($array,JSON_PRETTY_PRINT);
     }
 }

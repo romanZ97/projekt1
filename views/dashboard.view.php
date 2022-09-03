@@ -1,4 +1,5 @@
-<body>
+
+<body >
 <!--Quelle: https://getbootstrap.com/docs/4.3/components/carousel/-->
 
 <!--<div id="logocenter">-->
@@ -43,7 +44,7 @@
             <div class="carousel-item">
                 <div class="cards-wrapper">
                     <div class="card">
-                        <img src="<?php echo $globalpath ?>/assets/images/Bild4.png" class="card-img-top" alt="...">
+                        <img src="<?php echo $globalpath ?>/assets/images/vegan.png" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Vegane Gerichte</h5>
                             <p class="card-text">lorem ipsum</p>
@@ -88,7 +89,7 @@
     <hr class="mt-2 mb-2">
         <div class="container">
             <div class="row ">
-                <?php $dishS->showDashboardDishes(); ?>
+                <?php $foodS->showDashboardFood(); ?>
             </div>
         </div>
     </form>

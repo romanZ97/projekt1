@@ -8,7 +8,7 @@ $globalpath = "/Projekt1";
 function checkLogin()
 {
     if (!isset($_SESSION['user_id'])) {
-        header("Location: views/signin.view.php");
+        header("Location: signin.php");
         die();
     }
 }
@@ -23,11 +23,11 @@ if( isset($_SESSION["user_id"]) ){
     // Decrypt cookie variable value
     $user_id = $sInS->decrypt($_COOKIE["remember"]);
 
-    $sql = "SELECT COUNT(*), user_id FROM user WHERE user_id = ?";
+    $sql = "SELECT COUNT(*), id FROM user WHERE id = ?";
     $stmt = mysqli_stmt_init($conn);
 
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header("Location: $globalpath/views/signin.view.php?error=sqlerror");
+        header("Location: $globalpath/signin.php?error=sqlerror");
 
     } else {
         mysqli_stmt_bind_param($stmt, "i", $user_id);
@@ -50,31 +50,27 @@ if(isset($_POST['login-submit'])) {
     $pwd = mysqli_real_escape_string($conn, $_POST['pwd']);
 
     if(empty($mail_username) || empty($pwd)){
-        header("Location: ../signin.view.php?error=emptyfields");
+        header("Location: ../signin.php?error=emptyfields");
 
     } else {
-        $sql = "SELECT * FROM user WHERE user_name=? OR email =?;";
-        $stmt = mysqli_stmt_init($conn);
 
-        if(!mysqli_stmt_prepare($stmt, $sql)){
-            header("Location: $globalpath/views/signin.view.php?error=sqlerror");
 
-        } else {
-            mysqli_stmt_bind_param($stmt, "ss", $mail_username, $mail_username);
-            mysqli_stmt_execute($stmt);
-            $result = mysqli_stmt_get_result($stmt);
+        // TODO - Set path for Message by Main
+//        if(!mysqli_stmt_prepare($stmt, $sql)){
+//            header("Location: $globalpath/views/signin.php?error=sqlerror");
 
-            if($row= mysqli_fetch_assoc($result)){
-                $pwdCheck = password_verify($pwd, $row['password']);
+                $user = $sInS->getUserByNameOrEmail($mail_username);
+
+                $pwdCheck = password_verify($pwd, $user['password']);
 
                 if($pwdCheck == false){
-                    header("Location: $globalpath/views/signin.view.php?error=wrongpwd");
+                    header("Location: $globalpath/signin.php?error=wrongpwd");
 
                 } else {
                     session_start();
                     session_regenerate_id(true);
 
-                    $user_id = $row['user_id'];
+                    $user_id = $user['id'];
 
                     if( isset($_POST['remember-me']) ){
                         $days = 30;
@@ -90,10 +86,11 @@ if(isset($_POST['login-submit'])) {
                     exit();
                 }
 
-            } else {
-                header("Location: $globalpath/views/signin.view.php?error=nouser");
-            }
-        }
+                // TODO - Set Path for Message bei Main
+//            } else {
+//                header("Location: $globalpath/signin.php?error=nouser");
+//            }
+//        }
     }
     exit();
 }

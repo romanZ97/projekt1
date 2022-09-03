@@ -167,7 +167,7 @@
                 </button>
             </div>
             <div class="container" style="text-align: center">
-                <a class="text-reset" href="signin.view.php" style=>Hast du einen Account? Hier zu Anmelden!</a>
+                <a class="text-reset" href="signin.php" style=>Hast du einen Account? Hier zu Anmelden!</a>
             </div>
 
         </form>

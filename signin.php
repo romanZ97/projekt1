@@ -139,7 +139,7 @@ if (isset($_SESSION['user_id'])) {
     ?>
     <button class="btn btn-lg btn-primary btn-block mb-5" id="login-submit" name="login-submit" type="submit" style="">Sign in
     </button>
-    <a class="text-reset" href="signup.view.php">Noch keinen Account? Jetzt registrieren!</a>
+    <a class="text-reset" href="signup.php">Noch keinen Account? Jetzt registrieren!</a>
 </form>
 </body>
 </html>

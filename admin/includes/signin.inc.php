@@ -8,7 +8,7 @@ $globalpath = "/Projekt1";
 function checkLogin()
 {
     if (!isset($_SESSION['user_id'])) {
-        header("Location: views/signin.view.php");
+        header("Location: views/signin.php");
         die();
     }
 
@@ -21,14 +21,14 @@ if(isset($_POST['login-submit'])) {
     $pwd = $_POST['pwd'];
 
     if(empty($mail_username) || empty($pwd)){
-        header("Location: ../signin.view.php?error=emptyfields");
+        header("Location: ../signin.php?error=emptyfields");
 
     } else {
         $sql = "SELECT * FROM user WHERE user_name=? OR email =?;";
         $stmt = mysqli_stmt_init($conn);
 
         if(!mysqli_stmt_prepare($stmt, $sql)){
-            header("Location: $globalpath/views/signin.view.php?error=sqlerror");
+            header("Location: $globalpath/views/signin.php?error=sqlerror");
 
         } else {
             mysqli_stmt_bind_param($stmt, "ss", $mail_username, $mail_username);
@@ -39,7 +39,7 @@ if(isset($_POST['login-submit'])) {
                 $pwdCheck = password_verify($pwd, $row['password']); //TODO -------------------------------------------- Password sofort hashen => MD5 Method
 
                 if($pwdCheck == false){
-                    header("Location: $globalpath/views/signin.view.php?error=wrongpwd");
+                    header("Location: $globalpath/views/signin.php?error=wrongpwd");
 
                 } else {
                     session_start();
@@ -56,7 +56,7 @@ if(isset($_POST['login-submit'])) {
                 }
 
             } else {
-                header("Location: $globalpath/views/signin.view.php?error=nouser");
+                header("Location: $globalpath/views/signin.php?error=nouser");
             }
         }
     }

@@ -67,8 +67,13 @@ class SignService extends Main
      */
     public function getUserIdByName($user_name)
     {
-        $sql = "SELECT user_id FROM user WHERE user_name=?";
+        $sql = "SELECT id FROM user WHERE user_name=?";
         return mysqli_fetch_assoc($this->loadDataWithParameters($sql,"s",array($user_name)))['user_id'];
+    }
+
+    function getUserByNameOrEmail($mail_username){
+        $sql = "SELECT * FROM user WHERE user_name=? OR email =?;";
+        return mysqli_fetch_assoc($this->loadDataWithParameters($sql,"ss",array($mail_username, $mail_username)));
     }
 
 
