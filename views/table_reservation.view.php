@@ -9,6 +9,7 @@
 <!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>-->
 <!--</head>-->
 <body>
+<div class="container">
 <section id="book-a-table" class="book-a-table">
     <div class="container" data-aos="fade-up">
         <div class="row">
@@ -46,4 +47,5 @@
         </form>
     </div>
 </section>
+</div>
 </body>

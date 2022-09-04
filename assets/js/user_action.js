@@ -56,10 +56,34 @@ function addOrderPosition(position){
 
 }
 
-// function deleteNAOrder(str){
-//     const xmlhttp = new XMLHttpRequest();
-//     xmlhttp.open("POST", "http://localhost:63342/Projekt1/includes/delete.php");
-//     const data = new FormData();
-//     data.append("order_nr", str);
-//     xmlhttp.send(data);
-// }
+
+
+//window.addEventListener('unload', function (e) {
+//    // if(!window._link_clicked_o || !window._link_clicked_r || !window._link_clicked_h || !window._link_clicked_f){
+//        const xmlhttp = new XMLHttpRequest();
+//        xmlhttp.open("POST", "http://localhost:63342/Projekt1/includes/delete.php");
+//        const data = new FormData();
+//        data.append("order_nr", <?php //echo $_SESSION["order_nr"] ?>//);
+//        data.append("order_status",  "<?php //echo $dS->getStatusByNumber($_SESSION["order_nr"]) ?>//");
+//        xmlhttp.send(data);
+//    // }
+//});
+
+
+function increaseCount(a, b) {
+    let input = b.previousElementSibling;
+    let value = parseInt(input.value, 10);
+    value = isNaN(value) ? 0 : value;
+    value++;
+    input.value = value;
+}
+
+function decreaseCount(a, b) {
+    let input = b.nextElementSibling;
+    let value = parseInt(input.value, 10);
+    if (value > 1) {
+        value = isNaN(value) ? 0 : value;
+        value--;
+        input.value = value;
+    }
+}

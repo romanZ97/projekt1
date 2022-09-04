@@ -380,3 +380,36 @@ body {
 /*    box-shadow: 0 0 0 0 rgba(90, 153, 212, 0);*/
 /*  }*/
 /*}*/
+
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.counter input {
+  width: 30px;
+  border: 1px solid #17a2b8;
+  border-radius: 3px;
+  /*line-height: 30px;*/
+  font-size: 20px;
+  text-align: center;
+  background: #ffffff;
+  color: #3579e5;
+  /*appearance: none;*/
+  outline: 0;
+}
+.counter span {
+  /*display: block;*/
+  /*cursor: pointer;*/
+  color: #3579e5;
+  user-select: none;
+}
+ .down {
+   font-size: 30px;
+   padding: 0 10px;
+ }
+
+ .up{
+   font-size: 25px;
+   padding: 0 10px;
+ }
