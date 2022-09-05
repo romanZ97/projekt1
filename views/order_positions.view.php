@@ -1,17 +1,4 @@
 <body>
-
-<div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-        Wähle deine Speise!
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Vorspeisen</a>
-        <a class="dropdown-item" href="#">Hauptspeisen</a>
-        <a class="dropdown-item" href="#">Desserts</a>
-    </div>
-</div>
-
 <div class="container">
     <h1 class="fw-light text-left text-lg-start mt-4 mb-2" style="padding-left: 20px">Speisen</h1>
     <!--<div class="container" style="background: #1D3461">-->

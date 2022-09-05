@@ -16,7 +16,7 @@ if (isset($_SESSION['user_id'])) {
 }
 
 $globalpath = "http://localhost:63342/projekt1";
-require "views/header.view.php";
+require_once "views/header.view.php";
 require "views/dashboard.view.php";
 require "views/footer.view.php";
 ?>

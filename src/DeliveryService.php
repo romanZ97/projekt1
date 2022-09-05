@@ -47,19 +47,21 @@ class DeliveryService extends Main
                         <p style="margin-left: 15px">' . $position["food_portion"] . ' ' . $position["food_portion_unit"] . '</p>
                     </div>
                     <div class="d-flex flex-row align-items-center">
-                        <button class="dropdown-button" type="submit" name="order-position-delete"
-                        value="' . $position["id"] . '" style="margin-left: 5px">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
-                               <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                               <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                           </svg>
-                        </button>
-                        <div class="counter" style=" margin-left: 15px;">
-                            <span class="down" onClick="decreaseCount(event, this)">-</span>
-                            <input name="position_qty" type="text" value="' . $this->getPositionQty($position["id"]) . '">
-                            <span class="up" onClick="increaseCount(event, this)">+</span>
+                        <div class="d-flex flex-row align-items-center ">
+                            <button class="dropdown-button" type="submit" name="order-position-delete"
+                            value="' . $position["id"] . '" style="margin-left: 5px">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                   <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                               </svg>
+                            </button>
+                            <div class="counter" style=" margin-left: 15px;">
+                                <span class="down" onClick="decreaseCount(event, this)">-</span>
+                                <input name="position_qty" type="text" value="' . $this->getPositionQty($position["id"]) . '">
+                                <span class="up" onClick="increaseCount(event, this)">+</span>
+                            </div>
                         </div>
-                        <span style="margin-left: 15px">' . $position["price"] . ' €</span>
+                        <span style="margin-left: 15px;width: 65px; text-align: right">' . $position["price"] . ' €</span>
                     </div>
                 </li>
             </form>';
@@ -119,9 +121,10 @@ class DeliveryService extends Main
 
     public function addOrderPosition($order_nr, $food_id)
     {
-        if ($qty = $this->getPositionQty($food_id)){
-            $sql = "UPDATE `order_position` SET `qty`= '" . $qty + 1 . "' WHERE `order_id` = ? AND `food_id` = ?";
-            $this->executeQuery($sql, "ii", array($this->order_id, $food_id));
+        if ($this->getPositionQty($food_id)){
+//            $sql = "UPDATE `order_position` SET `qty`= '" . $qty + 1 . "' WHERE `order_id` = ? AND `food_id` = ?";
+//            $this->executeQuery($sql, "ii", array($this->order_id, $food_id));
+            $this->deleteOrderPosition($food_id);
 
         } else {
             $sql = "INSERT INTO `order_position`(`order_id`, `food_id`) 
@@ -161,12 +164,12 @@ class DeliveryService extends Main
         return false;
     }
 
-    public function deleteOrderPosition($order_nr, $food_id)
+    public function deleteOrderPosition($food_id)
     {
         $p_qty = $this->getPositionQty($food_id);
         $sql = "DELETE FROM `order_position` WHERE `order_id` = ? AND `food_id` = ?;";
         $this->executeQuery($sql, "ii", array($this->order_id, $food_id));
-        $this->updateOrder_del($order_nr, $food_id, $this->total_qty - $p_qty);
+        $this->updateOrder_del($this->order_nr, $food_id, $this->total_qty - $p_qty);
     }
 
     public function deleteOrder($order_nr)

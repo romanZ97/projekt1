@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="de">
-<title>GastroWeb</title>
+<title>Bestellen</title>
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <?php
 session_start();
+echo $_SESSION['order_nr'];
 $globalpath = "http://localhost:63342/Projekt1";
-require "views/header.view.php";
+require_once "views/header.view.php";
 require "views/order_positions.view.php";
 require "views/order_form.view.php";

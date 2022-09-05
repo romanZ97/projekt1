@@ -6,6 +6,31 @@ $foodS = new FoodService();
 $foodS->loadDashboardData();
 $foodS->loadActiveData();
 ?>
+<?php if (isset($_GET['category'])) : ?>
+    <?php if (!empty($_GET["category"])) : ?>
+        <script>
+            window.addEventListener('load', (e)=> {
+                document.getElementById("container_category_<?php echo $_GET["category"]?>").scrollIntoView({ behavior: 'smooth', block: 'start'});
+            });
+        </script>
+    <?php endif; ?>
+<?php endif; ?>
+<?php if (isset($_SESSION['u_item'])) : ?>
+        <script>
+            window.addEventListener('load', (e)=> {
+                document.getElementById("dashboard_order_position_<?php echo $_SESSION["u_item"]?>").scrollIntoView({block: "center"});
+            });
+        </script>
+        <?php unset($_SESSION["u_item"]);?>
+<?php endif; ?>
+<?php if (isset($_SESSION['u_order'])) : ?>
+    <script>
+        window.addEventListener('load', (e)=> {
+            document.getElementById("dashboard_order_position_<?php echo $_SESSION["u_order"]?>").scrollIntoView({block: "center"});
+        });
+    </script>
+    <?php unset($_SESSION["u_order"]);?>
+<?php endif; ?>
 <script src="<?php echo $globalpath ?>/assets/js/user_action.js"></script>
 <head>
     <!-- Bootstrap CSS -->
@@ -23,7 +48,7 @@ $foodS->loadActiveData();
 <!--                    <a class="nav-link active" aria-current="page" href="#">Kategorien</a>-->
 <!--                </li>-->
                 <li class="nav-item">
-                    <a id="food-link" class="nav-link active" href="#">Speisen</a>
+                    <a id="food-link" class="nav-link active" href="<?php echo $globalpath ?>/food.php">Speisen</a>
                 </li>
                 <li class="nav-item">
                     <a id="ordering-link" class="nav-link active" type="button" href="<?php echo $globalpath ?>/ordering.php">Bestellen</a>

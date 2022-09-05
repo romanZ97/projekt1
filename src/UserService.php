@@ -35,27 +35,22 @@ class UserService extends Main
 
     public function deleteUserFavorite($food_id)
     {
-        $this->p_deleteUserFavorite($food_id);
-    }
-
-    public function addUserFavorite($food_id)
-    {
-        $this->p_addUserFavorite($this->user_id,$food_id);
-    }
-
-    private function p_deleteUserFavorite($food_id)
-    {
         $sql = "DELETE FROM `user_favorit` WHERE `food_id` = ?;";
         $this->executeQuery($sql,"i", array($food_id));
     }
 
-    private function p_addUserFavorite($user_id,$food_id)
+    public function addUserFavorite($food_id)
     {
         if(!$this->chekUserFavorite($food_id)){
             $sql = "INSERT INTO `user_favorit`(`user_id`, `food_id`) VALUES (?,?);";
-            $this->executeQuery($sql,"ii", array($user_id,$food_id));
+            $this->executeQuery($sql,"ii", array($this->user_id,$food_id));
+            return true;
+        } else {
+            $this->deleteUserFavorite($food_id);
+            return false;
         }
     }
+
 
     public function chekUserFavorite($food_id){
         $col = array_column($this->user_favorites,"food_id");

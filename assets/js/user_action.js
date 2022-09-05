@@ -51,10 +51,15 @@ function deleteOrderPosition(position){
 window.addEventListener('load', (e)=> {
     userOrders = [];
     userFavorites = []
-    if(document.getElementById("user-favorites-div")){
-        loadUserFavorites();
+    let fileName = location.href.split("/").slice(-1);
+
+    if(fileName[0] === "index.php" || fileName[0].split("?")[0] === "food.php"){
+        if(document.getElementById("user-favorites-div")){
+            loadUserFavorites();
+        }
+        loadOrderPositions();
     }
-    loadOrderPositions();
+
 });
 
 

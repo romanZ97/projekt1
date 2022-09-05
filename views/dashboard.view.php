@@ -11,63 +11,70 @@
 
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="cards-wrapper">
-                    <div class="card">
-                        <img src="<?php echo $globalpath ?>/assets/images/Bild1.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Vorspeisen</h5>
-                            <p class="card-text">lorem ipsum</p>
-                            <a href="#" class="btn btn-primary">Alle anzeigen
-                            </a>
-                        </div>
-                    </div>
-                    <div class="card d-none d-md-block">
-                        <img src="<?php echo $globalpath ?>/assets/images/Bild2.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Hauptspeisen</h5>
-                            <p class="card-text">lorem ipsum</p>
-                            <a href="#" class="btn btn-primary">Alle anzeigen</a>
-                        </div>
-                    </div>
-                    <div class="card d-none d-md-block">
-                        <img src="<?php echo $globalpath ?>/assets/images/Bild3.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Dessert</h5>
-                            <p class="card-text">lorem ipsum</p>
-                            <a href="#" class="btn btn-primary">Alle anzeigen</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="cards-wrapper">
-                    <div class="card">
-                        <img src="<?php echo $globalpath ?>/assets/images/vegan.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Vegane Gerichte</h5>
-                            <p class="card-text">lorem ipsum</p>
-                            <a href="#" class="btn btn-primary">Alle anzeigen</a>
-                        </div>
-                    </div>
-                    <div class="card d-none d-md-block">
-                        <img src="<?php echo $globalpath ?>/assets/images/Bild5.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Laktose- und Glutenfrei</h5>
-                            <p class="card-text">lorem ipsum</p>
-                            <a href="#" class="btn btn-primary">Alle anzeigen</a>
-                        </div>
-                    </div>
-                    <div class="card d-none d-md-block">
-                        <img src="<?php echo $globalpath ?>/assets/images/Bild2.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">lorem ipsum</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php $foodS->showDashboardCategories(); ?>
+            <!--            <div class="carousel-item active">-->
+            <!--                <div class="cards-wrapper">-->
+            <!--                    <div class="card">-->
+            <!--                        <img src="-->
+            <?php //echo $globalpath ?><!--/assets/images/vorspeise.png" class="card-img-top" alt="...">-->
+            <!--                        <div class="card-body">-->
+            <!--                            <h5 class="card-title">Vorspeisen</h5>-->
+            <!--                            <p class="card-text">lorem ipsum</p>-->
+            <!--                            <a href="#" class="btn btn-primary">Alle anzeigen-->
+            <!--                            </a>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                    <div class="card d-none d-md-block">-->
+            <!--                        <img src="-->
+            <?php //echo $globalpath ?><!--/assets/images/Bild2.png" class="card-img-top" alt="...">-->
+            <!--                        <div class="card-body">-->
+            <!--                            <h5 class="card-title">Hauptspeisen</h5>-->
+            <!--                            <p class="card-text">lorem ipsum</p>-->
+            <!--                            <a href="#" class="btn btn-primary">Alle anzeigen</a>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                    <div class="card d-none d-md-block">-->
+            <!--                        <img src="-->
+            <?php //echo $globalpath ?><!--/assets/images/Bild3.png" class="card-img-top" alt="...">-->
+            <!--                        <div class="card-body">-->
+            <!--                            <h5 class="card-title">Dessert</h5>-->
+            <!--                            <p class="card-text">lorem ipsum</p>-->
+            <!--                            <a href="#" class="btn btn-primary">Alle anzeigen</a>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <!--            <div class="carousel-item">-->
+            <!--                <div class="cards-wrapper">-->
+            <!--                    <div class="card">-->
+            <!--                        <img src="-->
+            <?php //echo $globalpath ?><!--/assets/images/vegan.png" class="card-img-top" alt="...">-->
+            <!--                        <div class="card-body">-->
+            <!--                            <h5 class="card-title">Vegane Gerichte</h5>-->
+            <!--                            <p class="card-text">lorem ipsum</p>-->
+            <!--                            <a href="#" class="btn btn-primary">Alle anzeigen</a>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                    <div class="card d-none d-md-block">-->
+            <!--                        <img src="-->
+            <?php //echo $globalpath ?><!--/assets/images/Bild5.png" class="card-img-top" alt="...">-->
+            <!--                        <div class="card-body">-->
+            <!--                            <h5 class="card-title">Laktose- und Glutenfrei</h5>-->
+            <!--                            <p class="card-text">lorem ipsum</p>-->
+            <!--                            <a href="#" class="btn btn-primary">Alle anzeigen</a>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                    <div class="card d-none d-md-block">-->
+            <!--                        <img src="-->
+            <?php //echo $globalpath ?><!--/assets/images/Bild2.png" class="card-img-top" alt="...">-->
+            <!--                        <div class="card-body">-->
+            <!--                            <h5 class="card-title">Card title</h5>-->
+            <!--                            <p class="card-text">lorem ipsum</p>-->
+            <!--                            <a href="#" class="btn btn-primary">Go somewhere</a>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
@@ -86,13 +93,11 @@
     <h1 class="fw-light text-center text-lg-start mt-4 mb-0"> Beliebte Speisen</h1>
 
     <hr class="mt-2 mb-2">
-        <div class="container">
-            <div class="row ">
-                <?php $foodS->showDashboardFood(); ?>
-            </div>
+    <div class="container">
+        <div class="row ">
+            <?php $foodS->showDashboardFood(); ?>
         </div>
-    </form>
-
+    </div>
 </div>
 <!--<div class="suchergebnisse">-->
 <!---->

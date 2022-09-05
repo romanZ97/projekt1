@@ -25,40 +25,47 @@ class FoodService extends Main
         $this->setActiveFood();
     }
 
-    public function showActivFood(){
-        for ($i = 1; $i < count($this->active_categories); $i++){
+    public function showActiveFood(){
+        foreach ($this->active_categories as $category){
             echo '
-            <h2 class="fw-light text-center text-lg-start mt-4 mb-0">'. $this->getCategoryName($i) . '</h2>
-            <hr class="mt-2 mb-5">';
-        }
-        foreach ($this->dashboard_food as $food) {
-            echo '
-                 <div class="col-md-3" style="margin-bottom: 1em;">
+    <h2 id="container_category_'. $category["id"] . '" class="fw-light text-center text-lg-start mt-4 mb-0">'. $category["category_name"] . '</h2>
+    <hr class="mt-2 mb-5">
+    <div class="container" >
+        <div class="row ">';
+
+            $category_id = $category["id"];
+            $food_array = array_filter($this->active_food, function ($value) use ($category_id){
+                return ($value["category_id"] == $category_id);
+            });
+
+            foreach ($food_array as $food) {
+                echo '
+                 <div class="col-md-4" style="margin-bottom: 1em;">
                     <div class="card-sl h-100">                
                         <div class="card-image">
-                            <img src="' . $this->globalpath . '/assets/images/' . $food["image_name"] . '" alt="Spaghetti">
+                            <img src="' . $this->globalpath . '/assets/images/' . $food["image_name"] . '" alt="Spaghetti" style="height: 250px; width: 100%">
                         </div>
                         ';
-            if (isset($_SESSION["user_id"])) {
-                echo '
+                if (isset($_SESSION["user_id"])) {
+                    echo '
                         <form id="dashboard-' . $food["id"] . '-favorite" action="' . $this->globalpath . '/includes/user_actions.inc.php"
                        method="post">
                             <a class="card-action" id="dashboard_favorite_' . $food["id"] . '" type="button"
                                onclick="document.getElementById(\'dashboard-' . $food["id"] . '-favorite\').submit();" title="Favorite">
-                                <input name="dashboard-favorite-add" value="' . $food["id"] . '" hidden/>
+                                <input name="favorite-add" value="' . $food["id"] . '" hidden/>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
                                      class="bi bi-star-fill" viewBox="0 0 16 16">
                                     <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
                                 </svg>
                             </a>
                         </form>';
-            }
-            echo '
+                }
+                echo '
                         <form id="dashboard-' . $food["id"] . '-order" action="' . $this->globalpath . '/includes/user_actions.inc.php"
                                    method="post">
-                            <a class="card-action" id="d_order_p_' . $food["id"] . '" type="button" 
+                            <a class="card-action" id="dashboard_order_position_' . $food["id"] . '" type="button" 
                             onclick="document.getElementById(\'dashboard-' . $food["id"] . '-order\').submit();"title="Bestellen">
-                            <input name="dashboard-order-position-add" value="' . $food["id"] . '" hidden/>
+                            <input name="order-position-add" value="' . $food["id"] . '" hidden/>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
                                      class="bi bi-basket2-fill" viewBox="0 0 16 16">
                                     <path d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1z"/>
@@ -81,6 +88,45 @@ class FoodService extends Main
                 </div>
                
                 ';
+            }
+            echo '
+        </div>
+    </div>';
+        }
+    }
+
+    public function showDashboardCategories()
+    {
+        $first = true;
+        $count = 1;
+        foreach ($this->active_categories as $category){
+
+            if($first){
+                echo '
+        <div class="carousel-item active">
+            <div class="cards-wrapper">';
+                $first = false;
+            }elseif ($count == 4){
+                echo '<div class="carousel-item">
+                        <div class="cards-wrapper">';
+            }
+
+            echo '
+                    <a href="' . $this->globalpath . '/food.php?category=' . $category["id"] . '">
+                        <div class="card">
+                            <img src="' . $this->globalpath . '/assets/images/dashboard_' . $category["image_name"] . '" class="card-img-top" alt="' . $category["category_name"] . '">
+                            <div class="card-body">
+                                <h5 class="card-title">' . $category["category_name"] . '</h5>
+                            </div>
+                        </div>
+                    </a>';
+
+            if ($count == 3 OR $count == 5) {
+                echo '
+                   </div>
+              </div>';
+            }
+            $count++;
         }
     }
 
@@ -113,7 +159,7 @@ class FoodService extends Main
                                    method="post">
                             <a class="card-action" id="dashboard_order_position_' . $food["id"] . '" type="button" 
                             onclick="document.getElementById(\'dashboard_order_position_' . $food["id"] . '_form\').submit();"title="Bestellen">
-                            <input name="dashboard-order-position-add" value="' . $food["id"] . '" hidden/>
+                            <input name="order-position-add" value="' . $food["id"] . '" hidden/>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
                                      class="bi bi-basket2-fill" viewBox="0 0 16 16">
                                     <path d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1z"/>
