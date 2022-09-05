@@ -40,20 +40,26 @@ class DeliveryService extends Main
         foreach ($this->getSortedOrderPositions() as $position) {
             echo '
             <form id="ordering-position-' . $position["id"] . '-form" action="' . $this->globalpath . '/includes/oder_actions.inc.php" method="post" >
-                <li class="list-group-item justify-content-between align-items-start" style="height: max-content">
-                    <span>' . $position["title"] . '</span>
-                    <input name="order_position-view" value="' . $position["id"] . '" hidden>
-                    <button class="dropdown-button" type="submit" name="order-position-delete"
-                    value="' . $position["id"] . '" style="margin-left: 5px; float: right;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
-                           <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                           <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                       </svg>
-                    </button>
-                    <div class="counter" style="float: right; top: 0">
-                        <span class="down" onClick="decreaseCount(event, this)">-</span>
-                        <input name="position_qty" type="text" value="' . $this->getPositionQty($position["id"]) . '">
-                        <span class="up" onClick="increaseCount(event, this)">+</span>
+                <li class="d-flex justify-content-between">
+                    <div class="d-flex flex-row align-items-center">
+                        <span id="title">' . $position["title"] . '</span>
+                        <input name="order_position-view" value="' . $position["id"] . '" hidden>
+                        <p style="margin-left: 15px">' . $position["food_portion"] . ' ' . $position["food_portion_unit"] . '</p>
+                    </div>
+                    <div class="d-flex flex-row align-items-center">
+                        <button class="dropdown-button" type="submit" name="order-position-delete"
+                        value="' . $position["id"] . '" style="margin-left: 5px">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                               <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                               <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                           </svg>
+                        </button>
+                        <div class="counter" style=" margin-left: 15px;">
+                            <span class="down" onClick="decreaseCount(event, this)">-</span>
+                            <input name="position_qty" type="text" value="' . $this->getPositionQty($position["id"]) . '">
+                            <span class="up" onClick="increaseCount(event, this)">+</span>
+                        </div>
+                        <span style="margin-left: 15px">' . $position["price"] . ' €</span>
                     </div>
                 </li>
             </form>';
@@ -113,17 +119,16 @@ class DeliveryService extends Main
 
     public function addOrderPosition($order_nr, $food_id)
     {
-        $order = $this->getOrderByNumber($order_nr);
-        if ($qty = $this->getPositionQty($order["id"], $food_id)) {
+        if ($qty = $this->getPositionQty($food_id)){
             $sql = "UPDATE `order_position` SET `qty`= '" . $qty + 1 . "' WHERE `order_id` = ? AND `food_id` = ?";
-            $this->executeQuery($sql, "ii", array($order["id"], $food_id));
+            $this->executeQuery($sql, "ii", array($this->order_id, $food_id));
 
         } else {
-            $sql = "INSERT INTO `order_position`(`order_position_nr`, `order_id`, `food_id`) 
-                VALUES (?,?,?);";
-            $this->executeQuery($sql, "iii", array(($order["total_qty"] + 1), $order["id"], $food_id));
+            $sql = "INSERT INTO `order_position`(`order_id`, `food_id`) 
+                VALUES (?,?);";
+            $this->executeQuery($sql, "ii", array($this->order_id, $food_id));
         }
-        $this->updateOrder_add($order_nr, $food_id, $order["total_qty"] + 1);
+        $this->updateOrder_add($order_nr, $food_id, $this->total_qty + 1);
 
     }
 

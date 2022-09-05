@@ -31,7 +31,7 @@
 
     </div>
     <div class="col-12">
-        <ul class="list-group">
+        <ul class="list list-inline">
             <?php $dS->showPositions() ?>
 <!--            <form id="ordering-position---><?php //echo $position["id"] ?><!---form" action="--><?php //echo $globalpath ?><!--/includes/oder_actions.inc.php" method="post" >-->
 <!--            <li class="list-group-item d-flex justify-content-between align-items-center">-->

@@ -26,13 +26,13 @@ $foodS->loadActiveData();
                     <a id="food-link" class="nav-link active" href="#">Speisen</a>
                 </li>
                 <li class="nav-item">
-                    <a id="ordering-link" class="nav-link active" href="<?php echo $globalpath ?>/ordering.php">Bestellen</a>
+                    <a id="ordering-link" class="nav-link active" type="button" href="<?php echo $globalpath ?>/ordering.php">Bestellen</a>
                 </li>
                 <li class="nav-item">
                     <a id="reservation-link" class="nav-link active" href="<?php echo $globalpath ?>/reservation.php">Tischreservieren</a>
                 </li>
                 <li class="nav-item ml-1">
-                    <a class="nav-link align-items-center p-0" href="#" style="margin: 10px">
+                    <a  id="info-link" class="nav-link align-items-center p-0" href="#" style="margin: 10px">
                         <?php require __DIR__ . "/../assets/icons/info_icon.php"; ?>
                     </a>
                 </li>
@@ -63,7 +63,7 @@ $foodS->loadActiveData();
                             <form id="signout-form" action="<?php echo $globalpath ?>/signin.php"
                                   method="post" style="margin: 0">
                                 <input name="signout" value="out" hidden>
-                                <a class="dropdown-item" onclick="document.getElementById('signout-form').submit();">
+                                <a id="nav-sign-btn" class="dropdown-item" onclick="document.getElementById('signout-form').submit();">
                                     <?php require __DIR__ . "/../assets/icons/exit_icon.php"; ?>
                                     Anmelden</a>
                             </form>
@@ -78,7 +78,7 @@ $foodS->loadActiveData();
                         </a>
                         <form id="user-favorite-nav-form"
                               action="<?php echo $globalpath ?>/includes/user_actions.inc.php" method="post">
-                            <div class="dropdown-menu dropdown-menu-xl-right" style=" min-width: 300px">
+                            <div id="user-favorites-div" class="dropdown-menu dropdown-menu-xl-right" style=" min-width: 300px">
                                 <?php require "user_favorites_dropdown.view.php" ?>
                             </div>
                         </form>
@@ -109,7 +109,7 @@ $foodS->loadActiveData();
                             <form id="signout-form" action="<?php echo $globalpath ?>/includes/signout.inc.php"
                                   method="post" style="margin: 0">
                                 <input name="signout" value="out" hidden>
-                                <a class="dropdown-item" onclick="document.getElementById('signout-form').submit();">
+                                <a id="nav-sign-btn" class="dropdown-item" onclick="document.getElementById('signout-form').submit();">
                                     <?php require __DIR__ . "/../assets/icons/exit_icon.php"; ?>
                                     abmelden</a>
                             </form>

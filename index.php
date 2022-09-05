@@ -8,6 +8,7 @@
 
 <?php
 session_start();
+echo $_SESSION['order_nr'];
 //unset($_SESSION['order_nr']);
 if (isset($_SESSION['user_id'])) {
     require "src/UserService.php";
@@ -18,3 +19,4 @@ $globalpath = "http://localhost:63342/projekt1";
 require "views/header.view.php";
 require "views/dashboard.view.php";
 require "views/footer.view.php";
+?>

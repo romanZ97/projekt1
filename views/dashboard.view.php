@@ -1,11 +1,11 @@
-<body>
+<body id="dashboard-body">
 <!--Quelle: https://getbootstrap.com/docs/4.3/components/carousel/-->
 
 <!--<div id="logocenter">-->
 <!--    <img class="center" src="/assets/images/top_background.png" alt="Logo" id="sitelogo">-->
 <!--</div>-->
 
-<div class="container" style="background: #1D3461">
+<div class="container">
     <h1 class="fw-light text-center text-lg-start mt-4 mb-0"> Unsere Kategorien</h1>
     <hr class="mt-2 mb-5">
 
@@ -81,7 +81,7 @@
     <hr class="mt-2 mb-5">
 </div>
 
-<div class="container mt-5" style="background: #1D3461">
+<div class="container mt-5">
 
     <h1 class="fw-light text-center text-lg-start mt-4 mb-0"> Beliebte Speisen</h1>
 

@@ -381,6 +381,27 @@ body {
 /*  }*/
 /*}*/
 
+.list li {
+  list-style: none;
+  padding: 10px;
+  border: 1px solid #e3dada;
+  margin-top: 1px;
+  border-radius: 5px;
+  background: #fff;
+}
+
+.list #title{
+  font-weight: bold;
+}
+
+.list #price{
+
+}
+
+.list #portion{
+
+}
+
 .counter {
   display: flex;
   align-items: center;
