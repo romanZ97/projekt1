@@ -79,12 +79,14 @@ class DeliveryService extends Main
                     f.`food_portion`, 
                     f.`food_portion_unit`,
                     f.`category_id`,
+                    op.`qty`,
                     c.`category_name`,
                     c.`icon_name`,
                     mt.`icon_name`, 
                     co.`country_name`, 
                     co.`country_short_name`
                 FROM `food` AS f
+                JOIN order_position AS op ON op.food_id = f.id 
                 JOIN category AS c ON c.id = f.category_id 
                 JOIN country AS co ON co.id = f.country_id
                 JOIN meat_type AS mt ON mt.id = f.meat_type_id
@@ -239,5 +241,9 @@ class DeliveryService extends Main
         $result = $this->loadDataWithParameters($sql, "i", array($order_nr));
         $result = mysqli_fetch_assoc($result);
         return $result["status"];
+    }
+
+    public function getPositions(){
+        return $this->order_positions;
     }
 }

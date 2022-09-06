@@ -18,7 +18,7 @@ $foodS->loadActiveData();
 <?php if (isset($_SESSION['u_item'])) : ?>
         <script>
             window.addEventListener('load', (e)=> {
-                document.getElementById("dashboard_order_position_<?php echo $_SESSION["u_item"]?>").scrollIntoView({block: "center"});
+                document.getElementById("favorite_<?php echo $_SESSION["u_item"]?>").scrollIntoView({block: "center"});
             });
         </script>
         <?php unset($_SESSION["u_item"]);?>
@@ -26,7 +26,7 @@ $foodS->loadActiveData();
 <?php if (isset($_SESSION['u_order'])) : ?>
     <script>
         window.addEventListener('load', (e)=> {
-            document.getElementById("dashboard_order_position_<?php echo $_SESSION["u_order"]?>").scrollIntoView({block: "center"});
+            document.getElementById("order_position_<?php echo $_SESSION["u_order"]?>").scrollIntoView({block: "center"});
         });
     </script>
     <?php unset($_SESSION["u_order"]);?>
@@ -74,7 +74,7 @@ $foodS->loadActiveData();
                            aria-haspopup="true" aria-expanded="false" style="margin: 10px">
                             <?php require __DIR__ . "/../assets/icons/order_icon.php"; ?>
                         </a>
-                        <div id="orders-nav-dropdown" class="dropdown-menu dropdown-menu-xl-right"
+                        <div id="orders-nav-dropdown" class="dropdown-menu dropdown-menu-right dropdown-text-right"
                              style=" min-width: 300px">
                             <?php require "user_order_dropdown.view.php" ?>
                         </div>
@@ -103,7 +103,7 @@ $foodS->loadActiveData();
                         </a>
                         <form id="user-favorite-nav-form"
                               action="<?php echo $globalpath ?>/includes/user_actions.inc.php" method="post">
-                            <div id="user-favorites-div" class="dropdown-menu dropdown-menu-xl-right" style=" min-width: 300px">
+                            <div id="user-favorites-div" class="dropdown-menu dropdown-menu-right dropdown-text-right" style=" min-width: 300px">
                                 <?php require "user_favorites_dropdown.view.php" ?>
                             </div>
                         </form>
@@ -113,7 +113,8 @@ $foodS->loadActiveData();
                            aria-haspopup="true" aria-expanded="false" style="margin: 10px" onclick="checkOrders()">
                             <?php require __DIR__ . "/../assets/icons/order_icon.php"; ?>
                         </a>
-                        <div id="orders-nav-dropdown" class="dropdown-menu dropdown-menu-xl-right"
+                        <span class="dropdown-count-badge"><?php echo $dS->getTotalQty() ?></span>
+                        <div id="orders-nav-dropdown" class="dropdown-menu dropdown-menu-right dropdown-text-right"
                              style=" min-width: 300px">
                             <?php require "user_order_dropdown.view.php" ?>
                         </div>

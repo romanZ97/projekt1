@@ -4,7 +4,8 @@ require "src/UserService.php";
 $uS = new UserService($_SESSION['user_id']);
 }
 $userFavorites = $uS->getSortedUserFavorites();
-$dropdown_category = null;?>
+$dropdown_category = null;
+?>
 <?php if (count($userFavorites) < 1): ?>
     <a class="dropdown-item mt-0 px-0.5" style="animation-duration: 1000ms;">
         <span>
@@ -27,18 +28,30 @@ $dropdown_category = null;?>
                     </svg>
                 </button>
             </form>
-            <form id="dashboard-favorite-to-order-<?php echo $favorite["food_id"] ?>" action="<?php echo $globalpath ?>/includes/user_actions.inc.php" method="post" >
-                <button class="dropdown-button" name="favorite-to-order" type="submit" value="<?php echo $favorite["food_id"] ?>"
-                        style="margin-left: 5px; float: right">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                         class="bi bi-basket2-fill" viewBox="0 0 16 16">
-                        <path d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1z"/>
-                    </svg>
-                </button>
-            </form>
-            <span>
-            <?php echo $favorite["title"] ?>
-        </span>
+            <?php
+            $food_id = $favorite["food_id"];
+            $position = array_filter($dS->getPositions(), function ($value) use ($food_id){
+                return ($value["id"] == $food_id);
+            });?>
+            <?php if ($position): ?>
+                <form id="dashboard-favorite-to-order-<?php echo $favorite["food_id"] ?>" action="<?php echo $globalpath ?>/includes/user_actions.inc.php" method="post" >
+                    <button class="dropdown-button" name="favorite-to-order" type="submit" value="<?php echo $favorite["food_id"] ?>" style="position: relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bookmark-check-fill" viewBox="0 0 16 16" style="color: #ffdd1f">
+                            <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+                        </svg>
+                    </button>
+                </form>
+            <?php else: ?>
+                <form id="dashboard-favorite-to-order-<?php echo $favorite["food_id"] ?>" action="<?php echo $globalpath ?>/includes/user_actions.inc.php" method="post" >
+                    <button class="dropdown-button" name="favorite-to-order" type="submit" value="<?php echo $favorite["food_id"] ?>">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                             class="bi bi-basket2-fill" viewBox="0 0 16 16">
+                            <path d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1z"/>
+                        </svg>
+                    </button>
+                </form>
+            <?php endif; ?>
+            <span><?php echo $favorite["title"] ?></span>
         </a>
     <?php endforeach; ?>
 <?php endif; ?>

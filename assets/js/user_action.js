@@ -12,21 +12,20 @@ window.addEventListener('load',()=>{
     console.log(dashboardDishes);
 })
 function loadUserFavorites(){
-
     let nav_favorite_div = document.getElementById("user-favorites-div");
     let favorites = nav_favorite_div.getElementsByTagName("button");
     for (let i = 0; i < favorites.length; i++) {
         if((i % 2) !== 0)
             continue;
         let id = favorites[i].value;
-        let dashboard_favorite =  document.getElementById("dashboard_favorite_"+id);
+        let dashboard_favorite =  document.getElementById("favorite_"+id);
         dashboard_favorite.style.background= "#E26D5C";
         dashboard_favorite.style.color = "gold";
     }
 }
 
 function deleteFavorite(favorite){
-    let dashboard_favorite =  document.getElementById("dashboard_favorite_"+favorite);
+    let dashboard_favorite =  document.getElementById("favorite_"+favorite);
     dashboard_favorite.style.background = "white";
     dashboard_favorite.style.color = "black";
 }
@@ -36,14 +35,14 @@ function loadOrderPositions(){
     let order_positions = nav_order_positions_div.getElementsByTagName("button");
     for (let i = 0; i < order_positions.length; i++) {
         let id = order_positions[i].value;
-        let dashboard_order_positions =  document.getElementById("dashboard_order_position_"+id);
+        let dashboard_order_positions =  document.getElementById("order_position_"+id);
         dashboard_order_positions.style.background= "#E26D5C";
         dashboard_order_positions.style.color = "gold";
     }
 }
 
 function deleteOrderPosition(position){
-    let dashboard_order_positions =  document.getElementById("dashboard_order_position_"+position);
+    let dashboard_order_positions =  document.getElementById("order_position_"+position);
     dashboard_order_positions.style.background = "white";
     dashboard_order_positions.style.color = "black";
 }

@@ -254,10 +254,6 @@ body {
 
 }
 
-
-
-
-
 #brrr {
   background-color: #E7E7E7;
   border-radius: 8px;
@@ -276,14 +272,31 @@ body {
 }
 
 .dropdown-button{
+  position: relative;
+  float: right;
   border: 0;
   background-color: transparent;
   margin-right: 2px;
+  margin-left: 5px;
   padding-bottom: 0.3em;
   padding-left: 0;
   padding-right: 0;
 }
 
+.dropdown-count-badge{
+  position: absolute;
+  top: 15px;
+  right: 95px;
+  height: 17px;
+  width: 18px;
+  font-weight: bold;
+  color: gold;
+  background-color: #E26D5C;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border-radius: 50%;
+}
 
 .card-sl {
   height: 100%;
