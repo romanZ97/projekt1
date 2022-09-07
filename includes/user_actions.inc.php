@@ -6,7 +6,7 @@ require __DIR__ . "/../src/DeliveryService.php";
 if (isset($_SESSION['user_id']))
     $uS = new UserService($_SESSION["user_id"]);
 $dS  = new DeliveryService();
-$globalpath = "http://localhost:63342/projekt1";
+$globalpath = "http://localhost/projekt1";
 
 if(isset($_POST["favorite-delete"])){
     $uS->deleteUserFavorite($_POST["favorite-delete"]);

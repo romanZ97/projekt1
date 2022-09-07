@@ -1,16 +1,6 @@
 let userOrders = [];
 let userFavorites = [];
-let html = "";
-let dashboardDishes = [];
-window.addEventListener('load',()=>{
-    let metas = document.getElementsByTagName("meta");
-    for (let meta in metas){
-        if(meta.name === "dishdata_1"){
-            dashboardDishes.push(meta.content);
-        }
-    }
-    console.log(dashboardDishes);
-})
+
 function loadUserFavorites(){
     let nav_favorite_div = document.getElementById("user-favorites-div");
     let favorites = nav_favorite_div.getElementsByTagName("button");
@@ -60,46 +50,6 @@ window.addEventListener('load', (e)=> {
     }
 
 });
-
-
-// window.addEventListener('load', (e)=>{
-//     let db_body = document.getElementById("dashboard-body");
-//     let o_positions_body = document.getElementById("order-positions-body");
-//     let h_link = document.getElementById("home-link");
-//     let f_link = document.getElementById("food-link");
-//     let d_link = document.getElementById("ordering-link");
-//     let r_link = document.getElementById("reservation-link");
-//     let i_link = document.getElementById("info-link");
-//     let s_link = document.getElementById("nav-sign-btn");
-//     d_link.addEventListener('click',(e)=>{
-//         const xmlhttp = new XMLHttpRequest();
-//         xmlhttp.open("POST", "index.php");
-//         xmlhttp.onreadystatechange = function () {
-//             if (this.readyState == 4 && this.status == 200) {
-//                 document.getElementById("add-modal-body").innerHTML = this.responseText;
-//             }
-//         };
-//         const data = new FormData();
-//         data.append("link-name", str);
-//         data.append("user-id", <?php echo $UserService->getUserId()?>)
-//         xmlhttp.send(data);
-//     })
-    // _link.oncklick(()=>{
-    //     db_body.innerHTML = o;
-    // })
-// })
-
-// window.addEventListener('unload', function (e) {
-//    if(!window._link_clicked_o || !window._link_clicked_r || !window._link_clicked_h || !window._link_clicked_f){
-//        const xmlhttp = new XMLHttpRequest();
-//        xmlhttp.open("POST", "http://localhost:63342/Projekt1/includes/delete.php");
-//        const data = new FormData();
-//        data.append("order_nr", @Session["order_nr"] );
-//        data.append("order_status",  @SESSION["order_nr"]);
-//        xmlhttp.send(data);
-//    }
-// });
-
 
 function increaseCount(a, b) {
     let input = b.previousElementSibling;

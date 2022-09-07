@@ -8,7 +8,7 @@
 <?php
 session_start();
 echo $_SESSION['order_nr'];
-$globalpath = "http://localhost:63342/Projekt1";
+$globalpath = "http://localhost/projekt1";
 require "views/header.view.php";
 ?>
 

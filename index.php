@@ -15,7 +15,7 @@ if (isset($_SESSION['user_id'])) {
    $uS = new UserService($_SESSION['user_id']);
 }
 
-$globalpath = "http://localhost:63342/projekt1";
+$globalpath = "http://localhost/projekt1";
 require_once "views/header.view.php";
 require "views/dashboard.view.php";
 require "views/footer.view.php";
