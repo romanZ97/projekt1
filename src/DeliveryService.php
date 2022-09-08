@@ -37,10 +37,18 @@ class DeliveryService extends Main
 
     public function showPositions()
     {
-        foreach ($this->getSortedOrderPositions() as $position) {
+        if(!($positions = $this->getSortedOrderPositions())){
             echo '
-            <form id="ordering-position-' . $position["id"] . '-form" action="' . $this->globalpath . '/includes/oder_actions.inc.php" method="post" >
-                <li class="d-flex justify-content-between">
+                <div class="d-flex justify-content-md-center order-positions-summ">
+                    <div class="d-flex flex-row align-items-center">
+                        <span style="font-weight: bold">Ihre Bestellung ist leer, wählen Sie was aus</span>
+                    </div>
+                </div>';
+
+        } else {
+            foreach ($positions as $position) {
+                echo '
+                <li id="list-position-' . $position["id"] . '" class="d-flex justify-content-between">
                     <div class="d-flex flex-row align-items-center">
                         <span id="title">' . $position["title"] . '</span>
                         <input name="order_position-view" value="' . $position["id"] . '" hidden>
@@ -48,24 +56,25 @@ class DeliveryService extends Main
                     </div>
                     <div class="d-flex flex-row align-items-center">
                         <div class="d-flex flex-row align-items-center ">
-                            <button class="dropdown-button" type="submit" name="order-position-delete"
-                            value="' . $position["id"] . '" style="margin-left: 5px">
+                            <button class="dropdown-button" type="button" name="order-position-delete"
+                            value="' . $position["id"] . '" onclick="addOrderPosition(this.value)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                </svg>
                             </button>
                             <div class="counter" style=" margin-left: 15px;">
-                                <span class="down" onClick="decreaseCount(event, this)">-</span>
-                                <input name="position_qty" type="text" value="' . $this->getPositionQty($position["id"]) . '">
-                                <span class="up" onClick="increaseCount(event, this)">+</span>
+                                <span class="down" onClick="decreaseCount(event, this,' . $position["id"] . ')">-</span>
+                                <input id="position_qty" type="text" value="' . $this->getPositionQty($position["id"]) . '" readonly>
+                                <span class="up" onClick="increaseCount(event, this,' . $position["id"] . ')">+</span>
                             </div>
                         </div>
-                        <span style="margin-left: 15px;width: 65px; text-align: right">' . $position["price"] . ' €</span>
+                        <span id="price">' . $position["price"] . ' €</span>
                     </div>
-                </li>
-            </form>';
+                </li>';
+            }
         }
+
     }
 
     private function setOrderPositions_d($food_id)
@@ -127,13 +136,16 @@ class DeliveryService extends Main
 //            $sql = "UPDATE `order_position` SET `qty`= '" . $qty + 1 . "' WHERE `order_id` = ? AND `food_id` = ?";
 //            $this->executeQuery($sql, "ii", array($this->order_id, $food_id));
             $this->deleteOrderPosition($food_id);
+            return false;
 
         } else {
             $sql = "INSERT INTO `order_position`(`order_id`, `food_id`) 
                 VALUES (?,?);";
             $this->executeQuery($sql, "ii", array($this->order_id, $food_id));
+            $this->updateOrder_add($order_nr, $food_id, $this->total_qty + 1);
+            $this->setOrderPositions_d($food_id);
+            return true;
         }
-        $this->updateOrder_add($order_nr, $food_id, $this->total_qty + 1);
 
     }
 
@@ -171,7 +183,16 @@ class DeliveryService extends Main
         $p_qty = $this->getPositionQty($food_id);
         $sql = "DELETE FROM `order_position` WHERE `order_id` = ? AND `food_id` = ?;";
         $this->executeQuery($sql, "ii", array($this->order_id, $food_id));
-        $this->updateOrder_del($this->order_nr, $food_id, $this->total_qty - $p_qty);
+        $this->updateOrder_del($food_id);
+        $key = array_search($food_id, array_column($this->order_positions, "id"));
+        unset($this->order_positions[$key]);
+    }
+
+    public function deleteAllOrderPositions()
+    {
+        $sql = "DELETE FROM `order_position` WHERE `order_id` = ?";
+        $this->executeQuery($sql, "i", array($this->order_id));
+        $this->updateOrder_del_a();
     }
 
     public function deleteOrder($order_nr)
@@ -205,11 +226,29 @@ class DeliveryService extends Main
         $this->executeQuery($sql, "iis", array($totalprice, $qty, date('Y-m-d H:i:s')));
     }
 
-    private function updateOrder_del($order_nr, $food_id, $qty)
+    private function updateOrder_del($food_id)
     {
         $totalprice = $this->total_price - $this->getFoodPrice($food_id);
         $sql = "UPDATE `ordering` SET `total_price`= ?,`total_qty`= ?,`order_date`= ? WHERE 1";
-        $this->executeQuery($sql, "iis", array($totalprice, $qty, date('Y-m-d H:i:s')));
+        $this->executeQuery($sql, "iis", array($totalprice, $this->total_qty-1, date('Y-m-d H:i:s')));
+    }
+
+    private function updateOrder_del_a()
+    {
+        $sql = "UPDATE `ordering` SET `total_price`= ?,`total_qty`= ?,`order_date`= ? WHERE 1";
+        $this->executeQuery($sql, "iis", array(0, 0, date('Y-m-d H:i:s')));
+    }
+
+    public function updateOrderPositionsCount($data)
+    {
+        foreach ($data as $food_id => $qty){
+            $this->setPositionQty($food_id,$qty);
+        }
+    }
+
+    private function setPositionQty($position, $qty){
+        $sql = "UPDATE `order_position` SET `qty`= ? WHERE `order_id` = ? AND `food_id` = ?";
+        $this->executeQuery($sql, "iii", array($qty, $this->order_id, $position));
     }
 
     private function getOrderPrice($order_nr)
@@ -222,12 +261,17 @@ class DeliveryService extends Main
     private function getFoodPrice($food_id)
     {
         if ($food = array_search($food_id, array_column($this->order_positions, "id"))) {
-            return $this->order_positions[$food]["price"];
+            return $this->order_positions[$food_id]["price"];
         } else {
             $sql = "SELECT `price` FROM `food` WHERE `id` = ?";
             $result = $this->loadDataWithParameters($sql, "i", array($food_id));
             return mysqli_fetch_assoc($result)["price"];
         }
+    }
+
+    private function setTotalQty(){
+        $sql = "SELECT COUNT(qty) FROM `order_position` WHERE `order_id` = ?";
+        $this->total_qty = $this->loadDataWithParameters($sql, "i", array($this->order_nr));
     }
 
     public function getTotalQty()

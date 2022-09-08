@@ -32,6 +32,7 @@ $foodS->loadActiveData();
     <?php unset($_SESSION["u_order"]);?>
 <?php endif; ?>
 <script src="<?php echo $globalpath ?>/assets/js/user_action.js"></script>
+<body>
 <head>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -69,18 +70,24 @@ $foodS->loadActiveData();
             <!--            </a>-->
             <ul class="navbar-nav flex-row">
                 <?php if (!isset($_SESSION["user_id"])): ?>
-                    <li class="nav-item">
-                        <a class="nav-link dropdown" role="button" data-toggle="dropdown"
+                    <!-- --- -->
+                    <!-- User Order-Positions List - Bag -->
+                    <!-- --- -->
+                    <li class="nav-item" id="nav-bag">
+                        <a class="nav-link dropdown" id="nav-bag-dropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false" style="margin: 10px">
                             <?php require __DIR__ . "/../assets/icons/order_icon.php"; ?>
                         </a>
                         <div id="orders-nav-dropdown" class="dropdown-menu dropdown-menu-right dropdown-text-right"
                              style=" min-width: 300px">
-                            <?php require "user_order_dropdown.view.php" ?>
+                            <?php //require "user_order_dropdown.view.php" ?>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link dropdown" role="button" data-toggle="dropdown"
+                    <!-- --- -->
+                    <!-- User - Profile Login/Logout - Person -->
+                    <!-- --- -->
+                    <li class="nav-item" id="nav-person">
+                        <a class="nav-link dropdown" id="nav-person-dropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false" style="margin: 10px">
                             <?php require __DIR__ . "/../assets/icons/user_icon.php"; ?>
                         </a>
@@ -95,32 +102,42 @@ $foodS->loadActiveData();
                         </div>
                     </li>
                 <?php else: ?>
+                    <!-- --- -->
                     <!-- User Favorites List - Star -->
-                    <li class="nav-item" style="">
-                        <a class="nav-link dropdown" role="button" data-toggle="dropdown"
+                    <!-- --- -->
+                    <li class="nav-item" id="nav-star">
+                        <a class="nav-link dropdown" id="nav-star-dropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false" style="margin: 10px">
                             <?php require __DIR__ . "/../assets/icons/favorite_icon.php"; ?>
                         </a>
                         <form id="user-favorite-nav-form"
                               action="<?php echo $globalpath ?>/includes/user_actions.inc.php" method="post">
-                            <div id="user-favorites-div" class="dropdown-menu dropdown-menu-right dropdown-text-right" style=" min-width: 300px">
-                                <?php require "user_favorites_dropdown.view.php" ?>
+                            <div id="favorites-nav-dropdown" class="dropdown-menu dropdown-menu-right dropdown-text-right" style=" min-width: 300px">
+                                <?php //require "user_favorites_dropdown.view.php" ?>
                             </div>
                         </form>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link dropdown" role="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false" style="margin: 10px" onclick="checkOrders()">
+                    <!-- --- -->
+                    <!-- User Order-Positions List - Bag -->
+                    <!-- --- -->
+                    <?php if (!(basename($_SERVER["HTTP_REFERER"])== "ordering.php")): ?>
+                    <li class="nav-item" id="nav-bag">
+                        <a class="nav-link dropdown" id="nav-bag-dropdown" role="button" data-toggle="dropdown"
+                            style="margin: 10px" onclick="checkOrders()">
                             <?php require __DIR__ . "/../assets/icons/order_icon.php"; ?>
                         </a>
-                        <span class="dropdown-count-badge"><?php echo $dS->getTotalQty() ?></span>
+                        <span id="order-nav-count" class="dropdown-count-badge"></span>
                         <div id="orders-nav-dropdown" class="dropdown-menu dropdown-menu-right dropdown-text-right"
                              style=" min-width: 300px">
-                            <?php require "user_order_dropdown.view.php" ?>
+                            <?php //require "user_order_dropdown.view.php" ?>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link dropdown" role="button" data-toggle="dropdown"
+                    <?php endif; ?>
+                    <!-- --- -->
+                    <!-- User - Profile Login/Logout - Person -->
+                    <!-- --- -->
+                    <li class="nav-item" id="nav-person">
+                        <a class="nav-link dropdown" id="nav-person-dropdown" role="button" data-toggle="dropdown"
                            data-display="static" aria-haspopup="true" aria-expanded="false" style="margin: 10px">
                             <?php require __DIR__ . "/../assets/icons/user_icon.php"; ?>
                         </a>
@@ -146,3 +163,5 @@ $foodS->loadActiveData();
         </div>
     </nav>
 </head>
+<div class="container container-content">
+

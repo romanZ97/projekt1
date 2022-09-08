@@ -61,11 +61,11 @@
 }
 
 .nav-bottom {
-  font-family: "K2D";
   background-color: #343a40;
-  position: relative;
+  position: absolute;
+  bottom: 0;
   width: 100%;
-  height: 50px;
+  height: 80px;
   font-weight: bold;
   font-size: 1rem;
 }
@@ -98,7 +98,11 @@
   display: inline-block;
 }
 
-
+body{
+  position: relative;
+  min-height: 100vh;
+  background-color: #B3E5FC;
+}
 
 body,
 input,
@@ -154,12 +158,16 @@ p {
 
 
 .container {
-  width: 90%;
+  position: relative;
+  width: 100%;
   height: auto;
   max-width: 1200px;
   margin: 0 auto;
 }
 
+.container-content{
+  padding-bottom: 80px
+}
 
 .suchergebnisse {
   margin-top: 50px;
@@ -222,6 +230,12 @@ p {
   justify-content: center;
 }
 
+.food-category{
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+
 #sitelogo {
   height: 150px;
   width: auto;
@@ -231,13 +245,6 @@ img.center {
   display: block;
   margin: 0 auto;
 }
-
-body {
-
-  background-color: #B3E5FC;
-
-}
-
 
 .card-1 {
 
@@ -298,6 +305,27 @@ body {
   border-radius: 50%;
 }
 
+.order-action-btn{
+  position: relative;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  padding: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #636262FF;
+  border-radius: 3px;
+  width: 100%;
+  font-weight: bold;
+}
+
+.order-access-btn{
+  padding: 5px;
+  margin-left: 5px;
+  border: 1px solid #636262FF;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
 .card-sl {
   height: 100%;
   background: #fff;
@@ -310,6 +338,18 @@ body {
   height: 11vw;
   object-fit: cover;
   border-radius: 8px 8px 0px 0;
+}
+
+.card-icon {
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  border-radius: 100%;
+  padding: 15px;
+}
+
+.card-icon img{
+    max-width: 20px;
 }
 
 .card-action {
@@ -404,6 +444,27 @@ body {
 /*  }*/
 /*}*/
 
+.order-positions-summ{
+  padding: 10px;
+  border: 1px solid #e3dada;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  background: #fff;
+}
+
+#order-positions-summ #title{
+  font-weight: bold;
+  font-size: x-large;
+}
+
+#order-positions-summ #total-price{
+  font-weight: bold;
+  font-size: large;
+  margin-left: 18px;
+  width: 100px;
+  text-align: right
+}
+
 .list li {
   list-style: none;
   padding: 10px;
@@ -418,7 +479,9 @@ body {
 }
 
 .list #price{
-
+  margin-left: 15px;
+  width: 65px;
+  text-align: right
 }
 
 .list #portion{

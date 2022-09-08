@@ -8,42 +8,50 @@ if (isset($_SESSION['user_id']))
 $dS  = new DeliveryService();
 $globalpath = "http://localhost/projekt1";
 
-if(isset($_POST["favorite-delete"])){
-    $uS->deleteUserFavorite($_POST["favorite-delete"]);
+
+if(isset($_POST["submit-order"])){
+    $data = json_decode($_POST["submit-order"],true);
+    $dS->updateOrderPositionsCount($data);
 }
 
-if(isset($_POST["dashboard-favorite-add"])){
-    $uS->addUserFavorite($_POST["dashboard-favorite-add"]);
-    $_SESSION["u_item"] = $_POST["dashboard-favorite-add"];
-
-}elseif (isset($_POST["food-favorite-add"])){
-    $uS->addUserFavorite($_POST["food-favorite-add"]);
-    $_SESSION["u_item"] = $_POST["food-favorite-add"];
-    header("Location: $globalpath/food.php");
-    exit();
+if(isset($_POST["order-position-delete"])){
+    $dS->deleteOrderPosition($_POST["order-position-delete"]);
+    $dS->showPositions();
 }
 
-if(isset($_POST["dashboard-order-position-add"])){
-    $dS->addOrderPosition($_SESSION["order_nr"],$_POST["dashboard-order-position-add"]);
-    $_SESSION["u_order"] = $_POST["dashboard-order-position-add"];
-
-} elseif(isset($_POST["food-order-position-add"])){
-    $dS->addOrderPosition($_SESSION["order_nr"],$_POST["food-order-position-add"]);
-    $_SESSION["u_order"] = $_POST["food-order-position-add"];
-    header("Location: $globalpath/food.php");
-    exit();
+if(isset($_POST["delete_all_order_positions"])) {
+    $dS->deleteAllOrderPositions();
+    $dS->showPositions();
+    die();
 }
 
-if(isset($_POST["favorite-to-order"])){
-    $path = basename($_SERVER["HTTP_REFERER"]);
-    $dS->addOrderPosition($_SESSION["order_nr"],$_POST["favorite-to-order"]);
-    header("Location: $globalpath/$path");
-    exit();
+if(isset($_POST["favorite-add"])){
+    if(!($uS->addUserFavorite($_POST["favorite-add"]))){
+        echo "delete";
+    }
+    die();
 }
+
+if(isset($_POST["get-ordering"])){
+    $dS->showPositions();
+    die();
+}
+
+if(isset($_POST["order-position-add"])){
+    if(!isset($_POST["ordering"])){
+        if(!($dS->addOrderPosition($_SESSION["order_nr"],$_POST["order-position-add"]))){
+            echo "delete";
+        }
+    } else {
+        $dS->addOrderPosition($_SESSION["order_nr"],$_POST["order-position-add"]);
+        $dS->showPositions();
+    }
+    die();
+}
+
 
 if(isset($_POST["dashboard-order-position-delete"])){
     $dS->deleteOrderPosition($_POST["dashboard-order-position-delete"]);
 }
 
-header("Location: $globalpath/index.php");
-exit();
+die();

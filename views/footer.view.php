@@ -1,11 +1,11 @@
-<section>
-    <nav class="nav-bottom">
-        <ul>
-            <li><a href="">Impressum</a></li>
-            <li><a href="">Extras</a></li>
-        </ul>
-    </nav>
-</section>
+</div>
+<nav class="nav-bottom">
+    <ul>
+        <li><a href="">Impressum</a></li>
+        <li><a href="">Extras</a></li>
+    </ul>
+</nav>
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -46,5 +46,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
-</body>
 <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+
+</body>
