@@ -120,7 +120,7 @@ $foodS->loadActiveData();
                     <!-- --- -->
                     <!-- User Order-Positions List - Bag -->
                     <!-- --- -->
-                    <?php if (!(basename($_SERVER["HTTP_REFERER"])== "ordering.php")): ?>
+                    <?php if (!(basename($_SERVER["HTTP_REFERER"]) == "order_form.php" OR basename($_SERVER["HTTP_REFERER"]) == "order_confirmation.php")): ?>
                     <li class="nav-item" id="nav-bag">
                         <a class="nav-link dropdown" id="nav-bag-dropdown" role="button" data-toggle="dropdown"
                             style="margin: 10px" onclick="checkOrders()">

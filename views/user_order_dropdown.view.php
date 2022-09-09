@@ -35,7 +35,7 @@ $dropdown_category = null;
         <div class="d-grid col-12 mx-auto">
             <a class="order-action-btn" type="button" onclick="deleteAllOrderPositions()">Bestellkorb leeren</a>
         </div>
-        <?php if (!(basename($_SERVER["HTTP_REFERER"])== "ordering.php")): //TODO adept for Ordering?>
+        <?php if (!(basename($_SERVER["HTTP_REFERER"]) == "ordering.php")): ?>
         <div class="d-grid col-12 mx-auto">
             <a class="order-action-btn btn-success " type="button" href="<?php $dS->getglobalpath() ?>/projekt1/ordering.php" style="text-decoration: none">Zur Bestellung</a>
         </div>

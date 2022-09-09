@@ -11,13 +11,13 @@ $globalpath = "http://localhost/projekt1";
 
 if(isset($_POST["submit-order"])){
     $data = json_decode($_POST["submit-order"],true);
-    $dS->updateOrderPositionsCount($data);
+    $dS->submitOrder($data);
 }
 
-if(isset($_POST["order-position-delete"])){
-    $dS->deleteOrderPosition($_POST["order-position-delete"]);
-    $dS->showPositions();
-}
+//if(isset($_POST["order-position-delete"])){
+//    $dS->deleteOrderPosition($_POST["order-position-delete"]);
+//    $dS->showPositions();
+//}
 
 if(isset($_POST["delete_all_order_positions"])) {
     $dS->deleteAllOrderPositions();
@@ -50,8 +50,8 @@ if(isset($_POST["order-position-add"])){
 }
 
 
-if(isset($_POST["dashboard-order-position-delete"])){
-    $dS->deleteOrderPosition($_POST["dashboard-order-position-delete"]);
-}
+//if(isset($_POST["dashboard-order-position-delete"])){
+//    $dS->deleteOrderPosition($_POST["dashboard-order-position-delete"]);
+//}
 
 die();
