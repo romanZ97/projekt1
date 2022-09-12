@@ -24,7 +24,7 @@
             <?php $dS->showPositions() ?>
         </ul>
         <div class="d-flex justify-content-end align-items-center">
-            <div class="btn btn-success px-5" id="order-access" role="button" onclick="submitOrder()">zur Kasse</div>
+            <a class="btn btn-success px-5" id="order-access" role="button" onclick="submitOrder()" href="<?php $dS->getglobalpath() ?>/projekt1/views/order_form.view.php">Auswahl bestätigen</a>
             <a class="btn btn-secondary ml-1" id="order-cancel" onclick="" href="<?php $dS->getglobalpath() ?>/projekt1/index.php">abbrechen</a>
         </div>
     </div>

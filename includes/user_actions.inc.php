@@ -11,7 +11,7 @@ $globalpath = "http://localhost/projekt1";
 
 if(isset($_POST["submit-order"])){
     $data = json_decode($_POST["submit-order"],true);
-    $dS->submitOrder($data);
+    $dS->submitOrderCalculation($data);
 }
 
 //if(isset($_POST["order-position-delete"])){
@@ -47,6 +47,20 @@ if(isset($_POST["order-position-add"])){
         $dS->showPositions();
     }
     die();
+}
+
+if (isset($_POST['order-customer-data'])){
+    $lastname = $_POST['order-c-ln'];
+    $firstname = $_POST['order-c-fn'];
+    $email = $_POST['order-c-e'];
+    $address = $_POST['order-c-a'];
+    $contact = $_POST['order-c-c'];
+    if (isset($_SESSION['user_id'])){
+        $uS->setUserData($lastname,$firstname,$email,$address,$contact);
+    }else {
+        $dS->setOrderCustomer($lastname,$firstname,$email,$address,$contact);
+    }
+
 }
 
 

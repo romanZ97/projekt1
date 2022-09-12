@@ -217,5 +217,4 @@ class UserService extends Main
         return $this->user_reservation;
     }
 
-
 }

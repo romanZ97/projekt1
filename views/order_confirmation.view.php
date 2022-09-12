@@ -25,7 +25,6 @@
             <td>optional</td>
             <td>12:00</td>
             <td>optional</td>
-
         </tr>
         <tr>
             <td>2</td>

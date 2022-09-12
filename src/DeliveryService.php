@@ -215,16 +215,16 @@ class DeliveryService extends Main
         return $result == null ? false : $result["qty"];
     }
 
-    public function submitOrder($data)
+    public function submitOrderCalculation($data)
     {
         $this->updateOrderPositionsCount($data);
-        $this->updateOrder();
+        $this->updateOrder_calculation();
     }
 
-    private function updateOrder()
+    private function updateOrder_calculation()
     {
-//        $sql = "UPDATE `ordering` SET `total_price`= ?,`total_qty`= ?,`order_date`= ? WHERE 1";
-//        $this->executeQuery($sql, "iis", array($totalprice, $qty, date('Y-m-d H:i:s')));
+        $sql = "UPDATE `ordering` SET `total_price`= ?,`total_qty`= ?,`order_date`= ?, `status` = ? WHERE id = ?";
+        $this->executeQuery($sql, "sissi", array($this->total_price, $this->total_qty, date('Y-m-d H:i:s'), "calculated", $this->order_id));
     }
 
 //    private function updateOrder_del($food_id)
@@ -302,5 +302,11 @@ class DeliveryService extends Main
         $this->order_nr = $order["order_nr"];
         $this->status = $order["status"];
         $this->user_id = $order["user_id"];
+    }
+
+    public function setOrderCustomer(mixed $lastname, mixed $firstname, mixed $email, mixed $address, mixed $contact)
+    {
+        $sql = "UPDATE `ordering` SET `customer_surname`= ?,`customer_forename`= ?,`customer_email`= ?, `customer_address` = ?, `customer_address` = ?, `customer_contact` = ? WHERE `id`";
+        $this->executeQuery($sql, "iis", array($lastname, $firstname, $email, $address, $contact, $this->order_id));
     }
 }

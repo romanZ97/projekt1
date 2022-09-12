@@ -79,7 +79,9 @@ function loadALL(){
 }
 
 window.addEventListener('load', (e)=> {
-        loadALL();
+
+    loadALL();
+
 });
 
 // document.addEventListener("click", (evt) => {
@@ -168,8 +170,17 @@ async function loadOrdering(){
 }
 
 async function loadNavigation(){
-    await loadFavorites();
-    await loadOrders();
+    if (navOff()){
+        document.getElementById("nav-star").hidden = true;
+        document.getElementById("nav-bag").hidden = true;
+
+    } else {
+        document.getElementById("nav-star").hidden = false;
+        document.getElementById("nav-bag").hidden = false;
+        await loadFavorites();
+        await loadOrders();
+    }
+
 }
 
 async function loadFavorites(){
@@ -246,7 +257,6 @@ async function userDashAction(food_id, element_id, post_name, alert_text){
         if(await response.text() === "delete"){
             dashboard_favorite.style.color = "black";
             dashboard_favorite.style.background= "white";
-
         }
 
         loadALL();
@@ -324,6 +334,14 @@ function isDash(){
 
 function isOrdering(){
     if(window.location.pathname === "/projekt1/ordering.php") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function navOff(){
+    if(window.location.pathname === "/projekt1/view/order_form.view.php" || window.location.pathname === "/projekt1/views/order_confirmation.view.php" || window.location.pathname === "/projekt1/views/table_reservation.view.php") {
         return true;
     } else {
         return false;
