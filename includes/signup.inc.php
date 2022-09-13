@@ -43,7 +43,7 @@ if (!isset($_POST['signup-submit'])) {
             $SignupService->addUser($user_name, $email, $pwd);
             $user_id = $SignupService->getUserIdByName($user_name);
 
-            header("Location: $this->globalpath/index.php?signup=success");
+            header("Location: ../signin.php?signup=success");
             exit();
         }
     }

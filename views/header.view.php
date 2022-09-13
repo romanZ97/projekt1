@@ -117,7 +117,7 @@ $foodS->loadActiveData();
                             <?php //require "user_order_dropdown.view.php" ?>
                         </div>
                     </li>
-                    <?php endif; ?>
+                    <?php //endif; ?>
                     <!-- --- -->
                     <!-- User - Profile Login/Logout - Person -->
                     <!-- --- -->
@@ -143,7 +143,7 @@ $foodS->loadActiveData();
                             </form>
                         </div>
                     </li>
-                <?php // endif; ?>
+                <?php endif; ?>
             </ul>
         </div>
     </nav>

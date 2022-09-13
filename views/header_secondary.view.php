@@ -8,7 +8,7 @@ if (isset($_SESSION['user_id'])) {
     require __DIR__ . "/../src/UserService.php";
     $uS = new UserService($_SESSION['user_id']);
 }
-$globalpath = "http://localhost/projekt1";
+$globalpath = "http://localhost:8888/projekt1";
 ?>
 <script src="<?php echo $globalpath ?>/assets/js/order_action.js"></script>
 <body>

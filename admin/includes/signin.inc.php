@@ -4,7 +4,7 @@ require __DIR__ . "/../src/SignService.php";
 $sInS = new SignService();
 
 // TODO Connect SignService to MAin
-$globalpath = "http://localhost/projekt1";
+$globalpath = "http://localhost:8888/projekt1";
 
 function checkLogin()
 {
