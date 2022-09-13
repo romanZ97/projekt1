@@ -122,7 +122,7 @@ require_once (__DIR__ . '/partials/header.php');
                                             {
                                                 //wir haben ein Bild, dieses wird angezeigt.
                                                 ?>
-                                                <img src="<?php echo URLRACINE; ?>image/dish/<?php echo $image_name; ?>" width="100px" class="rounded-circle" alt="bildkategorie">
+                                                <img src="<?php echo URLRACINE; ?>assets/images/<?php echo $image_name; ?>" width="100px" class="rounded-circle" alt="bildkategorie">
                                                 <?php
                                             }
                                         ?>

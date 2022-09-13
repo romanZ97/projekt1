@@ -27,7 +27,7 @@ $foodS->loadActiveData();
         <div class="container-fluid ">
             <ul class="navbar-nav align-items-center p-0">
                 <a id="home-link" class="navbar-brand p-0 m-0" href="<?php echo $globalpath ?>/index.php" style="margin: 10px">
-                    <img src="<?php echo $globalpath ?>/assets/images/logo1_xs.png" height="30" alt="">
+                    <img src="<?php echo $globalpath ?>/assets/images/logo.png" height="30" alt="">
                 </a>
 <!--                <li class="nav-item">-->
 <!--                    <a class="nav-link active" aria-current="page" href="#">Kategorien</a>-->

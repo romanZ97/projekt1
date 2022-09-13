@@ -80,7 +80,7 @@ else
                             {
                                 //Bild vorhanden
                                 ?>
-                                <img src="<?php echo URLRACINE;; ?>image/dish/<?php echo $current_image; ?>" width="150px">
+                                <img src="<?php echo URLRACINE;; ?>assets/images/<?php echo $current_image; ?>" width="150px">
                                 <?php
                             }
                             ?>
@@ -331,7 +331,7 @@ else
 
                         // den Quellpfad und den Zielpfad abrufen
                         $src_path = $_FILES['image']['tmp_name']; //Quellpfad
-                        $dest_path = "../image/dish/".$image_name; //Weg zum Ziel, wo das Bild gespeichert wird
+                        $dest_path = "../assets/images/".$image_name; //Weg zum Ziel, wo das Bild gespeichert wird
 
                         //Bild wird hochgeladen
                         $upload = move_uploaded_file($src_path, $dest_path);
@@ -351,7 +351,7 @@ else
                         {
                             //Aktuelles Bild ist verfügbar
                             //Entfernen des Bildes
-                            $remove_path = "../image/product/".$current_image;
+                            $remove_path = "../assets/images/".$current_image;
 
                             $remove = unlink($remove_path);
 

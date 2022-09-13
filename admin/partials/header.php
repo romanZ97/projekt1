@@ -38,6 +38,6 @@ include('login-check.php');
     </div>
 </nav>
 <div id="logocenter">
-    <img class="center" src="../image/logo.png" alt="Logo" id="sitelogo">
+    <img class="center" src="../assets/images/logo.png" alt="Logo" id="sitelogo">
 </div>
 

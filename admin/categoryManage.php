@@ -92,7 +92,7 @@ require_once (__DIR__ . '/partials/header.php');
                             //Bild anzeigen
                             ?>
                             
-                            <img class="p-2 d-flex flex-row align-items-center mb-2 rounded-circle" src="<?php echo URLRACINE; ?>image/category/<?php echo $image_name; ?>" width="100px" >
+                            <img class="p-2 d-flex flex-row align-items-center mb-2 rounded-circle" src="<?php echo URLRACINE; ?>assets/images/<?php echo $image_name; ?>" width="100px" >
                             
                             <?php
                         }

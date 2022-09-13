@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php $globalpath = "http://localhost/projekt1"; ?>
+<?php $globalpath = "http://localhost:8888/projekt1"; ?>
 <html lang="de">
 <head>
     <meta charset="utf-8">

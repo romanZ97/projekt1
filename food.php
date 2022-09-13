@@ -7,7 +7,7 @@
 <?php
 session_start();
 echo $_SESSION['order_nr'];
-$globalpath = "http://localhost/projekt1";
+$globalpath = "http://localhost:8888/projekt1";
 require "views/header.view.php";
 $foodS->showActiveFood();
 require "views/footer.view.php";

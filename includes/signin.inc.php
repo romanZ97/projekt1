@@ -3,7 +3,7 @@ require_once __DIR__ . "/../config/db_connect.php";
 require __DIR__ . "/../src/SignService.php";
 $sInS = new SignService();
 
-$globalpath = "/Projekt1";
+$globalpath = "http://localhost:8888/projekt1";
 
 function checkLogin()
 {

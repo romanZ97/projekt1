@@ -52,7 +52,7 @@ if(isset($_POST['submit']))
 
             $source_path = $_FILES['image']['tmp_name'];
 
-            $destination_path = "../image/category/".$image_name;
+            $destination_path = "../assets/images/".$image_name;
 
             //Zum Schluss das Bild hochladen //Funktion zum Hochladen des Bildes
             $upload = move_uploaded_file($source_path, $destination_path);

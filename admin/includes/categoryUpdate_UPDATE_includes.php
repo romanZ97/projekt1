@@ -33,7 +33,7 @@ if(isset($_POST['submit']))
 
             $source_path = $_FILES['image']['tmp_name'];
 
-            $destination_path = "../image/category/".$image_name;
+            $destination_path = "../assets/images/".$image_name;
 
             //das Bild hochladen
             $upload = move_uploaded_file($source_path, $destination_path);
@@ -53,7 +53,7 @@ if(isset($_POST['submit']))
             // Entfernen Sie das aktuelle Bild, falls verfügbar
             if($current_image!="")
             {
-                $remove_path = "../image/category/".$current_image;
+                $remove_path = "../assets/images/".$current_image;
 
                 $remove = unlink($remove_path);
 

@@ -13,8 +13,8 @@
         //Entferne das Bild für die Kategorie aus der Datein 
         if($image_name != "")
         {
-            //Ort wo das Bild zu finden ist. --> image/category
-            $path = "../image/category/".$image_name;
+            //Ort wo das Bild zu finden ist. --> assets/images
+            $path = "../assets/images/".$image_name;
             //Das Bild ist verfügbar entferne es.
             $remove = unlink($path);
 

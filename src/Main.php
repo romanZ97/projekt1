@@ -3,7 +3,7 @@
 class Main
 {
     protected $conn;
-    protected string $globalpath = "http://localhost/projekt1";
+    protected string $globalpath = "http://localhost:8888/projekt1";
 
 
     public function __construct()

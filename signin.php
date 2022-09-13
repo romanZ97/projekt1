@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
 session_start();
-$globalpath = "http://localhost/projekt1";
+$globalpath = "http://localhost:8888/projekt1";
 if (isset($_SESSION['user_id'])) {
     header("Location: $globalpath/index.php");
 }

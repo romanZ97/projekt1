@@ -43,7 +43,8 @@ class FoodService extends Main
                  <div class="col-md-4" style="margin-bottom: 1em;">
                     <div class="card-sl h-100">
                         <div class="card-image">
-                            <img src="' . $this->globalpath . '/assets/images/' . $food["image_name"] . '" style="height: 250px; width: 100%">
+                        <img src="' . $this->globalpath . '/assets/images/' . $food["image_name"] . '" style="height: 250px; width: 100%"> 
+                           
                         </div>
                         
                         ';
@@ -112,7 +113,7 @@ class FoodService extends Main
             echo '
                     <a href="' . $this->globalpath . '/food.php?category=' . $category["id"] . '">
                         <div class="card">
-                            <img src="' . $this->globalpath . '/assets/images/dashboard_' . $category["image_name"] . '" class="card-img-top" alt="' . $category["category_name"] . '">
+                            <img src="' . $this->globalpath . '/assets/images/' . $category["image_name"] . '" class="card-img-top" alt="' . $category["category_name"] . '">
                             <div class="card-body">
                                 <h5 class="card-title">' . $category["category_name"] . '</h5>
                             </div>

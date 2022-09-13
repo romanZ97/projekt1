@@ -17,7 +17,7 @@
         {
             // das Product hat ein Bild und es muss aus dem Ordner entfernen
             //der Ort, wo das Bild zu finden ist
-            $path = "../image/dish/".$image_name;
+            $path = "../assets/images/".$image_name;
 
             //Bilddatei aus Ordner entfernen
             $remove = unlink($path);

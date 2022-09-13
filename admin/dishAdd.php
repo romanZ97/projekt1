@@ -329,7 +329,7 @@ require_once (__DIR__ . '/partials/header.php');
                         $src = $_FILES['image']['tmp_name'];
 
                         //Zielpfad für das hochzuladende Bild
-                        $dst = "../image/dish/".$image_name;
+                        $dst = "../assets/images/".$image_name;
 
                         //schließlich das Bild des Produktes hochladen
                         $upload = move_uploaded_file($src, $dst);
