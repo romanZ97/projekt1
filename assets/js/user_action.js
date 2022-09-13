@@ -341,7 +341,7 @@ function isOrdering(){
 }
 
 function navOff(){
-    if(window.location.pathname === "/projekt1/view/order_form.view.php" || window.location.pathname === "/projekt1/views/order_confirmation.view.php" || window.location.pathname === "/projekt1/views/table_reservation.view.php") {
+    if(!(isDash() || isOrdering())){
         return true;
     } else {
         return false;

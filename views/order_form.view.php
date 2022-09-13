@@ -6,11 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <?php
-require_once "../views/header_secondary.view.php";
+session_start();
+echo $_SESSION['order_nr'];
+$globalpath = "http://localhost/projekt1";
+if (isset($_SESSION['user_id'])) {
+    require __DIR__ . "/../src/UserService.php";
+    $uS = new UserService($_SESSION['user_id']);
+}
+require_once "../views/header.view.php";
 ?>
 
-
-<body>
 <!-- Bestellformular -->
 <?php if (!isset($_SESSION["user_id"])): ?>
 <div class="container mt-3">
@@ -116,7 +121,7 @@ require_once "../views/header_secondary.view.php";
         </div>
     </div>
 <?php endif; ?>
-</body>
+
 
 <?php
 require_once "../views/footer.view.php";
