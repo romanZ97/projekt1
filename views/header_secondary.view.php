@@ -1,21 +1,16 @@
 <?php
+session_start();
 require __DIR__ . "/../src/FoodService.php";
 require __DIR__ . "/../src/DeliveryService.php";
 $dS  = new DeliveryService();
-$foodS = new FoodService();
-$foodS->loadDashboardData();
-$foodS->loadActiveData();
+echo $_SESSION['order_nr'];
+if (isset($_SESSION['user_id'])) {
+    require __DIR__ . "/../src/UserService.php";
+    $uS = new UserService($_SESSION['user_id']);
+}
+$globalpath = "http://localhost/projekt1";
 ?>
-<?php if (isset($_GET['category'])) : ?>
-    <?php if (!empty($_GET["category"])) : ?>
-        <script>
-            window.addEventListener('load', (e)=> {
-                document.getElementById("container_category_<?php echo $_GET["category"]?>").scrollIntoView({ behavior: 'smooth', block: 'start'});
-            });
-        </script>
-    <?php endif; ?>
-<?php endif; ?>
-<script src="<?php echo $globalpath ?>/assets/js/user_action.js"></script>
+<script src="<?php echo $globalpath ?>/assets/js/order_action.js"></script>
 <body>
 <head>
     <!-- Bootstrap CSS -->
@@ -29,9 +24,6 @@ $foodS->loadActiveData();
                 <a id="home-link" class="navbar-brand p-0 m-0" href="<?php echo $globalpath ?>/index.php" style="margin: 10px">
                     <img src="<?php echo $globalpath ?>/assets/images/logo1_xs.png" height="30" alt="">
                 </a>
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link active" aria-current="page" href="#">Kategorien</a>-->
-<!--                </li>-->
                 <li class="nav-item">
                     <a id="food-link" class="nav-link active" href="<?php echo $globalpath ?>/food.php">Speisen</a>
                 </li>
@@ -47,27 +39,8 @@ $foodS->loadActiveData();
                     </a>
                 </li>
             </ul>
-            <!--            <a class="navbar-brand  p-0 m-0" href="-->
-            <?php //echo $globalpath ?><!--/index.php" style="margin: 10px">-->
-            <!--                <img src="-->
-            <?php //echo $globalpath ?><!--/assets/images/logo1_s.png" height="30" alt="">-->
-            <!--            </a>-->
             <ul class="navbar-nav flex-row">
                 <?php if (!isset($_SESSION["user_id"])): ?>
-                    <!-- --- -->
-                    <!-- User Order-Positions List - Bag -->
-                    <!-- --- -->
-                    <li class="nav-item" id="nav-bag">
-                        <a class="nav-link dropdown" id="nav-bag-dropdown" role="button" data-toggle="dropdown"
-                           style="margin: 10px" onclick="checkOrders()">
-                            <?php require __DIR__ . "/../assets/icons/order_icon.php"; ?>
-                        </a>
-                        <span id="order-nav-count" class="dropdown-count-badge" hidden></span>
-                        <div id="orders-nav-dropdown" class="dropdown-menu dropdown-menu-right dropdown-text-right"
-                             style=" min-width: 300px">
-                            <?php //require "user_order_dropdown.view.php" ?>
-                        </div>
-                    </li>
                     <!-- --- -->
                     <!-- User - Profile Login/Logout - Person -->
                     <!-- --- -->
@@ -87,37 +60,6 @@ $foodS->loadActiveData();
                         </div>
                     </li>
                 <?php else: ?>
-                    <!-- --- -->
-                    <!-- User Favorites List - Star -->
-                    <!-- --- -->
-                    <li class="nav-item" id="nav-star">
-                        <a class="nav-link dropdown" id="nav-star-dropdown" role="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false" style="margin: 10px">
-                            <?php require __DIR__ . "/../assets/icons/favorite_icon.php"; ?>
-                        </a>
-                        <form id="user-favorite-nav-form"
-                              action="<?php echo $globalpath ?>/includes/user_actions.inc.php" method="post">
-                            <div id="favorites-nav-dropdown" class="dropdown-menu dropdown-menu-right dropdown-text-right" style=" min-width: 300px">
-                                <?php //require "user_favorites_dropdown.view.php" ?>
-                            </div>
-                        </form>
-                    </li>
-                    <!-- --- -->
-                    <!-- User Order-Positions List - Bag -->
-                    <!-- --- -->
-                    <?php // if (!(basename($_SERVER["HTTP_REFERER"]) == "order_form.php" OR basename($_SERVER["HTTP_REFERER"]) == "order_confirmation.php")): ?>
-                    <li class="nav-item" id="nav-bag">
-                        <a class="nav-link dropdown" id="nav-bag-dropdown" role="button" data-toggle="dropdown"
-                            style="margin: 10px" onclick="checkOrders()">
-                            <?php require __DIR__ . "/../assets/icons/order_icon.php"; ?>
-                        </a>
-                        <span id="order-nav-count" class="dropdown-count-badge" hidden></span>
-                        <div id="orders-nav-dropdown" class="dropdown-menu dropdown-menu-right dropdown-text-right"
-                             style=" min-width: 300px">
-                            <?php //require "user_order_dropdown.view.php" ?>
-                        </div>
-                    </li>
-                    <?php endif; ?>
                     <!-- --- -->
                     <!-- User - Profile Login/Logout - Person -->
                     <!-- --- -->
@@ -143,7 +85,7 @@ $foodS->loadActiveData();
                             </form>
                         </div>
                     </li>
-                <?php // endif; ?>
+                <?php endif; ?>
             </ul>
         </div>
     </nav>

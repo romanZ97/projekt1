@@ -1,5 +1,5 @@
 <?php
-$globalpath = "/Projekt1";
+$globalpath = "http://localhost/projekt1";
 if(isset($_POST['signout'])){
     session_start();
     session_unset();

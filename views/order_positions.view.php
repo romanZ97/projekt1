@@ -1,13 +1,6 @@
-<body>
 <div class="container">
     <h1 class="fw-light text-left text-lg-start mt-4 mb-2" style="padding-left: 20px">Speisen</h1>
-    <!--<div class="container" style="background: #1D3461">-->
-    <!--    <div class="row justify-center">-->
     <div class="col-12">
-        <!--            <header>-->
-        <!--                <h1>Speisen</h1>-->
-        <!---->
-        <!--            </header>-->
         <div class="input-group mb-3">
             <input id="userinput" type="text" class="form-control" placeholder="Suche nach einer Speise.."
                    aria-label="Add an item" aria-describedby="basic-addon2">
@@ -18,27 +11,25 @@
 
     </div>
     <div class="col-12">
-        <ul class="list list-inline">
+        <div id="order-positions-summ" class="d-flex justify-content-between order-positions-summ">
+            <div class="d-flex flex-row align-items-center">
+                <span id="title">Bestellpositionen:</span>
+            </div>
+            <div class="d-flex flex-row align-items-center">
+                <span id="title">Summe:</span>
+                <span id="total-price">-,- €</span>
+            </div>
+        </div>
+        <ul id="order-positions-list" class="list list-inline">
             <?php $dS->showPositions() ?>
-<!--            <form id="ordering-position---><?php //echo $position["id"] ?><!---form" action="--><?php //echo $globalpath ?><!--/includes/oder_actions.inc.php" method="post" >-->
-<!--            <li class="list-group-item d-flex justify-content-between align-items-center">-->
-<!--                    <span>Salat mit Joghurtsauce</span>-->
-<!--                <input name="order_position-view" value="" hidden>-->
-<!--                <div class="counter" style="float: right">-->
-<!--                    <span class="down" onClick='decreaseCount(event, this)'>-</span>-->
-<!--                    <input name="position_qty" type="text" value="1">-->
-<!--                    <span class="up" onClick='increaseCount(event, this)'>+</span>-->
-<!--                </div>-->
-<!--            </li>-->
-<!--            </form>-->
-<!--            <li class="list-group-item">Salat mit Balsamico</li>-->
-<!--            <li class="list-group-item">Linsenuppe</li>-->
-<!--            <li class="list-group-item">Tomatensuppe</li>-->
-<!--            <li class="list-group-item">Aperitif</li>-->
         </ul>
+        <div class="d-flex justify-content-end align-items-center">
+            <a class="btn btn-success px-5" id="order-access" role="button" onclick="submitOrder()" href="<?php $dS->getglobalpath() ?>/projekt1/views/order_form.view.php">Auswahl bestätigen</a>
+            <a class="btn btn-secondary ml-1" id="order-cancel" onclick="" href="<?php $dS->getglobalpath() ?>/projekt1/index.php">abbrechen</a>
+        </div>
     </div>
 </div>
-</div>
 
 
-</body>
+
+
