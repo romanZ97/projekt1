@@ -2,7 +2,7 @@
     
     session_start();
      // Konstanten erstellen, damit die Werte die mehrmal vorkommen nicht verderholt werden müssen.
-     define('URLRACINE', 'http://localhost:8888/GastroApp/');
+     define('URLRACINE', 'http://localhost:8888/projekt1/');
      define('LOCALHOST', 'localhost');
      define('DB_USERNAME', 'root');
      define('DB_PASSWORD', 'root');

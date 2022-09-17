@@ -317,7 +317,8 @@ require_once (__DIR__ . '/partials/header.php');
                         // Bild ausgewählt
                         //das Bild umbenennen
                         //die extension des ausgewählten Bildes nehmen (jpg, png, gif, etc.) "franck-ivan.jpg" Franck Ivan jpg
-                        $ext = end(explode('.', $image_name));
+                        //$ext = end(explode('.', $image_name));
+                        $ext = 'png';
 
                         // Neuen Namen für Bild erstellen
                         $image_name = "DishName-".rand(0000,9999).".".$ext; //Neuer Bildname kann sein "product-Name-198.jpg"
@@ -340,7 +341,7 @@ require_once (__DIR__ . '/partials/header.php');
                             //Upload des Bildes fehlgeschlagen
                             //Weiterleitung zur Seite ,,Produkt hinzufügen" mit Fehlermeldung
                             $_SESSION['upload'] = "<div class='error'>das Bild wurde nicht hochgeladen</div>";
-                            header('location:'.SITEURL.'admin/dishAdd.php');
+                            header('location:'.URLRACINE.'admin/dishAdd.php');
                             //den Prozess stoppen
                             die();
                         }
@@ -376,7 +377,7 @@ require_once (__DIR__ . '/partials/header.php');
 
                 //Prüfen, ob Daten eingefügt wurden oder nicht
                 //4. Weiterleitung mit Nachricht zur Seite "manage-product"
-                if($res2 == true)
+                if($res2)
                 {
                     //Daten erfolgreich eingefügt
                     $_SESSION['add'] = "<div class='success'>Das Gericht wurde erfolgreich hinzugefügt.</div>";
@@ -387,7 +388,7 @@ require_once (__DIR__ . '/partials/header.php');
                     $_SESSION['add'] = "<div class='error'>das Gericht wurde nicht eingefügt.</div>";
 
                 }
-                header('location:'.SITEURL.'admin/dishManage.php');
+                header('location:'.URLRACINE.'admin/dishManage.php');
 
             }
 

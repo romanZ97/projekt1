@@ -1,13 +1,7 @@
-<!--<head>-->
-<!--    <title>Bootstrap Table Reservation Form Template Design</title>-->
-<!--    <meta charset="utf-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">-->
-<!--    <link rel="stylesheet" href="assets/css/style.css">-->
-<!--    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>-->
-<!--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>-->
-<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>-->
-<!--</head>-->
+<?php
+include('admin/config/constants.php'); //add connection to the database //TODO DB CONNECTION EINIGEN
+$globalpath = "http://localhost:8888/projekt1";
+?>
 <body>
 <div class="container">
 <section id="book-a-table" class="book-a-table">
@@ -37,14 +31,120 @@
                     <input type="time" class="form-control" name="time" id="time" placeholder="gewünschte Zeit">
                 </div>
                 <div class="col-lg-4 col-md-6 form-group">
-                    <input type="number" class="form-control" name="people" id="people" placeholder="Anzahl der Personen">
+                    <select name="peaple" class="form-control" >
+
+                        <?php
+                        // Kategorien aus der Datenbank anzeigen
+                        //1.  SQL-abfrage, um alle aktiven Kategorien aus der Datenbank abzurufen
+                        $sql = "SELECT * FROM table_reservation ";
+
+                        //Abfrage wird ausgeführt
+                        $res = mysqli_query($conn, $sql);
+
+                        // Zeilen zählen, um zu überprüfen, ob wir Kategorien haben oder nicht
+                        $count = mysqli_num_rows($res);
+
+                        //Wenn die Anzahl größer als 0 ist, haben wir Kategorien, sonst haben wir keine Kategorien
+                        if($count>0)
+                        {
+                            //wir haben kategorien
+                            while($row=mysqli_fetch_assoc($res))
+                            {
+                                //die Details der Kategorien erhalalten
+                                $id = $row['id'];
+                                $table_seat_count = $row['table_seat_count'];
+
+                                ?>
+
+                                <option value="<?php echo $id; ?>"><?php echo $table_seat_count; ?></option>
+
+                                <?php
+                            }
+                        }
+                        else
+                        {
+                            //wir haben keine Kategorie
+                            ?>
+                            <option value="0">Keine Tische gefunden</option>
+                            <?php
+                        }
+
+
+                        //2. Radiobutton
+                        ?>
+
+                    </select>
                 </div>
             </div>
             <div class="form-group">
-                <textarea class="form-control" name="message" placeholder="Möchtest Du eine Nachricht hinterlassen?"></textarea>
+                <textarea class="form-control" name="message"  placeholder="Möchtest Du eine Nachricht hinterlassen?"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary float-right mt-3">Termin reservieren!</button>
+            <input type="submit" name="submit" class="btn btn-primary float-right mt-3" value="Termin reservieren!">
         </form>
+
+
+        <?php
+
+        //Überprüfen, ob der Button „Bestellen“ angeklickt wurde oder nicht
+        if(isset($_POST['submit']))
+        {
+            // alle info aus dem Formular nehmen
+            // alle info aus dem Formular nehmen
+            $reservation_nr = rand(000,999);
+            $status = "on wait";
+            $date = $_POST["date"];;
+            $time = $_POST["time"];
+            $peaple = $_POST['peaple'];
+            $user_id = 1;
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            $phone = $_POST['phone'];
+
+            $message = $_POST['message'];
+
+
+
+
+
+            //Speichere die Bestellung in der DB
+            //SQL um die Daten zu speichern
+
+            $sql2 = "INSERT INTO tbl_reservation SET 
+                        reservation_nr  = '$reservation_nr',
+                        reservation_status = '$status',
+                        reservation_date = '$date',
+                        reservation_time = '$time',
+                        table_id  = $peaple,
+                        user_id = $user_id,
+                        customer_name = '$name',
+                        customer_contact = '$email',
+                        message = '$message'
+                    ";
+
+            //SQL Ausführen
+            $res2 = mysqli_query($conn, $sql2);
+
+
+
+            //war das erfolgreich ?
+            if($res2)
+            {
+                //Ja
+                echo "<div class='success text-center'>Vielen Dank für Ihre Reservierung</div>";
+                header('location:'.URLRACINE.'admin/add-category.php');
+            }
+            else
+            {
+                //Nein
+                echo  "<div class='error text-center'>Ein Fehler ist aufgetretten</div>";
+
+            }
+
+        }
+
+        ?>
+
+
     </div>
 </section>
 </div>

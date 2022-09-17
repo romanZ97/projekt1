@@ -95,7 +95,7 @@ require_once (__DIR__ . '/partials/header.php');
             <?php
                 // SQL-Abfrage, um den generierten Gesamtumsatz zu erhalten
                 //Vierte SQL-Abfrage
-                $sql4 = "SELECT SUM(total) AS Total FROM ordering WHERE status='geliefert'";
+                $sql4 = "SELECT SUM(total_price) AS Total FROM ordering WHERE status='geliefert'";
 
                 //Abfrage ausführen
                 $res4 = mysqli_query($conn, $sql4);
