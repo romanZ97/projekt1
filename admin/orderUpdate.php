@@ -160,7 +160,7 @@
                 $res2 = mysqli_query($conn, $sql2);
 
                 //Überprüfen, ob es aktualisiert wurde oder nicht
-                if($res2==true)
+                if($res2)
                 {
                     //Bestellung aktualisieren
                     $_SESSION['update'] = "<div class='success'>Bestellung wurde erfolgreich aktualisiert</div>";

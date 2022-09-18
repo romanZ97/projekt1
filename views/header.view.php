@@ -43,9 +43,7 @@ $foodS->loadActiveData();
                 <li class="nav-item">
                     <a id="reservation-link" class="nav-link active" href="<?php echo $globalpath ?>/reservation.php">Tischreservieren</a>
                 </li>
-                <li class="nav-item">
-                    <a id="reservation-link" class="nav-link active" href="<?php echo $globalpath ?>/Tische.php">Tische</a>
-                </li>
+
                 <li class="nav-item ml-1">
                     <a  id="info-link" class="nav-link align-items-center p-0" href="#" style="margin: 10px">
                         <?php require __DIR__ . "/../assets/icons/info_icon.php"; ?>

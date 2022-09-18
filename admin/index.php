@@ -89,6 +89,34 @@ require_once (__DIR__ . '/partials/header.php');
                 </div>
 
                 <br>
+
+
+                <!-- Anzahl der Tische anzeigen -->
+                <div class="item text-center">
+
+                    <?php
+                    // dritte Sql Abfrage --> Anzahl der Bestellungen
+                    $sql5 = "SELECT * FROM tbl_reservation where reservation_status = 'on wait'";
+                    //SQl Abfrage ausführen
+                    $res5 = mysqli_query($conn, $sql5);
+                    //Anzahl der Zeilen ermitteln
+                    $count5 = mysqli_num_rows($res5);
+
+                    if ($count5>0){
+                    ?>
+                       <h1> <?php echo $count5; ?> </h1>;
+                    <?php     }
+                    else{
+                        echo '<div class="error">Keine Buchung zu bearbeiten </div>';
+                    }
+
+                    ?>
+
+                    <br />
+                  Offene Buchung
+                </div>
+
+                <br>
                 <!-- Gesamter Umsatz anzeigen -->
             <div class="item text-center">
 

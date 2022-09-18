@@ -32,6 +32,7 @@ include('login-check.php');
             <li class="nav-item"><a class="nav-link active" aria-current="page" href="categoryManage.php">Kategorien</a></li>
             <li class="nav-item"><a class="nav-link active" aria-current="page" href="dishManage.php">Gerichte</a></li>
             <li class="nav-item"><a class="nav-link active" aria-current="page" href="orderManage.php">Bestellungen</a></li>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="reservationManage.php">Tische</a></li>
             <li class="nav-item"><a class="nav-link active" aria-current="page" href="logout.php">Abmelden</a></li>
         </ul>
     </div>
