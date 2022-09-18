@@ -10,7 +10,7 @@ if (isset($_SESSION['user_id'])) {
 }
 $globalpath = "http://localhost:8888/projekt1";
 ?>
-<script src="<?php echo $globalpath ?>/assets/js/order_action.js"></script>
+<script src="<?php echo $globalpath ?>/assets/js/global_action.js"></script>
 <body>
 <head>
     <!-- Bootstrap CSS -->

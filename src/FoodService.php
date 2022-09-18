@@ -25,6 +25,19 @@ class FoodService extends Main
         $this->setActiveFood();
     }
 
+    public function showFoodToSelect(){
+        foreach ($this->active_categories as $category){
+            echo '
+            <optgroup label="'. $category["category_name"] . '">';
+
+            $food_array = $this->getFootByCategory($category["id"]);
+            foreach ($food_array as $food) {
+                echo '
+                <option id="select-foot-' . $food["id"] . '" value="' . $food["id"] . '">' . $food["title"] . '</option>';
+            }
+        }
+    }
+
     public function showActiveFood(){
         foreach ($this->active_categories as $category){
             echo '
@@ -33,10 +46,7 @@ class FoodService extends Main
     <div class="container" >
         <div class="row ">';
 
-            $category_id = $category["id"];
-            $food_array = array_filter($this->active_food, function ($value) use ($category_id){
-                return ($value["category_id"] == $category_id);
-            });
+            $food_array = $this->getFootByCategory($category["id"]);
 
             foreach ($food_array as $food) {
                 echo '
@@ -336,5 +346,10 @@ class FoodService extends Main
         });
     }
 
-
+    public function getFootByCategory($category_id){
+        $food_array = array_filter($this->active_food, function ($value) use ($category_id){
+            return ($value["category_id"] == $category_id);
+        });
+        return $food_array;
+    }
 }

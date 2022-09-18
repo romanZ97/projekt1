@@ -1,6 +1,12 @@
 <?php
 require __DIR__ . "/../src/FoodService.php";
 require __DIR__ . "/../src/DeliveryService.php";
+$globalpath = "http://localhost:8888/projekt1";
+if (isset($_SESSION['user_id'])) {
+    require __DIR__ . "/../src/UserService.php";
+    $uS = new UserService($_SESSION['user_id']);
+    echo '<script id="user-sc" src="'. $globalpath .'/assets/js/user_action.js"></script>';
+}
 $dS  = new DeliveryService();
 $foodS = new FoodService();
 $foodS->loadDashboardData();
@@ -15,7 +21,7 @@ $foodS->loadActiveData();
         </script>
     <?php endif; ?>
 <?php endif; ?>
-<script src="<?php echo $globalpath ?>/assets/js/user_action.js"></script>
+<script src="<?php echo $globalpath ?>/assets/js/global_action.js"></script>
 <body>
 <head>
     <!-- Bootstrap CSS -->
@@ -105,7 +111,6 @@ $foodS->loadActiveData();
                     <!-- --- -->
                     <!-- User Order-Positions List - Bag -->
                     <!-- --- -->
-                    <?php // if (!(basename($_SERVER["HTTP_REFERER"]) == "order_form.php" OR basename($_SERVER["HTTP_REFERER"]) == "order_confirmation.php")): ?>
                     <li class="nav-item" id="nav-bag">
                         <a class="nav-link dropdown" id="nav-bag-dropdown" role="button" data-toggle="dropdown"
                             style="margin: 10px" onclick="checkOrders()">
@@ -117,7 +122,6 @@ $foodS->loadActiveData();
                             <?php //require "user_order_dropdown.view.php" ?>
                         </div>
                     </li>
-                    <?php //endif; ?>
                     <!-- --- -->
                     <!-- User - Profile Login/Logout - Person -->
                     <!-- --- -->
@@ -127,10 +131,7 @@ $foodS->loadActiveData();
                             <?php require __DIR__ . "/../assets/icons/user_icon.php"; ?>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-text-right">
-                            <a class="dropdown-item" href="#">
-                                <?php require __DIR__ . "/../assets/icons/favorite_icon.php"; ?>
-                                Favoriten</a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="<?php echo $globalpath ?>/views/user_profile.view.php">
                                 <?php require __DIR__ . "/../assets/icons/profile_icon.php"; ?>
                                 Konto</a>
                             <div class="dropdown-divider"></div>
