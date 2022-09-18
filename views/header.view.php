@@ -38,6 +38,9 @@ $foodS->loadActiveData();
                     <a id="food-link" class="nav-link active" href="<?php echo $globalpath ?>/food.php">Speisen</a>
                 </li>
                 <li class="nav-item">
+                    <a id="reservation-link" class="nav-link active" href="<?php echo $globalpath ?>/categories.php">Kategorien</a>
+                </li>
+                <li class="nav-item">
                     <a id="ordering-link" class="nav-link active" type="button" href="<?php echo $globalpath ?>/ordering.php">Bestellen</a>
                 </li>
                 <li class="nav-item">

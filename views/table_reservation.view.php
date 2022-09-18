@@ -16,19 +16,19 @@ $globalpath = "http://localhost:8888/projekt1";
         <form action="" method="post" role="form">
             <div class="form-row">
                 <div class="col-lg-4 col-md-6 form-group">
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Dein Name">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Dein Name" required>
                 </div>
                 <div class="col-lg-4 col-md-6 form-group">
-                    <input type="email" class="form-control" name="email" id="email" placeholder="Deine E-Mail-Adresse">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Deine E-Mail-Adresse" required>
                 </div>
                 <div class="col-lg-4 col-md-6 form-group">
-                    <input type="number" class="form-control" name="phone" id="phone" placeholder="Deine Telefonnummer">
+                    <input type="number" class="form-control" name="phone" id="phone" placeholder="Deine Telefonnummer" required>
                 </div>
                 <div class="col-lg-4 col-md-6 form-group">
-                    <input type="date" name="date" class="form-control" id="date" placeholder="gewünschtes Datum">
+                    <input type="date" name="date" class="form-control" id="date" placeholder="gewünschtes Datum" required>
                 </div>
                 <div class="col-lg-4 col-md-6 form-group">
-                    <input type="time" class="form-control" name="time" id="time" placeholder="gewünschte Zeit">
+                    <input type="time" class="form-control" name="time" id="time" placeholder="gewünschte Zeit" required>
                 </div>
                 <div class="col-lg-4 col-md-6 form-group">
                     <select name="peaple" class="form-control" >
@@ -92,7 +92,7 @@ $globalpath = "http://localhost:8888/projekt1";
             // alle info aus dem Formular nehmen
             $reservation_nr = rand(000,999);
             $status = "on wait";
-            $date = $_POST["date"];;
+            $date = $_POST["date"];
             $time = $_POST["time"];
             $peaple = $_POST['peaple'];
             $name = $_POST['name'];
@@ -128,13 +128,13 @@ $globalpath = "http://localhost:8888/projekt1";
             if($res2)
             {
                 //Ja
-                echo "<div class='success text-center'>Vielen Dank für Ihre Reservierung</div>";
+                echo "<div style='color: #4CAF50'>Vielen Dank für Ihre Reservierung</div>";
                 header('location:'.URLRACINE.'admin/add-category.php');
             }
             else
             {
                 //Nein
-                echo  "<div class='error text-center'>Ein Fehler ist aufgetretten</div>";
+                echo  "<div style='color: #bd1717'>Ein Fehler ist aufgetreten</div>";
 
             }
 

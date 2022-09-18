@@ -23,6 +23,40 @@
     background-color: #6496b4;
 }
 
+/* Kategorien */
+
+.categories{
+    padding: 4% 0;
+}
+
+.box-3{
+    width: 28%;
+    float: left;
+    margin: 2%;
+}
+.float-container{
+    position: relative;
+}
+.float-text{
+    position: absolute;
+    bottom: 50px;
+    left: 40%;
+}
+.container-kategorie{
+    width: 80%;
+    margin: 0 auto;
+    padding: 1%;
+}
+fieldset{
+    border: 1px solid white;
+    margin: 5%;
+    padding: 3%;
+    border-radius: 5px;
+}
+.clearfix{
+    clear: both;
+    float: none;
+}
 
 
 .success{

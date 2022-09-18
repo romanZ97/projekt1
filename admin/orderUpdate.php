@@ -164,14 +164,13 @@
                 {
                     //Bestellung aktualisieren
                     $_SESSION['update'] = "<div class='success'>Bestellung wurde erfolgreich aktualisiert</div>";
-                    header('location:'.URLRACINE.'admin/orderManage.php');
                 }
                 else
                 {
                     //Bestellung wurde nicht aktualisiert
                     $_SESSION['update'] = "<div class='error'>Bestellung wurde nicht aktualisiert</div>";
-                    header('location:'.URLRACINE.'admin/orderManage.php');
                 }
+                header('location:'.URLRACINE.'admin/orderManage.php');
             }
         ?>
 

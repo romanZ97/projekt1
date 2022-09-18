@@ -153,7 +153,7 @@ require_once (__DIR__ . '/partials/header.php');
                     $res7 = mysqli_query($conn, $sql7);
 
                     //es wird überprüft, ob die Abfrage ausgeführt wird oder nicht
-                    if($res7==TRUE) {
+                    if($res7) {
                         // Zeilen zählen, um zu prüfen, ob Daten in der Datenbank vorhanden sind oder nicht
                         $count = mysqli_num_rows($res7); // Funktion zum Abrufen aller Zeilen in der Datenbank
 

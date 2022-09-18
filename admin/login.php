@@ -1,6 +1,6 @@
 <?php include('config/constants.php'); ?>
 
-<html>
+<html lang="de">
     <head>
         <title>Login - Administratoren </title>
         <link rel="stylesheet" href="../css/admin.css">

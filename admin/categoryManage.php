@@ -92,7 +92,7 @@ require_once (__DIR__ . '/partials/header.php');
                             //Bild anzeigen
                             ?>
                             
-                            <img class="p-2 d-flex flex-row align-items-center mb-2 rounded-circle" src="<?php echo URLRACINE; ?>assets/images/<?php echo $image_name; ?>" width="100px" >
+                            <img alt="KategorieImage" class="p-2 d-flex flex-row align-items-center mb-2 rounded-circle" src="<?php echo URLRACINE; ?>assets/images/<?php echo $image_name; ?>" width="100px" >
                             
                             <?php
                         }
@@ -109,7 +109,19 @@ require_once (__DIR__ . '/partials/header.php');
                 <td><?php echo $active; ?></td>
                 <td>
                     <a href="<?php echo URLRACINE; ?>admin/categoryUpdate.php?id=<?php echo $id; ?>" class="button1">Kategorie aktualisieren</a>
-                    <a href="<?php echo URLRACINE; ?>admin/categoryDelete.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>" class="button2">Kategorie löschen</a>
+
+                    <a onclick="ConfirmDelete()"  class="button2">Kategorie löschen</a>
+
+                    <script type="text/javascript">
+                        const baseUrl='<?php echo URLRACINE; ?>admin/categoryDelete.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>';
+                        function ConfirmDelete()
+                        {
+                            if (confirm("Wollen Sie die Kategorie wirklich löschen ?")) {
+                                location.href = baseUrl;
+                            }
+                        }
+                    </script>
+
                 </td>
             </tr>
 

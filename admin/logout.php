@@ -7,4 +7,3 @@
     //Gehe zur Loginseite
     header('location:'.URLRACINE.'admin/login.php');
 
-?>

@@ -80,7 +80,7 @@ else
                             {
                                 //Bild vorhanden
                                 ?>
-                                <img src="<?php echo URLRACINE;; ?>assets/images/<?php echo $current_image; ?>" width="150px">
+                                <img src="<?php echo URLRACINE; ?>assets/images/<?php echo $current_image; ?>" width="150px">
                                 <?php
                             }
                             ?>

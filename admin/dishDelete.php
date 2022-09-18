@@ -45,23 +45,19 @@
         {
             //das Produkt wurde gelöscht
             $_SESSION['delete'] = "<div class='success'>Das Gericht wurde erfolgreich gelöscht</div>";
-            header('location:'.URLRACINE.'admin/dishManage.php');
         }
         else
         {
             //das Produkt wurde nicht gelöscht
             $_SESSION['delete'] = "<div class='error'>Ein Fehler ist aufgetreten, das Produkt wurde nicht gelöscht.</div>";
-            header('location:'.URLRACINE.'admin/dishManage.php');
         }
 
-        
 
     }
     else
     {
         //gehe zur Seite manage-dish_name
         $_SESSION['unauthorize'] = "<div class='error'>Unautorisierter Zugriff</div>";
-        header('location:'.URLRACINE.'admin/dishManage.php');
     }
+header('location:'.URLRACINE.'admin/dishManage.php');
 
-?>
