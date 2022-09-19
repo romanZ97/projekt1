@@ -8,11 +8,6 @@
 <?php
 session_start();
 echo $_SESSION['order_nr'];
-$globalpath = "http://localhost:8888/projekt1";
-if (isset($_SESSION['user_id'])) {
-    require __DIR__ . "/../src/UserService.php";
-    $uS = new UserService($_SESSION['user_id']);
-}
 require_once "../views/header.view.php";
 ?>
 
@@ -67,35 +62,10 @@ require_once "../views/header.view.php";
     <p>Füllen Sie bitte alle Felder aus</p>
 
     <form name="order-customer-form" action="<?php echo $globalpath ?>/includes/user_actions.inc.php" method="post">
-        <div class="mb-3 mt-3">
-            <label for="order-c-ln" class="form-label">Name:</label>
-            <input type="text" class="form-control" id="order-c-ln" name="order-c-ln" placeholder="Mustermann" value="<?php echo $uS->getUserSurname() ?>" required>
-
-        </div>
-        <div class="mb-3 mt-3">
-            <label for="order-c-fn" class="form-label">Vorname:</label>
-            <input type="text" class="form-control" id="order-c-fn" name="order-c-fn" placeholder="Max" value="<?php echo $uS->getUserForename() ?>" required>
-
-        </div>
-        <div class="mb-3 mt-3">
-            <label for="order-c-e" class="form-label">E-Mail:</label>
-            <input type="email" class="form-control" id="order-c-e" name="order-c-e" placeholder="MaxMustermann@muster.de" value="<?php echo $uS->getUserMail() ?>" required>
-
-        </div>
-        <div class="mb-3 mt-3">
-            <label for="order-c-a" class="form-label">Adresse:</label>
-            <input type="text" class="form-control" id="order-c-a" name="order-c-a" placeholder="PLZ Ort, Strasse Haus-nr." value="<?php echo $uS->getUserAddress() ?>" required>
-
-        </div>
-        <div class="mb-3 mt-3">
-            <label for="order-c-c" class="form-label">Telefonnummer:</label>
-            <input type="text" class="form-control" id="order-c-c" name="order-c-c" placeholder="+49..." value="<?php echo $uS->getUserContact() ?>" required>
-
-        </div>
-
+        <?php $uS->showOrderUserProfileData(); ?>
         <!-- Buttons -->
         <div class="d-flex justify-content-end align-items-center">
-            <button class="btn btn-success px-5" id="order-access" name="order-customer-data" type="button" data-toggle="modal" data-target="#saveUserDaten">jetzt bestellen</button>
+            <button class="btn btn-success px-5" id="order-access" name="order-customer-data" type="button" onclick="checkUserData()">jetzt bestellen</button>
             <a class="btn btn-secondary ml-1" id="order-cancel" onclick="" href="<?php $dS->getglobalpath() ?>/projekt1/ordering.php">abbrechen</a>
         </div>
     </form>
