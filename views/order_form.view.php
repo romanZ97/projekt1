@@ -46,17 +46,23 @@ require_once "../views/header.view.php";
 
         <!-- Buttons -->
         <div class="d-flex justify-content-end align-items-center">
-            <button class="btn btn-success px-5" id="order-access" name="order-customer-data" role="button" type="submit">zur Kasse</button>
+            <button class="btn btn-success px-5" id="order-access" name="order-customer-data" role="button" type="submit">jetzt bestellen</button>
             <a class="btn btn-secondary ml-1" id="order-cancel" onclick="" href="<?php $dS->getglobalpath() ?>/projekt1/ordering.php">abbrechen</a>
         </div>
     </form>
 </div>
 <?php else: ?>
 <script>
-    function modalUserData(){
-
+    function checkUserData(){
+        if (change){
+            let modal = document.getElementById("saveUserData");
+            modal.ariaDisabled = "true";
+        } else {
+            console.log(change);
+        }
     }
 </script>
+    <script src="<?php echo $globalpath ?>/assets/js/order_confirmation.js"></script>
 <div class="container mt-3">
     <h3>Bestellformular</h3>
     <p>Füllen Sie bitte alle Felder aus</p>
@@ -71,7 +77,7 @@ require_once "../views/header.view.php";
     </form>
 </div>
     <!-- Modal -->
-    <div class="modal fade" id="saveUserDaten" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal fade" id="saveUserData" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -91,8 +97,26 @@ require_once "../views/header.view.php";
         </div>
     </div>
 <?php endif; ?>
-
-
+<!-- Modal -->
+<div class="modal fade" id="confirm-order" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--                <div class="modal-body">-->
+            <!--                    ...-->
+            <!--                </div>-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Nein</button>
+                <button type="button" class="btn btn-primary">Ja</button>
+            </div>
+        </div>
+    </div>
+</div>
 <?php
 require_once "../views/footer.view.php";
 ?>
