@@ -41,7 +41,7 @@ class FoodService extends Main
     public function showActiveFood(){
         foreach ($this->active_categories as $category){
             echo '
-    <h2 id="container_category_'. $category["id"] . '" class="fw-light text-center text-lg-start mt-4 mb-0" style="font-weight: bold">'. $category["category_name"] . '</h2>
+    <h2 id="container_category_'. $category["id"] . '" class="ueberschrift fw-light text-center text-lg-start mt-4 mb-0" style="font-weight: bold">'. $category["category_name"] . '</h2>
     <hr class="mt-2 mb-5">
     <div class="container" >
         <div class="row ">';
@@ -92,10 +92,38 @@ class FoodService extends Main
                                 ' . $food["price"] . '€
                             </div>
                         </div>
-                        <a href="#" class="card-button"> weitere Details</a>
+                        <a class="card-button" role="button" type="button" onclick="showFoodModal(' . $food["id"] . ')"> weitere Details</a>
                     </div>
                 </div>
-               
+               <!-- Modal -->
+                <div class="modal fade" id="food-modal-' . $food["id"] . '" tabindex="-1" role="dialog" aria-labelledby="modal-' . $food["id"] . '" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modal-' . $food["id"] . '">' . $food["title"] . '</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>';
+
+                if($food["description"]) {
+                    echo '
+                            <div class="modal-body" style="background-image: url("' . htmlentities($this->globalpath) . '\/assets\/images\/' . $food["image_name"] . '");">
+                                ' . $food["description"] . '
+                             </div>';
+                }
+                echo '
+                            <div class="modal-footer">
+                                <div id="text-left">
+                                   Eine Portion: ' . $food["food_portion"] . ' ' . $food["food_portion_unit"] . '
+                                </div>
+                                <div id="text-right">
+                                    Preis: ' . $food["price"] . '€
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 ';
             }
             echo '
@@ -170,21 +198,50 @@ class FoodService extends Main
                             </svg>
                         </a>
                         
-                        <div class="card-details">
-                            <div class="card-heading h-100">
+                        <div id="food-' . $food["id"] . '" class="card-details">
+                            <div id="title-' . $food["id"] . '" class="card-heading h-100">
                                 ' . $food["title"] . '
                             </div>
-                            <div class="card-text-left">
+                            <div id="portion-' . $food["id"] . '" class="card-text-left">
                                 ' . $food["food_portion"] . ' ' . $food["food_portion_unit"] . '
                             </div>
-                            <div class="card-text-right">
+                            <div id="price-' . $food["id"] . '" class="card-text-right">
                                 ' . $food["price"] . '€
                             </div>
                         </div>
-                        <a href="#" class="card-button"> weitere Details</a>
+                        <a class="card-button" role="button" type="button" tabindex="1" onclick="showFoodModal(' . $food["id"] . ')"> weitere Details</a>
                     </div>
                 </div>
-               
+                
+                <!-- Modal -->
+                <div class="modal fade" id="food-modal-' . $food["id"] . '" tabindex="-1" role="dialog" aria-labelledby="modal-' . $food["id"] . '" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modal-' . $food["id"] . '">' . $food["title"] . '</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>';
+
+            if($food["description"]) {
+                echo '
+                            <div class="modal-body food-details" >
+                                ' . $food["description"] . '
+                             </div>';
+            }
+            echo '
+                            <div class="modal-footer">
+                                <div id="text-left">
+                                   Eine Portion: ' . $food["food_portion"] . ' ' . $food["food_portion_unit"] . '
+                                </div>
+                                <div id="text-right">
+                                    Preis: ' . $food["price"] . '€
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 ';
         }
     }

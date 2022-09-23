@@ -1,6 +1,8 @@
 <?php
-require_once __DIR__ . "/../config/db_connect.php";
+require_once __DIR__ . "/../config/db_connect.php"; //TODO make with Main
 require __DIR__ . "/../src/SignService.php";
+require __DIR__ . "/../src/DeliveryService.php.php";
+$dS = new DeliveryService();
 $sInS = new SignService();
 
 $globalpath = "http://localhost:8888/projekt1";
@@ -79,8 +81,6 @@ if(isset($_POST['login-submit'])) {
                     }
 //                    $_SESSION['user_id'] = $sInS->encrypt($user_id);
                     $_SESSION['user_id'] = $user_id;
-                    $_SESSION['response']="Du bist angemeldet!";
-                    $_SESSION['res_type']="success";
 
                     header("Location: $globalpath/index.php?login=success");
                     exit();

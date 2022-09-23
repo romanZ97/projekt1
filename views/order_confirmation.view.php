@@ -1,94 +1,54 @@
-<head>
-    <title>Bestellvorgang erfolgreich</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
-        .list-nr{
-            margin-left: 15px;
-            width: 65px;
-            text-align: center;
-        }
-        .list-price{
-            margin-left: 15px;
-            width: 65px;
-            text-align: right
-        }
-    </style>
-</head>
-<body>
+
+<title>Bestellvorgang erfolgreich</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<?php require "header.view.php"; ?>
+
 <div class="container mt-3">
     <h2>Ihre Bestellung wurde erfolgreich angenommen</h2>
-    <p><b>Informationen</b></p>
-    <ul>
-        <li>Ihre Bestellung wird innerhalb <b>50 Minuten</b> geliefert.</li>
-        <li><b>Zahlen</b> Sie bitte <b>bar</b> an unserem Lieferanten bei der Annahme der Bestellung</li>
-        <li>Wenn Sie ihre Bestellung stornieren wollen, kontaktieren Sie uns <b>innerhalb nächsten 10 Minuten</b>, nach dieser Zeit muss die Bestellung vom Empfänger bezahlt werden.</li>
+    <span class="bold-text" >Informationen:</span>
+    <ul style="margin-top: 5px">
+        <li>Ihre Bestellung wird innerhalb <span class="bold-text">50 Minuten</span> geliefert.</li>
+        <li><span class="bold-text">Zahlen Sie bitte bar</span> an unserem Lieferanten bei der Annahme der Bestellung</li>
+        <li>Wenn Sie ihre Bestellung stornieren wollen, kontaktieren Sie uns <span class="bold-text">innerhalb nächsten 10 Minuten</span>, nach dieser Zeit muss die Bestellung vom Empfänger bezahlt werden.</li>
     </ul>
     <hr>
-    <p><b>Ihre Bestellungsnummer : </b><span>999999</span></p>
+    <p><span class="bold-text" >Ihre Bestellungsnummer : </span><span><?php echo $dS->getOrderNr()?></span></p>
     <hr>
-    <p><b>Bestellzeit : </b><span>2022-12-12 12:50</span></p>
+    <p><span class="bold-text" >Bestellzeit : </span><span><?php echo $dS->getOrderDate()?></span></p>
     <hr>
-    <b>Ihre Bestellpositionen :</b>
-    <table class="table table-bordered">
-        <thead>
+    <span class="bold-text" >Ihre Bestellpositionen:</span>
+    <div class="table-responsive">
+    <table class="table" style="margin-top: 5px">
+        <thead class="thead-dark">
         <tr>
             <th style="width: 12px">Nr.</th>
             <th>Bezeichnung</th>
-            <th style="width: 120px">Portion</th>
-            <th style="width: 120px">Preis</th>
+            <th style="width: 120px; text-align: center">Menge</th>
+            <th style="width: 120px; text-align: center">Portion</th>
+            <th style="width: 120px; text-align: center">Preis</th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-            <td class="list-nr">1</td>
-            <td>Beschbarmack</td>
-            <td>200 g</td>
-            <td class="list-price">17,99 €</td>
-        </tr>
-        <tr>
-            <td class="list-nr">1</td>
-            <td>Beschbarmack</td>
-            <td>200 g</td>
-            <td class="list-price">17,99 €</td>
-        </tr>
-        <tr>
-            <td class="list-nr">1</td>
-            <td>Beschbarmack</td>
-            <td>200 g</td>
-            <td class="list-price">17,99 €</td>
-        </tr>
-        <tr>
-            <td class="list-nr">1</td>
-            <td>Beschbarmack</td>
-            <td>200 g</td>
-            <td class="list-price">17,99 €</td>
-        </tr>
-        <tr>
-            <td class="list-nr">1</td>
-            <td>Beschbarmack</td>
-            <td>200 g</td>
-            <td class="list-price">17,99 €</td>
-        </tr>
-        <tr>
-            <td class="list-nr">1</td>
-            <td>Beschbarmack</td>
-            <td>200 g</td>
-            <td class="list-price">17,99 €</td>
-        </tr>
+        <tbody style="background-color: rgba(255,255,255,0.53)">
+        <?php $dS->showDelivery(); ?>
         </tbody>
-        <tfoot>
+        <tfoot style="background-color: rgba(255,255,255,0.74)">
         <tr>
             <th>Summe</th>
             <th> </th>
             <th> </th>
-            <th class="list-price">99999,99 €</th>
+            <th> </th>
+            <th class="list-price"><?php echo $dS->getTotalPrice()?> €</th>
         </tr>
         </tfoot>
     </table>
+        <a class="btn btn-secondary ml-1" id="order-cancel" onclick=""
+           href="<?php $dS->getglobalpath() ?>/projekt1/index.php">zurück</a>
+</div>
 </div>
 
 </div>
-</body>
+<?php
+unset($_SESSION['order_nr']);
+require "footer.view.php"; ?>

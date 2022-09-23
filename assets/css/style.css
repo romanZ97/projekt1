@@ -3,30 +3,28 @@
   justify-content: center;
 }
 
-.card img {
+.card-img-top {
   height: 100%;
-  /*max-width: 100%;*/
-  /*max-height: 100%;*/
+  text-decoration: none;
 }
 
 .card {
   width: 350px;
-  margin: 0 0.5em;
-  box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
-  border: none;
-  border-radius: 0;
+  margin: 0 0.5em 10px 0.5em;
+  box-shadow: 2px 6px 6px 0 rgba(22, 22, 26, 0.18);
+  background: #e1e8db;
+  color: #343a40;
+  font-family: "Lucida Console", "Courier New", monospace;
   text-decoration: none;
 }
 
 .card-body{
   padding-top: 3px;
   padding-bottom: 3px;
-  text-decoration: none;
 }
 
 .card-title {
   padding-top: 0.5em;
-  text-decoration: none;
 }
 
 .carousel-control-prev,
@@ -101,7 +99,7 @@
 body{
   position: relative;
   min-height: 100vh;
-  background-color: #B3E5FC;
+  background-color: #ece8db;
 }
 
 body,
@@ -251,7 +249,7 @@ img.center {
   border: none;
   border-radius: 10px;
   width: 100%;
-  background-color: #fff;
+  background-color: #f1efc9;
 }
 
 
@@ -328,7 +326,7 @@ img.center {
 
 .card-sl {
   height: 100%;
-  background: #fff;
+  background: #e1e8db;
   border-radius: 8px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -375,19 +373,19 @@ img.center {
 .card-details{
   height: 40px;
   margin-bottom: 1em;
+  font-weight: bold;
 }
 
 .card-heading {
   font-size: 18px;
   font-weight: bold;
-  background: #fff;
+  font-family: "Lucida Console", "Courier New", monospace;
   padding: 10px 0 0 10px;
 }
 
 .card-text-left {
   float: left;
   padding: 10px 0 10px 10px;
-  background: #fff;
   font-weight: bold;
   font-size: 14px;
   color: #636262;
@@ -396,7 +394,6 @@ img.center {
 .card-text-right {
   float: right;
   padding: 10px 10px 10px 0;
-  background: #fff;
   font-weight: bold;
   font-size: 14px;
   color: #636262;
@@ -407,15 +404,16 @@ img.center {
   justify-content: center;
   padding: 10px 0;
   width: 100%;
-  background-color: #1F487E;
-  color: #fff;
+  background-color: #45503d;
+  color: #ffffff;
   border-radius: 0 0 8px 8px;
 }
 
 .card-button:hover {
   text-decoration: none;
-  background-color: #1D3461;
-  color: #fff;
+  background-color: #79964b;
+  color: #ffffff;
+  font-weight: bold;
 }
 
 
@@ -484,6 +482,14 @@ img.center {
   text-align: right
 }
 
+.list-nr,
+.list-count,
+.list-portion{
+  margin-left: 15px;
+  width: 65px;
+  text-align: center;
+}
+
 .list #portion{
 
 }
@@ -520,3 +526,43 @@ img.center {
    font-size: 25px;
    padding: 0 10px;
  }
+
+ .changeText{
+
+ }
+
+ thead{
+   border-bottom: 2px solid black;
+ }
+
+ thead td {
+   border: none;
+ }
+
+ .bold-text{
+   font-weight: bold;
+ }
+
+ .ueberschrift{
+   font-family: "Lucida Console", "Courier New", monospace;
+   /*border-radius: 100%;*/
+   box-shadow: 0 6px rgb(212, 236, 188);
+   caret-shape: auto;
+   /*background: #ece5d0;*/
+ }
+
+  .modal-footer #text-left{
+
+  }
+
+  .modal-footer #text-right{
+    margin-left: 35px;
+  }
+
+  .food-details {
+    line-height: 1.5;
+    /*font-weight: bold;*/
+    font-size: 18px;
+    background: #e1e8db;
+    padding: 50px 70px 50px 70px;
+  }

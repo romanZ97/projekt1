@@ -1,5 +1,5 @@
 <div class="container">
-<h1 class="fw-light text-center text-lg-start mt-4 mb-0"> Unsere Kategorien</h1>
+<h1 class="ueberschrift fw-light text-center text-lg-start mt-4 mb-0"> Unsere Kategorien</h1>
 <hr class="mt-2 mb-5">
 
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -20,7 +20,7 @@
 
 <div class="container mt-5">
 
-    <h1 class="fw-light text-center text-lg-start mt-4 mb-0"> Beliebte Speisen</h1>
+    <h1 class="ueberschrift fw-light text-center text-lg-start mt-4 mb-0">Beliebte Speisen</h1>
 
     <hr class="mt-2 mb-2">
     <div class="container">

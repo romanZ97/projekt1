@@ -1,4 +1,5 @@
 <?php
+session_start();
 require __DIR__ . "/../src/FoodService.php";
 require __DIR__ . "/../src/DeliveryService.php";
 $globalpath = "http://localhost:8888/projekt1";
@@ -6,8 +7,21 @@ if (isset($_SESSION['user_id'])) {
     require __DIR__ . "/../src/UserService.php";
     $uS = new UserService($_SESSION['user_id']);
     echo '<script id="user-sc" src="'. $globalpath .'/assets/js/user_action.js"></script>';
-}
-$dS  = new DeliveryService();
+}?>
+<script src="<?php echo $globalpath ?>/assets/js/global_action.js"></script>
+
+<?php
+$dS  = new DeliveryService(); ?>
+<script>
+    window.addEventListener('beforeunload', (e)=> {
+        console.log(sessionStorage.getItem("order_nr"));
+        if (!inside_click){
+            deleteOrder(<?php echo $_SESSION['order_nr'] ?>);
+        }
+        inside_click = false;
+    });
+</script>
+<?php
 $foodS = new FoodService();
 $foodS->loadDashboardData();
 $foodS->loadActiveData();
@@ -23,10 +37,14 @@ $foodS->loadActiveData();
         </script>
     <?php endif; ?>
 <?php endif; ?>
-<script src="<?php echo $globalpath ?>/assets/js/global_action.js"></script>
+
 <body>
 <head>
+
+
     <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="<?php echo $globalpath ?>/assets/css/style.css">
@@ -137,7 +155,7 @@ $foodS->loadActiveData();
                             <?php require __DIR__ . "/../assets/icons/user_icon.php"; ?>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-text-right">
-                            <a class="dropdown-item" href="<?php echo $globalpath ?>/views/user_profile.view.php">
+                            <a id="profile-link" class="dropdown-item" href="<?php echo $globalpath ?>/views/user_profile.view.php">
                                 <?php require __DIR__ . "/../assets/icons/profile_icon.php"; ?>
                                 Konto</a>
                             <div class="dropdown-divider"></div>
