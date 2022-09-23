@@ -25,7 +25,6 @@ class DeliveryService extends Main
         }
     }
 
-
     public function getSortedOrderPositions()
     {
         $orderCategoryNames = array_column($this->order_positions, "category_name");
@@ -75,6 +74,23 @@ class DeliveryService extends Main
 
     }
 
+    public function showDelivery(){
+        $positions = $this->getSortedOrderPositions();
+        $index = 1;
+        foreach ($positions as $position){
+            echo '
+        <tr>
+            <td class="list-nr">'. $index .'</td>
+            <td>'. $position["title"] .'</td>
+            <td class="list-count">x'. $position["qty"] .'</td>
+            <td class="list-portion">'. $position["food_portion"] .' '. $position["food_portion_unit"] .'</td>
+            <td class="list-price">'. $position["price"]*$position["qty"]  .' €</td>
+        </tr>';
+            $index++;
+        }
+
+    }
+
     private function setOrderPositions_d($food_id)
     {
         $sql = "SELECT 
@@ -97,18 +113,23 @@ class DeliveryService extends Main
                 JOIN category AS c ON c.id = f.category_id 
                 JOIN country AS co ON co.id = f.country_id
                 JOIN meat_type AS mt ON mt.id = f.meat_type_id
-                WHERE f.`id` = ?";
-        $result = $this->loadDataWithParameters($sql, "i", array($food_id));
+                WHERE f.`id` = ?
+                AND op.order_id = ?";
+        $result = $this->loadDataWithParameters($sql, "ii", array($food_id,$this->order_id));
         foreach ($result as $order_position) {
             $this->order_positions[] = $order_position;
             $this->total_qty++;
-            $this->total_price += $order_position["price"];
+            $this->total_price += $order_position["price"]*$order_position["qty"];
         }
     }
 
     private function setOrderPositions($order_nr)
     {
         $this->setOrder($this->getOrderByNumber($order_nr));
+        if (isset($_SESSION['user_id'])) {
+            $this->setUser($_SESSION['user_id']);
+            $this->user_id = $_SESSION['user_id'];
+        }
 
         $sql = "SELECT 
                     o.`id`,
@@ -154,7 +175,7 @@ class DeliveryService extends Main
         return false;
     }
 
-    public function addOrderPosition($order_nr, $food_id)
+    public function addOrderPosition($food_id)
     {
         if ($this->getPositionQty($food_id)){
             $this->deleteOrderPosition($food_id);
@@ -173,10 +194,8 @@ class DeliveryService extends Main
 
     public function deleteOrderPosition($food_id)
     {
-        $p_qty = $this->getPositionQty($food_id);
         $sql = "DELETE FROM `order_position` WHERE `order_id` = ? AND `food_id` = ?;";
         $this->executeQuery($sql, "ii", array($this->order_id, $food_id));
-//        $this->updateOrder_del($food_id);
         $key = array_search($food_id, array_column($this->order_positions, "id"));
         $this->total_qty--;
         $this->total_price = $this->total_price - $this->order_positions[$key]["price"];
@@ -227,21 +246,9 @@ class DeliveryService extends Main
         $this->executeQuery($sql, "sissi", array($this->total_price, $this->total_qty, date('Y-m-d H:i:s'), "calculated", $this->order_id));
     }
 
-//    private function updateOrder_del($food_id)
-//    {
-//        $totalprice = $this->total_price - $this->getFoodPrice($food_id);
-//        $sql = "UPDATE `ordering` SET `total_price`= ?,`total_qty`= ?,`order_date`= ? WHERE 1";
-//        $this->executeQuery($sql, "iis", array($totalprice, $this->total_qty-1, date('Y-m-d H:i:s')));
-//    }
-//
-//    private function updateOrder_del_a()
-//    {
-//        $sql = "UPDATE `ordering` SET `total_price`= ?,`total_qty`= ?,`order_date`= ? WHERE 1";
-//        $this->executeQuery($sql, "iis", array(0, 0, date('Y-m-d H:i:s')));
-//    }
-
     public function updateOrderPositionsCount($data)
     {
+        $this->total_price = 0;
         foreach ($data as $food_id => $qty){
             $this->setPositionQty($food_id,$qty);
         }
@@ -251,45 +258,32 @@ class DeliveryService extends Main
         $key = array_search($position, array_column($this->order_positions, "id"));
         $this->order_positions[$key]["qty"] = $qty;
         $this->total_qty = $this->total_qty + $qty-1;
+        $this->total_price += $this->order_positions[$key]["price"] * $qty;
         $sql = "UPDATE `order_position` SET `qty`= ? WHERE `order_id` = ? AND `food_id` = ?";
-        $this->executeQuery($sql, "iii", array($qty, $this->order_id, $position));
+        $this->executeQuery($sql, "iii", array( $qty, $this->order_id, $position));
     }
-
-//    private function getOrderPrice($order_nr)
-//    {
-//        $sql = "SELECT `total_price` FROM `ordering` WHERE `order_nr` = ?";
-//        $result = $this->loadDataWithParameters($sql, "i", array($order_nr));
-//        return mysqli_fetch_assoc($result)["total_price"];
-//    }
-//
-//    private function getFoodPrice($food_id)
-//    {
-//        if ($food = array_search($food_id, array_column($this->order_positions, "id"))) {
-//            return $this->order_positions[$food_id]["price"];
-//        } else {
-//            $sql = "SELECT `price` FROM `food` WHERE `id` = ?";
-//            $result = $this->loadDataWithParameters($sql, "i", array($food_id));
-//            return mysqli_fetch_assoc($result)["price"];
-//        }
-//    }
-//
-//    private function setTotalQty(){
-//        $sql = "SELECT COUNT(qty) FROM `order_position` WHERE `order_id` = ?";
-//        $this->total_qty = $this->loadDataWithParameters($sql, "i", array($this->order_nr));
-//    }
 
     public function getTotalQty()
     {
         return $this->total_qty;
     }
 
-//    public function getStatusByNumber($order_nr)
-//    {
-//        $sql = "SELECT `status` FROM `ordering` WHERE `order_nr` = ?";
-//        $result = $this->loadDataWithParameters($sql, "i", array($order_nr));
-//        $result = mysqli_fetch_assoc($result);
-//        return $result["status"];
-//    }
+    public function getTotalPrice()
+    {
+        return $this->total_price;
+    }
+
+    public function getOrderNr()
+    {
+        return $this->order_nr;
+    }
+
+    public function getOrderDate(){
+        $sql = "SELECT  `order_date`
+                FROM `ordering`
+                WHERE `id` = ?";
+        return mysqli_fetch_assoc($this->loadDataWithParameters($sql, "i", array($this->order_id)))["order_date"];
+    }
 
     public function getPositions()
     {
@@ -304,14 +298,31 @@ class DeliveryService extends Main
         $this->user_id = $order["user_id"];
     }
 
-    public function setOrderCustomer(mixed $lastname, mixed $firstname, mixed $email, mixed $address, mixed $contact)
+    public function isPosition($food_id)
     {
-        $sql = "UPDATE `ordering` SET `customer_surname`= ?,`customer_forename`= ?,`customer_email`= ?, `customer_address` = ?, `customer_address` = ?, `customer_contact` = ? WHERE `id`";
-        $this->executeQuery($sql, "iis", array($lastname, $firstname, $email, $address, $contact, $this->order_id));
+        $test = array_search($food_id, array_column($this->order_positions, "id"));
+        return gettype($test) == "integer";
     }
 
-    public function isPosition($food_id){
-        $test = array_search($food_id, array_column($this->order_positions, "id"));
-        return gettype($test) == "integer";;
+    public function submitOrder($data)
+    {
+        foreach ($data as $key => $item){
+            $this->$key = $item;
+            $sql = "UPDATE `ordering` SET `order_date`= ?, `$key`= ? WHERE id = ?";
+            $this->executeQuery($sql,"ssi",array(date('Y-m-d H:i:s'), $item, $this->order_id));
+        }
+        $this->uptateOrderStatus("submitted");
+    }
+
+    private function setUser($user_id)
+    {
+        $sql = "UPDATE `ordering` SET `order_date`= ?, `user_id` = ? WHERE `id` = ?";
+        $this->executeQuery($sql, "sii", array(date('Y-m-d H:i:s'), $user_id, $this->order_id));
+    }
+
+    public function uptateOrderStatus($status)
+    {
+        $sql = "UPDATE `ordering` SET `order_date`= ?, `status` = ? WHERE `id` = ?";
+        $this->executeQuery($sql, "ssi", array(date('Y-m-d H:i:s'), $status, $this->order_id));
     }
 }

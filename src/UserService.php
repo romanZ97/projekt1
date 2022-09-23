@@ -46,7 +46,7 @@ class UserService extends Main
         </div>
         <div class="mb-3 mt-3">
             <label for="order-c-c" class="form-label">Telefonnummer:</label>
-            <input type="text" class="form-control" id="order-c-c" name="order-c-c" placeholder="+49..."  value="' . $this->contact . '" required>
+            <input type="tel" class="form-control" id="order-c-c" name="order-c-c" placeholder="+49..." pattern="(((\+|00+)49)|0)[1-9]\d+" value="' . $this->contact . '" required>
 
         </div>';
     }
@@ -80,7 +80,7 @@ class UserService extends Main
         </div>
         <div class="mb-3 mt-3">
             <label for="order-c-c" class="form-label">Telefonnummer:</label>
-            <input type="text" class="form-control" id="user-c" name="user-c" placeholder="+49..."  value="' . $this->contact . '" >
+            <input type="tel" class="form-control" id="user-c" name="user-c" placeholder="+49..." pattern="(((\+|00+)49)|0)[1-9]\d+" value="' . $this->contact . '" >
 
         </div>';
     }
@@ -182,8 +182,9 @@ class UserService extends Main
 
     private function setUserReservation($user_id)
     {
-        $sql = "SELECT `id` FROM `reservation` WHERE `user_id` = ?";
+        $sql = "SELECT `id` FROM `tbl_reservation` WHERE `user_id` = ?";
         $result = $this->loadDataWithParameters($sql,"i", array($user_id));
+
         foreach ($result as $reservation) {
             $this->user_favorites[] = $reservation;
         }
@@ -193,7 +194,7 @@ class UserService extends Main
         foreach ($data as $key => $item){
             if ($item != $this->$key){
                 $this->$key = $item;
-                $sql = "UPDATE `user` SET `$key`= ?";
+                $sql = "UPDATE `user` SET `$key`= ? WHERE id = ". $_SESSION["user_id"];
                 $this->executeQuery($sql,"s",array($item));
             }
         }

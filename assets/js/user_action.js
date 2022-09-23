@@ -86,3 +86,7 @@ async function userUserDashAction(food_id, element_id, post_name, alert_text){
         alert(alert_text + response.status);
     }
 }
+
+function sendUserData(data){
+    sendJSON('order-user-data',data).then()
+}

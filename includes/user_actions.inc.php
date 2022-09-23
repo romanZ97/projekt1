@@ -1,5 +1,4 @@
 <?php
-//require __DIR__ . "/../config/userService.php";
 session_start();
 require __DIR__ . "/../src/UserService.php";
 require __DIR__ . "/../src/DeliveryService.php";
@@ -39,11 +38,11 @@ if(isset($_POST["get-ordering"])){
 
 if(isset($_POST["order-position-add"])){
     if(!isset($_POST["ordering"])){
-        if(!($dS->addOrderPosition($_SESSION["order_nr"],$_POST["order-position-add"]))){
+        if(!($dS->addOrderPosition($_POST["order-position-add"]))){
             echo "delete";
         }
     } else {
-        $dS->addOrderPosition($_SESSION["order_nr"],$_POST["order-position-add"]);
+        $dS->addOrderPosition($_POST["order-position-add"]);
         $dS->showPositions();
     }
     die();
@@ -71,25 +70,43 @@ if (isset($_POST['user-profile-submit'])){
     die();
 }
 
-if (isset($_POST['order-customer-data'])){
-    $lastname = $_POST['order-c-ln'];
-    $firstname = $_POST['order-c-fn'];
-    $email = $_POST['order-c-e'];
-    $address = $_POST['order-c-a'];
-    $contact = $_POST['order-c-c'];
+if (isset($_POST['order-user-data'])){
+    $data = json_decode($_POST["order-user-data"],true);
     if (isset($_SESSION['user_id'])){
-        $uS->setUserData($lastname,$firstname,$email,$address,$contact);
-    }else {
-        $dS->setOrderCustomer($lastname,$firstname,$email,$address,$contact);
+        $uS->setUserData($data);
     }
-
 }
 
-if(isset($_POST["getui"])){
-    if (isset($_SESSION['user_id']))
-        echo $_SESSION['user_id'];
-    else
-        echo false;
+if (isset($_POST['order-customer-data'])){
+    $data = array();
+    if (isset($_POST['order-c-ln'])){
+        $data["customer_surname"] = $_POST['order-c-ln'];
+    }
+    if (isset($_POST['order-c-fn'])){
+        $data["customer_forename"] = $_POST['order-c-fn'];
+    }
+    if (isset($_POST['order-c-e'])){
+        $data["customer_email"] = $_POST['order-c-e'];
+    }
+    if (isset($_POST['order-c-a'])){
+        $data["customer_address"] = $_POST['order-c-a'];
+    }
+    if (isset($_POST['order-c-c'])){
+        $data["customer_contact"] = $_POST['order-c-c'];
+    }
+    $dS->submitOrder($data);
+
+    header("Location: $globalpath/views/order_confirmation.view.php?order=".$_SESSION['order_nr']);
+    die();
+}
+
+if (isset($_POST["cancel-calculate"])){
+    $dS->uptateOrderStatus("open");
+}
+
+if (isset($_POST["delete-order"])){
+    $dS->deleteOrder($_SESSION['order_nr']);
+    unset($_SESSION['order_nr']);
 }
 
 //if(isset($_POST["dashboard-order-position-delete"])){

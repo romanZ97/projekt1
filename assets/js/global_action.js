@@ -1,3 +1,12 @@
+let globalpath = "http://" + window.location.host + "/projekt1/";
+let inside_click = false
+let links = ["home-link", "food-link", "ordering-link", "reservation-link", "info-link", "to-ordering-btn", "nav-sign-btn", "profile-link"];
+
+let Order = {
+    order_positions:{},
+    order_total_qty:0,
+    order_total_price:0
+}
 
 function increaseCount(a, b, food_id) {
     let input = b.previousElementSibling;
@@ -83,10 +92,16 @@ function loadALL(){
 }
 
 window.addEventListener('load', (e)=> {
-
+    links.forEach(setClickListener)
     loadALL();
-
 });
+
+function setClickListener(id){
+    let link = document.getElementById(id);
+    if(link){
+        link.addEventListener("click", ()=>{inside_click = true});
+    }
+}
 
 function loadOrderPositions(){
     let nav_order_positions_div = document.getElementById("orders-nav-dropdown");
@@ -139,7 +154,7 @@ async function loadOrdering(){
     if (response.ok) {
         if(isOrdering()){
             document.getElementById("order-positions-list").innerHTML = await response.text();
-            // await loadData("views/select_food_dropdown.view.php","food-to-position","ERROR");
+            await loadData("views/select_food_dropdown.view.php","food-to-position","ERROR");
         }
     } else {
         alert("ERROR" + response.status);
@@ -170,7 +185,7 @@ function submitOrder(){
             let food_id = position.querySelector(".dropdown-button").value;
             count[food_id] = parseInt(qty);
         }
-        sendJSON("submit-order", JSON.stringify(count)).then().catch();
+        sendJSON("submit-order", count).then().catch();
 
     } else {
 
@@ -182,6 +197,26 @@ function addSelectToOrderPosition(){
     if(select.value){
         addOrderPosition(select.value);
     }
+}
+
+function add(food_id){
+
+    let newOb = new Object();
+    newOb.title = document.getElementById('title-' + food_id).innerText;
+    newOb.portion = document.getElementById('portion-' + food_id).innerText;
+    newOb.price = document.getElementById('price-' + food_id).innerText;
+    if(Order.order_positions[food_id]){
+        Order.order_total_price -= newOb.price;
+        Order.order_total_qty--;
+        delete Order.order_positions[food_id]
+    } else {
+        Order.order_total_price += newOb.price;
+        Order.order_total_qty++;
+        Order.order_positions[food_id] = newOb;
+    }
+
+
+    console.log(JSON.stringify(Order))
 }
 
 function addOrderPosition(food_id,nav){
@@ -205,6 +240,11 @@ function addOrderPosition(food_id,nav){
 
 }
 
+function deleteOrder(nr){
+    let url = globalpath + "includes/delete.php?nr="+nr;
+    fetch(url).then()
+}
+
 function deleteAllOrderPositions(){
     if(isDash()) {
         unloadOrderPositions();
@@ -219,7 +259,7 @@ async function dashAction(food_id, element_id, post_name, alert_text){
     dashboard_favorite.style.background = "#E26D5C";
     dashboard_favorite.style.color = "gold";
 
-    let response = await fetch("includes/user_actions.inc.php",
+    let response = await fetch(globalpath + "includes/user_actions.inc.php",
         {
             method: "POST",
             headers: {
@@ -243,7 +283,7 @@ async function dashAction(food_id, element_id, post_name, alert_text){
 
 async function userAction(post_name){
 
-    let response = await fetch("includes/user_actions.inc.php",
+    let response = await fetch(globalpath + "includes/user_actions.inc.php",
         {
             method: "POST",
             headers: {
@@ -262,7 +302,7 @@ async function userAction(post_name){
 
 async function orderAction(food_id, element_id, post_name, alert_text){
 
-    let response = await fetch("includes/user_actions.inc.php",
+    let response = await fetch(globalpath + "includes/user_actions.inc.php",
         {
             method: "POST",
             headers: {
@@ -281,13 +321,13 @@ async function orderAction(food_id, element_id, post_name, alert_text){
 
 async function sendJSON(post_name, json){
 
-    let response = await fetch("includes/user_actions.inc.php",
+    let response = await fetch(globalpath + "includes/user_actions.inc.php",
         {
             method: "POST",
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
             },
-            body: post_name + "=" + json
+            body: post_name + "=" + encodeURIComponent(JSON.stringify(json))
         });
     if (response.ok) {
         console.log("All right");
@@ -321,3 +361,8 @@ function navOff(){
         return false;
     }
 }
+
+function showFoodModal(id){
+    $('#food-modal-' + id).modal('show');
+}
+

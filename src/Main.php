@@ -108,7 +108,8 @@ class Main
         return $this->globalpath;
     }
 
-    public function getJSON($array){
-        return json_encode($array,JSON_PRETTY_PRINT);
+    public function deleteOrder($id) {
+        $sql = "DELETE FROM `ordering` WHERE `order_nr` = ?;";
+        $this->executeQuery($sql,"i", array($id));
     }
 }
