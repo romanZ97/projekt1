@@ -54,7 +54,7 @@ class DeliveryService extends Main
                         <p style="margin-left: 15px">' . $position["food_portion"] . ' ' . $position["food_portion_unit"] . '</p>
                     </div>
                     <div class="d-flex flex-row align-items-center">
-                        <div class="d-flex flex-row align-items-center ">
+                        <div class="d-flex flex-row align-items-center">
                             <button class="dropdown-button" type="button" value="' . $position["id"] . '" onclick="addOrderPosition(this.value)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -67,7 +67,7 @@ class DeliveryService extends Main
                                 <span class="up" onClick="increaseCount(event, this,' . $position["id"] . ')">+</span>
                             </div>
                         </div>
-                        <span id="price">' . $position["price"] . ' €</span>
+                        <span class="list-price" id="price">' . $position["price"] . ' €</span>
                     </div>
                 </li>';
             }
@@ -308,5 +308,10 @@ class DeliveryService extends Main
     {
         $sql = "UPDATE `ordering` SET `customer_surname`= ?,`customer_forename`= ?,`customer_email`= ?, `customer_address` = ?, `customer_address` = ?, `customer_contact` = ? WHERE `id`";
         $this->executeQuery($sql, "iis", array($lastname, $firstname, $email, $address, $contact, $this->order_id));
+    }
+
+    public function isPosition($food_id){
+        $test = array_search($food_id, array_column($this->order_positions, "id"));
+        return gettype($test) == "integer";;
     }
 }
