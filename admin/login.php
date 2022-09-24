@@ -8,25 +8,25 @@
     </head>
 
     <body>
-        
+    <br><br> <br><br>
+    <?php
+    if(isset($_SESSION['login']))
+    {
+        echo $_SESSION['login'];
+        unset($_SESSION['login']);
+    }
+
+
+    if(isset($_SESSION['no-login-message']))
+    {
+        echo $_SESSION['no-login-message'];
+        unset($_SESSION['no-login-message']);
+    }
+    ?>
         <div class="login">
             <h1 class="text-center">Login als Admin</h1>
             <br><br>
 
-            <?php
-            if(isset($_SESSION['login']))
-            {
-                echo $_SESSION['login'];
-                unset($_SESSION['login']);
-            }
-
-
-            if(isset($_SESSION['no-login-message']))
-                {
-                    echo $_SESSION['no-login-message'];
-                    unset($_SESSION['no-login-message']);
-                }
-            ?>
             <br><br>
 
             <!-- Das Loginformular beginn hier  -->

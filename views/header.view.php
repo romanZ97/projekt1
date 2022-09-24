@@ -2,6 +2,7 @@
 session_start();
 require __DIR__ . "/../src/FoodService.php";
 require __DIR__ . "/../src/DeliveryService.php";
+include('./admin/config/constants.php');
 $globalpath = "http://localhost:8888/projekt1";
 if (isset($_SESSION['user_id'])) {
     require __DIR__ . "/../src/UserService.php";
