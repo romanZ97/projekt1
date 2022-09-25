@@ -70,7 +70,7 @@ class FoodService extends Main
                 }
                 echo '
                             <a class="card-action" id="order_position_' . $food["id"] . '" type="button" 
-                            onclick="addOrderPosition(\'' . $food["id"] . '\')"title="Bestellen">
+                            onclick="add(\'' . $food["id"] . '\')"title="Bestellen">
                             <input name="position-add" value="' . $food["id"] . '" hidden/>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
                                      class="bi bi-basket2-fill" viewBox="0 0 16 16">
@@ -78,16 +78,14 @@ class FoodService extends Main
                                 </svg>
                             </a>
                         
-                        <div class="card-details">
-                            <div class="card-heading h-100">
-                                ' . $food["title"] . ' <a class="card-icon" id="icon_' . $food["id"] . '" title="' . $food["icon_name"] . '">
-                                <img src="' . $this->globalpath . '/assets/icons/' . $food["icon_name"] . '.png"">
-                            </a>  
+                        <div id="food-' . $food["id"] . '" class="card-details">
+                            <div id="title-' . $food["id"] . '" class="card-heading h-100">
+                                ' . $food["title"] . '
                             </div>
-                            <div class="card-text-left">
+                            <div id="portion-' . $food["id"] . '" class="card-text-left">
                                 ' . $food["food_portion"] . ' ' . $food["food_portion_unit"] . '
                             </div>
-                            <div class="card-text-right">
+                            <div id="price-' . $food["id"] . '" class="card-text-right">
                                 ' . $food["price"] . '€
                             </div>
                         </div>
@@ -107,7 +105,7 @@ class FoodService extends Main
 
                 if($food["description"]) {
                     echo '
-                            <div class="modal-body" style="background-image: url("' . htmlentities($this->globalpath) . '\/assets\/images\/' . $food["image_name"] . '");">
+                            <div class="modal-body food-details" >
                                 ' . $food["description"] . '
                              </div>';
                 }
@@ -189,7 +187,7 @@ class FoodService extends Main
             }
             echo '
                         <a class="card-action" id="order_position_' . $food["id"] . '" type="button" 
-                        onclick="addOrderPosition(\'' . $food["id"] . '\')"title="Bestellen">
+                        onclick="add(\'' . $food["id"] . '\')"title="Bestellen">
                         <input name="order-position-add" value="' . $food["id"] . '" hidden/>
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
                                  class="bi bi-basket2-fill" viewBox="0 0 16 16">
@@ -243,6 +241,20 @@ class FoodService extends Main
                 </div>
                 ';
         }
+    }
+
+    public function getFoodById($food_id)
+    {
+        $sql = "SELECT 
+                    `id`, 
+                    `title`,  
+                    `price`,
+                    `food_portion`,
+                    `food_portion_unit`
+                FROM `food`
+                WHERE id = ?
+                AND featured LIKE ?";
+        return json_encode(mysqli_fetch_array($this->loadDataWithParameters($sql,"is",array($food_id,"ja"))));
     }
 
     private function editCategory($category_id, $category_name, $category_image, $category_status, $category_dashboard)

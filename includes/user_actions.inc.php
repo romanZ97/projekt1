@@ -2,15 +2,21 @@
 session_start();
 require __DIR__ . "/../src/UserService.php";
 require __DIR__ . "/../src/DeliveryService.php";
+require __DIR__ . "/../src/FoodService.php";
 if (isset($_SESSION['user_id']))
     $uS = new UserService($_SESSION["user_id"]);
 $dS  = new DeliveryService();
+$foodS = new FoodService();
 $globalpath = "http://localhost:8888/projekt1";
 
 
 if(isset($_POST["submit-order"])){
     $data = json_decode($_POST["submit-order"],true);
-    $dS->submitOrderCalculation($data);
+    $dS->addOrder($data);
+}
+
+if(isset($_POST["update_order"])){
+    $data = json_decode($_POST["submit-order"],true);
 }
 
 //if(isset($_POST["order-position-delete"])){
@@ -36,20 +42,15 @@ if(isset($_POST["get-ordering"])){
     die();
 }
 
-if(isset($_POST["order-position-add"])){
-    if(!isset($_POST["ordering"])){
-        if(!($dS->addOrderPosition($_POST["order-position-add"]))){
-            echo "delete";
-        }
-    } else {
-        $dS->addOrderPosition($_POST["order-position-add"]);
-        $dS->showPositions();
-    }
-    die();
+if(isset($_POST["order-select-add"])){
+    echo $foodS->getFoodById($_POST["order-select-add"]);
 }
 
 if (isset($_POST['user-profile-submit'])){
     $data = array();
+    if (isset($_POST['user-n'])){
+        $data["user_name"] = $_POST['user-n'];
+    }
     if (isset($_POST['user-sn'])){
         $data["user_surname"] = $_POST['user-sn'];
     }

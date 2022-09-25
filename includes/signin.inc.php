@@ -1,8 +1,6 @@
 <?php
 require_once __DIR__ . "/../config/db_connect.php"; //TODO make with Main
 require __DIR__ . "/../src/SignService.php";
-require __DIR__ . "/../src/DeliveryService.php.php";
-$dS = new DeliveryService();
 $sInS = new SignService();
 
 $globalpath = "http://localhost:8888/projekt1";

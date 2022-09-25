@@ -15,7 +15,7 @@ require_once "../views/header.view.php";
     <h3>Bestellformular</h3>
     <p>Füllen Sie bitte alle Felder aus</p>
 
-    <form name="order-customer-form" action="<?php echo $globalpath ?>/includes/user_actions.inc.php" method="post">
+    <form name="order-customer-form" action="<?php echo $globalpath ?>/includes/user_actions.inc.php" method="post" onsubmit="submitOrder()">
         <div class="mb-3 mt-3">
             <label for="order-c-ln" class="form-label">Name:</label>
             <input type="text" class="form-control" id="order-c-ln" name="order-c-ln" placeholder="Mustermann" required>
@@ -45,7 +45,7 @@ require_once "../views/header.view.php";
         <!-- Buttons -->
         <div class="d-flex justify-content-end align-items-center">
             <button class="btn btn-success px-5" id="order-access" name="order-customer-data" role="button" type="submit">jetzt bestellen</button>
-            <a class="btn btn-secondary ml-1" id="order-cancel" onclick="updateOrder()" href="<?php $dS->getglobalpath() ?>/projekt1/ordering.php">abbrechen</a>
+            <a class="btn btn-secondary ml-1" id="order-cancel" onclick="updateOrder()" href="<?php echo $globalpath ?>/projekt1/ordering.php">abbrechen</a>
         </div>
     </form>
 </div>
@@ -55,12 +55,12 @@ require_once "../views/header.view.php";
     <h3>Bestellformular</h3>
     <p>Füllen Sie bitte alle Felder aus</p>
 
-    <form id="order-customer-form" name="order-customer-form" action="<?php echo $globalpath ?>/includes/user_actions.inc.php" method="post">
+    <form id="order-customer-form" name="order-customer-form" action="<?php echo $globalpath ?>/includes/user_actions.inc.php" method="post" onsubmit="submitOrder()">
         <?php $uS->showOrderUserProfileData(); ?>
         <input name="order-customer-data" hidden>
         <div class="d-flex justify-content-end align-items-center">
             <button class="btn btn-success px-5" id="order-access" type="button" onclick="checkUserData()">jetzt bestellen</button>
-            <a class="btn btn-secondary ml-1" id="order-cancel" onclick="updateOrder()" href="<?php $dS->getglobalpath() ?>/projekt1/ordering.php">abbrechen</a>
+            <a class="btn btn-secondary ml-1" id="order-cancel" href="<?php echo $globalpath ?>/ordering.php">abbrechen</a>
         </div>
     </form>
 </div>

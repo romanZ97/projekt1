@@ -55,7 +55,7 @@ class UserService extends Main
         echo '
         <div class="mb-3 mt-3">
             <label for="order-c-ln" class="form-label">Benutzername:</label>
-            <input type="text" class="form-control" id="user-n" value="' . $this->user_name . '" readonly>
+            <input type="text" class="form-control" id="user-n" value="' . $this->user_name . '">
 
         </div>
         <div class="mb-3 mt-3">

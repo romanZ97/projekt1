@@ -11,17 +11,7 @@ if (isset($_SESSION['user_id'])) {
 <script src="<?php echo $globalpath ?>/assets/js/global_action.js"></script>
 
 <?php
-$dS  = new DeliveryService(); ?>
-<script>
-    window.addEventListener('beforeunload', (e)=> {
-        console.log(sessionStorage.getItem("order_nr"));
-        if (!inside_click){
-            deleteOrder(<?php echo $_SESSION['order_nr'] ?>);
-        }
-        inside_click = false;
-    });
-</script>
-<?php
+$dS  = new DeliveryService();
 $foodS = new FoodService();
 $foodS->loadDashboardData();
 $foodS->loadActiveData();
@@ -83,7 +73,7 @@ $foodS->loadActiveData();
                     <!-- --- -->
                     <li class="nav-item" id="nav-bag">
                         <a class="nav-link dropdown" id="nav-bag-dropdown" role="button" data-toggle="dropdown"
-                           style="margin: 10px" onclick="checkOrders()">
+                           style="margin: 10px">
                             <?php require __DIR__ . "/../assets/icons/order_icon.php"; ?>
                         </a>
                         <span id="order-nav-count" class="dropdown-count-badge" hidden></span>
@@ -131,7 +121,7 @@ $foodS->loadActiveData();
                     <!-- --- -->
                     <li class="nav-item" id="nav-bag">
                         <a class="nav-link dropdown" id="nav-bag-dropdown" role="button" data-toggle="dropdown"
-                            style="margin: 10px" onclick="checkOrders()">
+                            style="margin: 10px">
                             <?php require __DIR__ . "/../assets/icons/order_icon.php"; ?>
                         </a>
                         <span id="order-nav-count" class="dropdown-count-badge" hidden></span>

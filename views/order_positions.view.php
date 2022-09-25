@@ -17,7 +17,7 @@
                 } ?>
             </select>
             <div class="input-group-append">
-                <button class="btn btn-outline-info" id="select-food-to-position" type="button" onclick="addSelectToOrderPosition()">Hinzufügen</button>
+                <button class="btn btn-info" id="select-food-to-position" type="button" onclick="addSelectToOrderPosition()">Hinzufügen</button>
             </div>
         </div>
     </div>
@@ -31,14 +31,10 @@
                 <span id="total-price">-,- €</span>
             </div>
         </div>
-        <ul id="order-positions-list" class="list list-inline">
-            <?php $dS->showPositions(); ?>
-        </ul>
+        <ul id="order-positions-list" class="list list-inline"></ul>
         <div class="d-flex justify-content-end align-items-center">
-            <?php if (($positions = $dS->getSortedOrderPositions())): ?>
-                <a class="btn btn-success px-5" id="order-access" role="button" onclick="submitOrder()"
-                   href="<?php $dS->getglobalpath() ?>/projekt1/views/order_form.view.php">Auswahl bestätigen</a>
-            <?php endif; ?>
+            <a class="btn btn-success px-5" id="order-access" role="button"
+               href="<?php $dS->getglobalpath() ?>/projekt1/views/order_form.view.php">Auswahl bestätigen</a>
             <a class="btn btn-secondary ml-1" id="order-cancel" onclick=""
                href="<?php $dS->getglobalpath() ?>/projekt1/index.php">zurück</a>
         </div>
