@@ -32,7 +32,7 @@ require_once (__DIR__ . '/partials/header.php');
                             {
                                 //Bild anzeigen
                                 ?>
-                                <img src="<?php echo URLRACINE; ?>assets/images/<?php echo $current_image; ?>" width="150px">
+                                <img alt="aktuelles Bild" src="<?php echo URLRACINE; ?>assets/images/<?php echo $current_image; ?>" width="150px">
                                 <?php
                             }
                             else

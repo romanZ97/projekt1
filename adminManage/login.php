@@ -3,8 +3,8 @@
 <html>
     <head>
         <title>Login - Administratoren </title>
-        <link rel="stylesheet" href="../css/admin.css">
-        <link rel="stylesheet" href="../css/admin2.css">
+        <link rel="stylesheet" href="../admin/assets/css/admin.css">
+        <link rel="stylesheet" href="../admin/assets/css/admin2.css">
     </head>
 
     <body>

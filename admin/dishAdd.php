@@ -286,23 +286,9 @@ require_once (__DIR__ . '/partials/header.php');
 
 
                 //Überprüfen, ob die Radion-button für gekennzeichnet und aktiv aktiviert sind oder nicht
-                if(isset($_POST['featured']))
-                {
-                    $featured = $_POST['featured'];
-                }
-                else
-                {
-                    $featured = "Nein"; //Standardwert zuweisen
-                }
+                $featured = $_POST['featured'] ?? "Nein";
 
-                if(isset($_POST['active']))
-                {
-                    $active = $_POST['active'];
-                }
-                else
-                {
-                    $active = "Nein"; // Standardwert zuweisen
-                }
+                $active = $_POST['active'] ?? "Nein";
 
                 //2. das Bild hochladen, falls ausgewählt
                 //Überprüfen, ob das ausgewählte Bild angeklickt wurde oder nicht, und das Bild nur hochladen, wenn das Bild ausgewählt ist

@@ -1,6 +1,6 @@
-<?php 
-    
-    session_start();
+<?php
+
+//session_start();
 const URLRACINE = 'http://localhost:8888/projekt1/';
 const LOCALHOST = 'localhost';
 const DB_USERNAME = 'root';

@@ -1,32 +1,32 @@
-<?php include('config/constants.php'); ?>
+<?php include('../admin/config/constants.php'); ?>
 
-<html>
+<html lang="de">
     <head>
         <title>Login - Administratoren </title>
-        <link rel="stylesheet" href="../css/admin.css">
-        <link rel="stylesheet" href="../css/admin2.css">
+        <link rel="stylesheet" href="../admin/assets/css/admin.css">
+        <link rel="stylesheet" href="../admin/assets/css/admin2.css">
     </head>
 
     <body>
-        
+    <br><br> <br><br>
+    <?php
+    if(isset($_SESSION['login']))
+    {
+        echo $_SESSION['login'];
+        unset($_SESSION['login']);
+    }
+
+
+    if(isset($_SESSION['no-login-message']))
+    {
+        echo $_SESSION['no-login-message'];
+        unset($_SESSION['no-login-message']);
+    }
+    ?>
         <div class="login">
             <h1 class="text-center">Login als Admin</h1>
             <br><br>
 
-            <?php
-            if(isset($_SESSION['login']))
-            {
-                echo $_SESSION['login'];
-                unset($_SESSION['login']);
-            }
-
-
-            if(isset($_SESSION['no-login-message']))
-                {
-                    echo $_SESSION['no-login-message'];
-                    unset($_SESSION['no-login-message']);
-                }
-            ?>
             <br><br>
 
             <!-- Das Loginformular beginn hier  -->

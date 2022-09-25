@@ -181,7 +181,7 @@ use PHPMailer\PHPMailer\Exception;
                                        
                           <h1>Vielen Dank f&uuml;r Ihre Reservierung</h1>
                       
-                          <p>Der Stand Ihrer reservierung wurde aktualisiert, Sie haben folgenden Termin reserviert</p>
+                          <p>Ihre reservierung wurde best&auml;tigt, Sie haben folgenden Termin reserviert</p>
                           <table>
                             <tr>
                               <th> Ihr Name </th> <th>Datum</th> <th>Uhrzeit</th>    <th>Status</th>  
@@ -241,7 +241,7 @@ use PHPMailer\PHPMailer\Exception;
 
                 $mail ->Password = "qtplwxmbnrgndyyy";
 
-                $mail ->Subject = "Der Stand Ihre Reservierrung wurde aktulisiert ";
+                $mail ->Subject = "Ihre Reservierrung wurde aktulisiert ";
 
                 try {
                     $mail->setFrom("junioryvan5@gmail.com");
@@ -263,7 +263,7 @@ use PHPMailer\PHPMailer\Exception;
                             <tr>
                               <td>$customer_name</td><td>$reservation_date</td><td>$reservation_time</td><td> $reservation_status</td>
                             </tr>
-                            
+                            <p>Ihre Reservierung ist in Bearbeitung, Sie werden so fr&uuml;h wie m&ouml;glich dar&uuml;ber informiert, sobald den Termin best&auml;tigt wurde</p>
                           </table>
                         ";
 
@@ -315,7 +315,7 @@ use PHPMailer\PHPMailer\Exception;
 
                 $mail ->Password = "qtplwxmbnrgndyyy";
 
-                $mail ->Subject = "Der Stand Ihre Reservierrung wurde aktulisiert ";
+                $mail ->Subject = "Ihre Reservierung wurde storniert";
 
                 try {
                     $mail->setFrom("junioryvan5@gmail.com");
@@ -326,9 +326,9 @@ use PHPMailer\PHPMailer\Exception;
 
                 $mail ->Body = "
                                        
-                          <h1>Vielen Dank f&uuml;r Ihre Reservierung</h1>
+                          <h1>Ihre Reservierung wurde storniert</h1>
                       
-                          <p>Der Stand Ihrer reservierung wurde aktualisiert, Sie haben folgenden Termin reserviert</p>
+                          <p>Sie haben folgenden Termin reserviert</p>
                           <table>
                             <tr>
                               <th> Ihr Name </th> <th>Datum</th> <th>Uhrzeit</th>    <th>Status</th>  
@@ -340,7 +340,7 @@ use PHPMailer\PHPMailer\Exception;
                             
                           </table>
                           
-                          <b>Ihr Termin wurde storniert bitte w&auml;hlen Sie an anderes Datum aus</b>
+                          <b> Leider haben wir keinen freien Platz mehr f&uuml;r dieses Datum, bitte w&auml;hlen Sie an anderes Datum aus</b>
                         ";
 
                 try {

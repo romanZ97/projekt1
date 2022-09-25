@@ -91,7 +91,7 @@
 
                                                 if($reservation_status=="on wait")
                                                 {
-                                                    echo "<label>gebucht</label>";
+                                                    echo "<label style='color: #0986e0;'>gebucht</label>";
                                                 }
                                                 elseif($reservation_status=="done")
                                                 {
