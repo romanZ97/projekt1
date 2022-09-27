@@ -148,7 +148,7 @@ class FoodService extends Main
             echo '
                     <a href="' . $this->globalpath . '/food.php?category=' . $category["id"] . '">
                         <div class="card">
-                            <img src="' . $this->globalpath . '/assets/images/dashboard_' . $category["image_name"] . '" class="card-img-top" alt="' . $category["category_name"] . '">
+                            <img src="' . $this->globalpath . '/assets/images/' . $category["image_name"] . '" class="card-img-top" alt="' . $category["category_name"] . '">
                             <div class="card-body">
                                 <h5 class="card-title">' . $category["category_name"] . '</h5>
                             </div>
@@ -243,7 +243,7 @@ class FoodService extends Main
         }
     }
 
-    public function getFoodById($food_id)
+    public function getFoodById($food_id, $path)
     {
         $sql = "SELECT 
                     `id`, 
@@ -254,58 +254,13 @@ class FoodService extends Main
                 FROM `food`
                 WHERE id = ?
                 AND featured LIKE ?";
-        return json_encode(mysqli_fetch_array($this->loadDataWithParameters($sql,"is",array($food_id,"ja"))));
-    }
-
-    private function editCategory($category_id, $category_name, $category_image, $category_status, $category_dashboard)
-    {
-        $sql = "UPDATE `category` SET 
-                      `category_name`= ?,
-                      `category_image`= ?,
-                      `category_status`= ?,
-                      `category_dashboard`= ?
-                WHERE `category_id` = ?;";
-        $this->executeQuery($sql, "ssssi", array($category_name, $category_image, $category_status, $category_dashboard, $category_id));
-    }
-
-    private function editFood($dish_id, $dish_name, $dish_description, $dish_price, $dish_status, $dish_dashboard, $dish_category_id, $meat_type_id, $country_id, $dish_calories, $dish_ch, $dish_p, $dish_f, $dish_image)
-    {
-        $sql = "UPDATE `dish` SET 
-                  `dish_name`= ?,
-                  `dish_description`= ?,
-                  `dish_price`= ?,
-                  `dish_status`= ?, 
-                  `dish_dashboard`= ?,
-                  `category_id`= ?,
-                  `meat_type_id`= ?,
-                  `country_id`= ?,
-                  `dish_calories`= ?,
-                  `dish_ch_share`= ?,
-                  `dish_p_share`= ?,
-                  `dish_f_share`= ?,
-                  `dish_image`= ? 
-                WHERE `dish_id` = ?;";
-        $this->executeQuery($sql, "ssfssiiiifffsi", array($dish_name, $dish_description, $dish_price, $dish_status, $dish_dashboard, $dish_category_id, $meat_type_id, $country_id, $dish_calories, $dish_ch, $dish_p, $dish_f, $dish_image, $dish_id));
-    }
-
-    private function insertCategory($category_name, $category_image, $category_status, $category_dashboard)
-    {
-        $sql = "INSERT INTO `category`(`category_name`, `category_image`, `category_status`, `category_dashboard`) 
-                VALUES (?,?,?,?);";
-        $this->executeQuery($sql, "ssss", array($category_name, $category_image, $category_status, $category_dashboard));
-    }
-
-    private function insertDish($dish_name, $dish_description, $dish_price, $dish_status, $dish_dashboard, $dish_category_id, $meat_type_id, $country_id, $dish_calories, $dish_ch, $dish_p, $dish_f, $dish_image)
-    {
-        $sql = "INSERT INTO `dish`(`dish_name`, `dish_description`, `dish_price`, `dish_status`, `dish_dashboard`, `category_id`, `meat_type_id`, `country_id`, `dish_calories`, `dish_ch_share`, `dish_p_share`, `dish_f_share`, `dish_image`) 
-                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
-        $this->executeQuery($sql, "ssfssiiiifffs", array($dish_name, $dish_description, $dish_price, $dish_status, $dish_dashboard, $dish_category_id, $meat_type_id, $country_id, $dish_calories, $dish_ch, $dish_p, $dish_f, $dish_image));
+        return json_encode(mysqli_fetch_array($this->loadDataWithParameters($sql,"is",array($food_id,"ja"), $path)));
     }
 
     private function setDashboardCategories()
     {
         $sql = "SELECT `id`, `category_name`, `image_name`, `icon_name` FROM `category` WHERE `featured` LIKE \"ja\";";
-        $result = $this->loadData($sql);
+        $result = $this->loadData($sql, "index");
         foreach ($result as $category) {
             $this->dashboard_categories[] = $category;
         }
@@ -314,7 +269,7 @@ class FoodService extends Main
     private function setActiveCategories()
     {
         $sql = "SELECT `id`, `category_name`, `image_name`, `icon_name` FROM `category` WHERE `active` LIKE \"ja\";";
-        $result = $this->loadData($sql);
+        $result = $this->loadData($sql, "index");
         foreach ($result as $category) {
             $this->active_categories[] = $category;
         }
@@ -340,7 +295,7 @@ class FoodService extends Main
                 JOIN country AS co ON co.id = f.country_id
                 JOIN meat_type AS mt ON mt.id = f.meat_type_id
                 WHERE f.featured LIKE \"ja\"";
-        $result = $this->loadData($sql);
+        $result = $this->loadData($sql, "index");
         foreach ($result as $food) {
             $this->dashboard_food[$food['id']] = $food;
         }
@@ -367,7 +322,7 @@ class FoodService extends Main
                 JOIN country AS co ON co.id = f.country_id
                 JOIN meat_type AS mt ON mt.id = f.meat_type_id
                 WHERE f.active LIKE \"ja\"";
-        $result = $this->loadData($sql);
+        $result = $this->loadData($sql, "index");
         foreach ($result as $food) {
             $this->active_food[$food['id']] = $food;
         }

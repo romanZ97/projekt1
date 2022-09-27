@@ -1,39 +1,72 @@
 <?php
 
+/**
+ *
+ */
 class Main
 {
+    /**
+     * @var
+     */
     protected $conn;
+    /**
+     * @var string
+     */
     protected string $globalpath = "http://localhost:8888/projekt1";
 
-
+    /**
+     *
+     */
     public function __construct()
     {
         require __DIR__ . "/../config/db_connect.php";
         $this->conn = $conn;
     }
 
-    public function loadDataWithParameters($query, $types, $data)
+    /**
+     * @param $query
+     * @param $types
+     * @param $data
+     * @return false|mysqli_result|null
+     */
+    public function loadDataWithParameters($query, $types, $data, $path)
     {
-        return $this->p_loadDataWithParameters($query,$types,$data);
+        return $this->p_loadDataWithParameters($query,$types,$data,$path);
     }
 
-    public function loadData($query)
+    /**
+     * @param $query
+     * @return false|mysqli_result|null
+     */
+    public function loadData($query, $path)
     {
-        return $this->p_loadData($query);
+        return $this->p_loadData($query, $path);
     }
 
-    public function executeQuery($query,$types,$data)
+    /**
+     * @param $query
+     * @param $types
+     * @param $data
+     * @return void
+     */
+    public function executeQuery($query, $types, $data, $path)
     {
-        $this->p_executeQuery($query,$types,$data);
+        $this->p_executeQuery($query,$types,$data, $path);
     }
 
-    private function p_executeQuery($query, $types, $data)
+    /**
+     * @param $query
+     * @param $types
+     * @param $data
+     * @return void
+     */
+    private function p_executeQuery($query, $types, $data, $path)
     {
         $this->secureQuery($this->conn,$data);
         $stmt = mysqli_stmt_init($this->conn);
 
         if(!mysqli_stmt_prepare($stmt, $query)){
-            header("Location: $this->globalpath/index.php?error=sqlerror");
+            header("Location: $this->globalpath/$path.php?error=sqlerror");
             exit();
 
         } else {
@@ -41,21 +74,26 @@ class Main
             $result = mysqli_stmt_execute($stmt);
 
             if(!$result){
-                header("Location: $this->globalpath/index.php?error=sqlerror");
+                header("Location: $this->globalpath/$path.php?error=sqlerror");
                 exit();
             }
 
         }
     }
 
-    private function p_loadDataWithParameters($query, $types, $data)
+    /**
+     * @param $query
+     * @param $types
+     * @param $data
+     * @return false|mysqli_result|void
+     */
+    private function p_loadDataWithParameters($query, $types, $data, $path)
     {
         $this->secureQuery($this->conn,$data);
         $stmt = mysqli_stmt_init($this->conn);
 
         if(!mysqli_stmt_prepare($stmt, $query)){
-            //TODO - SetPathForMassage
-            header("Location: $this->globalpath/index.php?error=sqlerror");
+            header("Location: $this->globalpath/$path.php?error=sqlerror");
             exit();
 
         } else {
@@ -67,19 +105,23 @@ class Main
 
 
             }else{
-                header("Location: $this->globalpath/index.php?error=sqlerror");
+                header("Location: $this->globalpath/$path.php?error=sqlerror");
                 exit();
             }
 
         }
     }
 
-    private function p_loadData($query)
+    /**
+     * @param $query
+     * @return false|mysqli_result|void
+     */
+    private function p_loadData($query,$path)
     {
         $stmt = mysqli_stmt_init($this->conn);
 
         if(!mysqli_stmt_prepare($stmt, $query)){
-            header("Location: $this->globalpath/index.php?error=sqlerror");
+            header("Location: $this->globalpath/$path.php?error=sqlerror");
             exit();
 
         } else {
@@ -89,13 +131,18 @@ class Main
                 return mysqli_stmt_get_result($stmt);
 
             }else{
-                header("Location: $this->globalpath/index.php?error=sqlerror");
+                header("Location: $this->globalpath/$path.php?error=sqlerror");
                 exit();
             }
 
         }
     }
 
+    /**
+     * @param $conn
+     * @param $query
+     * @return void
+     */
     function secureQuery($conn, $query)
     {
         foreach ($query as $key => $value){
@@ -104,12 +151,11 @@ class Main
         }
     }
 
+    /**
+     * @return string
+     */
     public function getglobalpath(){
         return $this->globalpath;
     }
 
-    public function deleteOrder($id) {
-        $sql = "DELETE FROM `ordering` WHERE `order_nr` = ?;";
-        $this->executeQuery($sql,"i", array($id));
-    }
 }

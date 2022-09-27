@@ -62,30 +62,19 @@ require "views/header.view.php";
         <h2 class="text-center">Kategorien</h2>
 
         <?php
+        $categories = $foodS->getActiveCategories();
 
-        //Display all the cateories that are active
-        //Sql Query
-        $sql = "SELECT * FROM category WHERE active='Ja'";
-
-        //Execute the Query
-        $res = mysqli_query($conn, $sql);
-
-        //Count Rows
-        $count = mysqli_num_rows($res);
-
-        //CHeck whether categories available or not
-        if($count>0)
+        if(count($categories)>0)
         {
-            //CAtegories Available
-            while($row=mysqli_fetch_assoc($res))
+            foreach ($categories as $category)
             {
                 //Get the Values
-                $id = $row['id'];
-                $category_name = $row['category_name'];
-                $image_name = $row['image_name'];
+                $id = $category['id'];
+                $category_name = $category['category_name'];
+                $image_name = $category['image_name'];
                 ?>
 
-                <a href="<?php echo $globalpath; ?>food.php?category=<?php echo $id; ?>">
+                <a href="<?php echo $globalpath; ?>/food.php?category=<?php echo $id; ?>">
                     <div class="box-3 float-container">
                         <?php
                         if($image_name=="")
@@ -97,7 +86,7 @@ require "views/header.view.php";
                         {
                             //Image Available
                             ?>
-                            <img src="<?php echo URLRACINE; ?>assets/images/<?php echo $image_name; ?>" alt="FoodImage" class="img-responsive img-curve" height="300.34px">
+                            <img src="<?php echo $globalpath; ?>/assets/images/<?php echo $image_name; ?>" alt="FoodImage" class="img-responsive img-curve" height="300.34px">
                             <?php
                         }
                         ?>

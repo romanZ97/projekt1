@@ -1,21 +1,36 @@
 <?php
+// Session start
 session_start();
+
+// Zugriff zu jeweiligen Klassen
 require __DIR__ . "/../src/FoodService.php";
 require __DIR__ . "/../src/DeliveryService.php";
-$globalpath = "http://localhost:8888/projekt1";
-if (isset($_SESSION['user_id'])) {
-    require __DIR__ . "/../src/UserService.php";
-    $uS = new UserService($_SESSION['user_id']);
-    echo '<script id="user-sc" src="'. $globalpath .'/assets/js/user_action.js"></script>';
-}?>
-<script src="<?php echo $globalpath ?>/assets/js/global_action.js"></script>
 
+// Erzeugung von globalem Pfad
+$globalpath = "http://localhost:8888/projekt1";
+
+
+// Prüfen, ob ein User angemeldet ist
+if (isset($_SESSION['user_id'])) {
+// Zugriff auf Klasse UserService
+    require __DIR__ . "/../src/UserService.php";
+//Erzeugen einer Instanz von UserService
+    $uS = new UserService($_SESSION['user_id']);
+// Zugriff auf JavaScript Funktionen von User
+    echo '<script id="user-sc" src="'. $globalpath .'/assets/js/user_action.js"></script>';
+}
+?>
+<!-- Zugriff auf JavaScript Funktionen-->
+<script src="<?php echo $globalpath ?>/assets/js/global_action.js"></script>
 <?php
+// Erzeugen der Instanzen
 $dS  = new DeliveryService();
 $foodS = new FoodService();
+// Laden von Speisen Daten
 $foodS->loadDashboardData();
 $foodS->loadActiveData();
 ?>
+<!-- Auto-Scrolling-Funktion für Kategorien Auswahl-->
 <?php if (isset($_GET['category'])) : ?>
     <?php if (!empty($_GET["category"])) : ?>
         <script>
@@ -28,13 +43,11 @@ $foodS->loadActiveData();
 
 <body>
 <head>
-
-
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <link rel="stylesheet" href="<?php echo $globalpath ?>/assets/css/style.css">
 
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark ">
@@ -43,9 +56,9 @@ $foodS->loadActiveData();
                 <a id="home-link" class="navbar-brand p-0 m-0" href="<?php echo $globalpath ?>/index.php" style="margin: 10px">
                     <img src="<?php echo $globalpath ?>/assets/images/logo1_xs.png" height="30" alt="">
                 </a>
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link active" aria-current="page" href="#">Kategorien</a>-->
-<!--                </li>-->
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="<?php echo $globalpath ?>/categories.php">Kategorien</a>
+                </li>
                 <li class="nav-item">
                     <a id="food-link" class="nav-link active" href="<?php echo $globalpath ?>/food.php">Speisen</a>
                 </li>
@@ -91,7 +104,7 @@ $foodS->loadActiveData();
                             <?php require __DIR__ . "/../assets/icons/user_icon.php"; ?>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-text-right">
-                            <form id="signout-form" action="<?php echo $globalpath ?>/signin.php"
+                            <form id="signout-form" action="<?php echo $globalpath ?>/includes/sign.inc.php"
                                   method="post" style="margin: 0">
                                 <input name="signout" value="out" hidden>
                                 <a id="nav-sign-btn" class="dropdown-item" onclick="document.getElementById('signout-form').submit();">

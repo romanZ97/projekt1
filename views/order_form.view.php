@@ -45,7 +45,7 @@ require_once "../views/header.view.php";
         <!-- Buttons -->
         <div class="d-flex justify-content-end align-items-center">
             <button class="btn btn-success px-5" id="order-access" name="order-customer-data" role="button" type="submit">jetzt bestellen</button>
-            <a class="btn btn-secondary ml-1" id="order-cancel" onclick="updateOrder()" href="<?php echo $globalpath ?>/projekt1/ordering.php">abbrechen</a>
+            <a class="btn btn-secondary ml-1" id="order-cancel" href="<?php echo $globalpath ?>/projekt1/ordering.php">abbrechen</a>
         </div>
     </form>
 </div>

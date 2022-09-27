@@ -20,7 +20,7 @@
 
     <title>Account erstellen</title>
 
-    <link rel="stylesheet" href="<?php echo $globalpath ?>/assets/css/register.css">
+    <link rel="stylesheet" href="assets/css/register.css">
 </head>
 <body>
 
@@ -144,7 +144,7 @@
             }
         }
         ?>
-        <form class="form-signup" action="<?php echo $globalpath ?>/includes/signup.inc.php" method="post">
+        <form class="form-signup" action="includes/sign.inc.php" method="post">
             <div class="form-group">
                 <label for="user_name">Benutzername</label>
                 <input class="form-control" id="user_name" type="text" name="user_name" placeholder="Username">

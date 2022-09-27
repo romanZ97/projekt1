@@ -21,39 +21,15 @@ class SignService extends Main
     }
 
     /**
-     * return preg_match("/^[a-zA-Z0-9]*\.[a-zA-Z-]*$/", $user_name)
-     *
-     * Prüft, ob der User-Name gültige Zeichenkombination hat (v.name)
-     *
-     * @param $user_name string
-     * @return false|int 1 if the pattern matches given subject, 0 if it does not, or FALSE if an error occurred.
-     */
-    public function checkUserNameValidation($user_name)
-    {
-        //return preg_match("/^[a-zA-Z0-9]*\.[a-zA-Z-]*$/", $user_name);
-        return true;
-    }
-
-    public function checkPassword($pwd, $pwd_r)
-    {
-        if($pwd == $pwd_r){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-    /**
      * Prüft, ob der User-Name in Datenbank vorhanden ist.
      *
      * @param $user_name string
      * @return bool|void true|false
      */
-    public function checkUser($user_name)
+    public function checkUser($user_name,$path)
     {
         $sql = "SELECT user_name FROM user WHERE user_name=?";
-        return (!empty(mysqli_fetch_array($this->loadDataWithParameters($sql,"s",array($user_name)))));
+        return (!empty(mysqli_fetch_array($this->loadDataWithParameters($sql,"s",array($user_name),$path))));
     }
 
 // GETTER ..............................................................................................................*
@@ -65,15 +41,15 @@ class SignService extends Main
      * @param $user_name string
      * @return mixed|void int $user_id
      */
-    public function getUserIdByName($user_name)
+    public function getUserIdByName($user_name, $path)
     {
         $sql = "SELECT id FROM user WHERE user_name=?";
-        return mysqli_fetch_assoc($this->loadDataWithParameters($sql,"s",array($user_name)))['id'];
+        return mysqli_fetch_assoc($this->loadDataWithParameters($sql,"s",array($user_name), $path))['id'];
     }
 
-    function getUserByNameOrEmail($mail_username){
+    function getUserByNameOrEmail($mail_username, $path){
         $sql = "SELECT * FROM user WHERE user_name=? OR email =?;";
-        return mysqli_fetch_assoc($this->loadDataWithParameters($sql,"ss",array($mail_username, $mail_username)));
+        return mysqli_fetch_assoc($this->loadDataWithParameters($sql,"ss",array($mail_username, $mail_username), $path));
     }
 
 
@@ -93,7 +69,7 @@ class SignService extends Main
         $sql = "INSERT INTO user (user_name, email, password, token_password) VALUES (?, ?, ?, null)";
 
         $pwd = password_hash($pwd, PASSWORD_DEFAULT);
-        $this->executeQuery($sql, "sss", array($user_name, $email, $pwd));
+        $this->executeQuery($sql, "sss", array($user_name, $email, $pwd), "signup");
 
     }
 

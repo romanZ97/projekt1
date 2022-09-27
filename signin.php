@@ -26,14 +26,14 @@ if (isset($_SESSION['user_id'])) {
 
     <title>Login</title>
 
-    <link rel="stylesheet" href="<?php echo $globalpath ?>/assets/css/sign.css">
+    <link rel="stylesheet" href="assets/css/sign.css">
 
 </head>
 
 
 <body class="text-center">
-<form class="form-signin" action="<?php echo $globalpath ?>/includes/signin.inc.php" method="post">
-    <img class="mb-4" src="<?php echo $globalpath ?>/assets/images/logo.png" alt="logo" width="150" height="150">
+<form class="form-signin" action="includes/sign.inc.php" method="post">
+    <img class="mb-4" src="assets/images/logo.png" alt="logo" width="150" height="150">
     <input type="text" id="inputEmail" name="mail-username" class="form-control" placeholder="Username/E-Mail" required
            autofocus>
     <input type="password" id="inputPassword" name="pwd" class="form-control" placeholder="Password" required>
@@ -94,36 +94,6 @@ if (isset($_SESSION['user_id'])) {
             $message = "User ist nicht gefunden!";
             echo '                            <div class="container">
                                 <div class="alert alert-danger" role="alert">
-                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                        <strong>' . $bold . '</strong> ' . $message . '
-                                </div>
-                            </div>
-        
-                            <script type="text/javascript">
-                                setTimeout(function() {
-                                $(".alert").hide(); 
-                                }, 5000);
-                            </script>';
-        } else if ($_GET['error'] == "mailsuccess") {
-            $bold = "Yes! ";
-            $message = "E-Mail ist gesendet!";
-            echo '                             <div class="container">
-                                <div class="alert alert-success" role="alert">
-                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                        <strong>' . $bold . '</strong> ' . $message . '
-                                </div>
-                            </div>
-        
-                            <script type="text/javascript">
-                                setTimeout(function() {
-                                $(".alert").hide(); 
-                                }, 5000);
-                            </script>';
-        } else if ($_GET['error'] == "passwordupdated") {
-            $bold = "Yes! ";
-            $message = "Dein Passwort ist aktualisiert!";
-            echo '                             <div class="container">
-                                <div class="alert alert-success" role="alert">
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                         <strong>' . $bold . '</strong> ' . $message . '
                                 </div>

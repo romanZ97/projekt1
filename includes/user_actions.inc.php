@@ -26,7 +26,6 @@ if(isset($_POST["update_order"])){
 
 if(isset($_POST["delete_all_order_positions"])) {
     $dS->deleteAllOrderPositions();
-    $dS->showPositions();
     die();
 }
 
@@ -37,13 +36,8 @@ if(isset($_POST["favorite-add"])){
     die();
 }
 
-if(isset($_POST["get-ordering"])){
-    $dS->showPositions();
-    die();
-}
-
 if(isset($_POST["order-select-add"])){
-    echo $foodS->getFoodById($_POST["order-select-add"]);
+    echo $foodS->getFoodById($_POST["order-select-add"],"ordering");
 }
 
 if (isset($_POST['user-profile-submit'])){
@@ -95,14 +89,10 @@ if (isset($_POST['order-customer-data'])){
     if (isset($_POST['order-c-c'])){
         $data["customer_contact"] = $_POST['order-c-c'];
     }
-    $dS->submitOrder($data);
+    $dS->submitOrder($data,"views/order_form.view");
 
     header("Location: $globalpath/views/order_confirmation.view.php?order=".$_SESSION['order_nr']);
     die();
-}
-
-if (isset($_POST["cancel-calculate"])){
-    $dS->uptateOrderStatus("open");
 }
 
 if (isset($_POST["delete-order"])){
