@@ -1,111 +1,283 @@
 <?php
+require_once "Main.php";
+class UserService extends Main
+{
 
-
-
-class UserService {
-
-    protected string $globalpath = "/Projekt1";
-
-    private string $user_id;
+    private $user_id;
     private $user_name = null;
-    private $user_mail = null;
+    private $email = null;
     private $user_forename = null;
     private $user_surname = null;
-    private $user_address = null;
-    private $user_contact = null;
+    private $address = null;
+    private $contact = null;
     private $user_favorites = array();
     private $user_orders = array();
     private $user_reservation = array();
 
-    protected $conn = null;
 
     public function __construct($user_id)
     {
-        require_once __DIR__ . "/../config/db_connect.php";
-        $this->conn = $conn;
-
+        parent::__construct();
         $this->user_id  = $user_id;
         $this->setUser($user_id);
-
     }
 
-    private function loadData($query, $types, $data)
+    public function showOrderUserProfileData(){
+        echo '
+        <div class="mb-3 mt-3">
+            <label for="order-c-ln" class="form-label">Name:</label>
+            <input type="text" class="form-control" id="order-c-ln" name="order-c-ln" placeholder="Mustermann" value="' . $this->user_surname . '" required>
+
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="order-c-fn" class="form-label">Vorname:</label>
+            <input type="text" class="form-control" id="order-c-fn" name="order-c-fn" placeholder="Max" value="' . $this->user_forename . '" required>
+
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="order-c-e" class="form-label">E-Mail:</label>
+            <input type="email" class="form-control" id="order-c-e" name="order-c-e" placeholder="MaxMustermann@muster.de"  value="' . $this->email . '" required>
+
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="order-c-a" class="form-label">Adresse:</label>
+            <input type="text" class="form-control" id="order-c-a" name="order-c-a" placeholder="PLZ Ort, Strasse Haus-nr." value="' . $this->address . '" required>
+
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="order-c-c" class="form-label">Telefonnummer:</label>
+            <input type="tel" class="form-control" id="order-c-c" name="order-c-c" placeholder="+49..." pattern="(((\+|00+)49)|0)[1-9]\d+" value="' . $this->contact . '" required>
+
+        </div>';
+    }
+
+    public function showUserProfileData(){
+        echo '
+        <div class="mb-3 mt-3">
+            <label for="order-c-ln" class="form-label">Benutzername:</label>
+            <input type="text" class="form-control" id="user-n" value="' . $this->user_name . '">
+
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="order-c-ln" class="form-label">Nachname:</label>
+            <input type="text" class="form-control" id="user-sn" name="user-sn" placeholder="Mustermann" value="' . $this->user_surname . '" >
+
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="order-c-fn" class="form-label">Vorname:</label>
+            <input type="text" class="form-control" id="user-fn" name="user-fn" placeholder="Max" value="' . $this->user_forename . '" >
+
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="order-c-e" class="form-label">E-Mail:</label>
+            <input type="email" class="form-control" id="user-e" name="user-e" placeholder="MaxMustermann@muster.de"  value="' . $this->email . '" required>
+
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="order-c-a" class="form-label">Adresse:</label>
+            <input type="text" class="form-control" id="user-a" name="user-a" placeholder="PLZ Ort, Strasse Haus-nr." value="' . $this->address . '" >
+
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="order-c-c" class="form-label">Telefonnummer:</label>
+            <input type="tel" class="form-control" id="user-c" name="user-c" placeholder="+49..." pattern="(((\+|00+)49)|0)[1-9]\d+" value="' . $this->contact . '" >
+
+        </div>';
+    }
+
+    public function deleteUserFavorite($food_id)
     {
-        $stmt = mysqli_stmt_init($this->conn);
+        $sql = "DELETE FROM `user_favorit` WHERE `food_id` = ?;";
+        $this->executeQuery($sql,"i", array($food_id), "index");
+    }
 
-        if(!mysqli_stmt_prepare($stmt, $query)){
-            header("Location: $this->globalpath/index.php?error=sqlerror");
-            exit();
-
+    public function addUserFavorite($food_id)
+    {
+        if(!$this->chekUserFavorite($food_id)){
+            $sql = "INSERT INTO `user_favorit`(`user_id`, `food_id`) VALUES (?,?);";
+            $this->executeQuery($sql,"ii", array($this->user_id,$food_id), "index");
+            return true;
         } else {
-            mysqli_stmt_bind_param($stmt,$types,...$data);
-            $result = mysqli_stmt_execute($stmt);
-
-            if($result){
-                return mysqli_stmt_get_result($stmt);
-
-            }else{
-                header("Location: $this->globalpath/index.php?error=sqlerror");
-                exit();
-            }
-
+            $this->deleteUserFavorite($food_id);
+            return false;
         }
     }
 
-    //TODO-------------------------------------------------------------------------------------------------------------- ENCRYPT & DECRYPT METHODS
-//    private function decrypt( $ciphertext ): bool|string
-//    {
-//        $cipher = "aes-256-cbc";
-//
-//        $encrypted_data = explode('::', base64_decode($ciphertext));
-//        return openssl_decrypt($encrypted_data[0], $cipher,  null,0,null);
-//    }
+
+    public function chekUserFavorite($food_id){
+        $col = array_column($this->user_favorites,"food_id");
+        $res = in_array($food_id,$col);
+        return in_array($food_id,array_column($this->user_favorites,"food_id"));
+    }
+
 
 // SETTER ..............................................................................................................*
 
-    private function setUser($user_id): void
+    private function setUser($user_id)
     {
-        $sql = "SELECT `user_id`, `user_name`, `user_forename`, `user_surname`, `email`, `address`, `contact` FROM `user` WHERE `user_id` = ?";
+        $this->user_id  = $user_id;
 
-        $result = mysqli_fetch_array($this->loadData($sql,"i", array($user_id)));
+        $sql = "SELECT 
+                    `id`, 
+                    `user_name`, 
+                    `user_forename`, 
+                    `user_surname`, 
+                    `email`, 
+                    `address`, 
+                    `contact` 
+                FROM `user` 
+                WHERE `id` = ?";
+
+        $result = mysqli_fetch_array($this->loadDataWithParameters($sql,"i", array($user_id),"index"));
         $this->user_name = $result["user_name"];
-        $this->user_mail = $result["email"];
+        $this->email = $result["email"];
         $this->user_forename = $result["user_forename"];
         $this->user_surname = $result["user_surname"];
-        $this->user_address = $result["address"];
-        $this->user_contact = $result["contact"];
+        $this->address = $result["address"];
+        $this->contact = $result["contact"];
 
         $this->setUserOrders($user_id);
         $this->setUserReservation($user_id);
         $this->setUserFavorites($user_id);
     }
 
-    private function setUserFavorites($user_id): void
+
+    public function getSortedUserFavorites()
     {
-        $sql = "SELECT `dish_id` FROM `user_favorit` WHERE `user_id` = ?";
-        $result = $this->loadData($sql,"i", array($user_id));
+        $userFCategoryNames = array_column($this->user_favorites,"category_name");
+        $userF = $this->user_favorites;
+        array_multisort($userFCategoryNames,SORT_ASC,$userF);
+        return $userF;
+    }
+
+
+    private function setUserFavorites($user_id)
+    {
+        $sql = "SELECT 
+                    uf.`food_id`, 
+                    f.`title`, 
+                    f.`category_id`, 
+                    f.`price`, 
+                    c.`category_name`, 
+                    c.`icon_name` 
+                FROM `user_favorit`AS uf
+                JOIN `food` AS f ON f.id = uf.food_id
+                JOIN `category` AS c ON c.id = f.category_id
+                WHERE uf.`user_id` = ?";
+
+        $result = $this->loadDataWithParameters($sql,"i", array($user_id), "index");
         foreach ($result as $favorite) {
             $this->user_favorites[] = $favorite;
         }
     }
 
-    private function setUserOrders($user_id): void
+    private function setUserOrders($user_id)
     {
-        $sql = "SELECT `order_id` FROM `order` WHERE `user_id` = ?";
-        $result = $this->loadData($sql,"i", array($user_id));
+        $sql = "SELECT `id` FROM `ordering` WHERE `user_id` = ?";
+        $result = $this->loadDataWithParameters($sql,"i", array($user_id), "index");
         foreach ($result as $order) {
-            $this->user_favorites[] = $order;
+            $this->user_orders[] = $order;
         }
     }
 
-    private function setUserReservation($user_id): void
+    private function setUserReservation($user_id)
     {
-        $sql = "SELECT `reservation_id` FROM `reservation` WHERE `user_id` = ?";
-        $result = $this->loadData($sql,"i", array($user_id));
+        $sql = "SELECT `id` FROM `tbl_reservation` WHERE `user_id` = ?";
+        $result = $this->loadDataWithParameters($sql,"i", array($user_id), "index");
+
         foreach ($result as $reservation) {
             $this->user_favorites[] = $reservation;
         }
     }
 
+    public function setUserData($data){
+        foreach ($data as $key => $item){
+            if ($item != $this->$key){
+                $this->$key = $item;
+                $sql = "UPDATE `user` SET `$key`= ? WHERE id = ". $_SESSION["user_id"];
+                $this->executeQuery($sql,"s",array($item), "index");
+            }
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * @return null
+     */
+    public function getUserName()
+    {
+        return $this->user_name;
+    }
+
+    /**
+     * @return null
+     */
+    public function getUserMail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @return null
+     */
+    public function getUserForename()
+    {
+        return $this->user_forename;
+    }
+
+    /**
+     * @return null
+     */
+    public function getUserSurname()
+    {
+        return $this->user_surname;
+    }
+
+    /**
+     * @return null
+     */
+    public function getUserAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @return null
+     */
+    public function getUserContact()
+    {
+        return $this->contact;
+    }
+
+    /**
+     * @return array
+     */
+    public function getUserFavorites()
+    {
+        return $this->user_favorites;
+    }
+
+    /**
+     * @return array
+     */
+    public function getUserOrders()
+    {
+        return $this->user_orders;
+    }
+
+    /**
+     * @return array
+     */
+    public function getUserReservation()
+    {
+        return $this->user_reservation;
+    }
 
 }

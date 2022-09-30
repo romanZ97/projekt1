@@ -1,22 +1,8 @@
 <?php
+require "Main.php";
 
-class SignService
+class SignService extends Main
 {
-    /**
-     * @var object|null mysql_connect Objekt
-     */
-    private $db_conn;
-
-    /**
-     * Konstruktor für die Klasse SignupService
-     *
-     * @throws object $db_conn
-     */
-    public function __construct()
-    {
-        require __DIR__ . "/../config/db_connect.php";
-        $this->db_conn = $conn;
-    }
 
 // Check Funktionen ....................................................................................................*
 
@@ -35,51 +21,15 @@ class SignService
     }
 
     /**
-     * return preg_match("/^[a-zA-Z0-9]*\.[a-zA-Z-]*$/", $user_name)
-     *
-     * Prüft, ob der User-Name gültige Zeichenkombination hat (v.name)
-     *
-     * @param $user_name string
-     * @return false|int 1 if the pattern matches given subject, 0 if it does not, or FALSE if an error occurred.
-     */
-    public function checkUserNameValidation($user_name)
-    {
-        //return preg_match("/^[a-zA-Z0-9]*\.[a-zA-Z-]*$/", $user_name);
-        return true;
-    }
-
-    public function checkPassword($pwd, $pwd_r): bool
-    {
-        if($pwd == $pwd_r){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-    /**
      * Prüft, ob der User-Name in Datenbank vorhanden ist.
      *
      * @param $user_name string
      * @return bool|void true|false
      */
-    public function checkUser($user_name)
+    public function checkUser($user_name,$path)
     {
         $sql = "SELECT user_name FROM user WHERE user_name=?";
-
-        $stmt = mysqli_stmt_init($this->db_conn);
-
-        if (!mysqli_stmt_prepare($stmt, $sql)) {
-            header("Location: ../signup.php?error=sqlerror");
-            exit();
-
-        } else {
-            mysqli_stmt_bind_param($stmt, "s", $user_name);
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_store_result($stmt);
-            return (mysqli_stmt_num_rows($stmt) > 0);
-        }
+        return (!empty(mysqli_fetch_array($this->loadDataWithParameters($sql,"s",array($user_name),$path))));
     }
 
 // GETTER ..............................................................................................................*
@@ -91,21 +41,15 @@ class SignService
      * @param $user_name string
      * @return mixed|void int $user_id
      */
-    public function getUserIdByName($user_name)
+    public function getUserIdByName($user_name, $path)
     {
-        $sql = "SELECT user_id FROM user WHERE user_name=?";
+        $sql = "SELECT id FROM user WHERE user_name=?";
+        return mysqli_fetch_assoc($this->loadDataWithParameters($sql,"s",array($user_name), $path))['id'];
+    }
 
-        $stmt = mysqli_stmt_init($this->db_conn);
-
-        if (!mysqli_stmt_prepare($stmt, $sql)) {
-            header("Location: ../index.php?error=sqlerror");
-            exit();
-
-        } else {
-            mysqli_stmt_bind_param($stmt, "s", $user_name);
-            mysqli_stmt_execute($stmt);
-            return mysqli_fetch_assoc(mysqli_stmt_get_result($stmt))['user_id'];
-        }
+    function getUserByNameOrEmail($mail_username, $path){
+        $sql = "SELECT * FROM user WHERE user_name=? OR email =?;";
+        return mysqli_fetch_assoc($this->loadDataWithParameters($sql,"ss",array($mail_username, $mail_username), $path));
     }
 
 
@@ -120,26 +64,18 @@ class SignService
      * @param $password string Hash
      * @return void
      */
-    public function addUser($user_name, $email, $pwd): void
+    public function addUser($user_name, $email, $pwd)
     {
-        $sql = "INSERT INTO user (user_name, email, password, token_password, token_session) VALUES (?, ?, ?, null, null)";
+        $sql = "INSERT INTO user (user_name, email, password) VALUES (?, ?, ?)";
 
-        $stmt = mysqli_stmt_init($this->db_conn);
+        $pwd = password_hash($pwd, PASSWORD_DEFAULT);
+        $this->executeQuery($sql, "sss", array($user_name, $email, $pwd), "signup");
 
-        if (!mysqli_stmt_prepare($stmt, $sql)) {
-            header("Location: ../signup.php?error=sqlerror");
-            exit();
-
-        } else {
-            $pwd = password_hash($pwd, PASSWORD_DEFAULT);
-            mysqli_stmt_bind_param($stmt, "sss", $user_name, $email, $pwd);
-            mysqli_stmt_execute($stmt);
-        }
     }
 
 // CRYPT Funktionen ....................................................................................................*
 
-    public function encrypt($value): string
+    public function encrypt($value)
     {
         return $this->p_encrypt($value);
     }
@@ -150,7 +86,7 @@ class SignService
     }
 
 
-    private function p_encrypt( $value ): string
+    private function p_encrypt( $value )
     {
 
         $key = hex2bin(openssl_random_pseudo_bytes(4));
@@ -164,7 +100,7 @@ class SignService
         return( base64_encode($ciphertext . '::' . $iv. '::' .$key) );
     }
 
-    private function p_decrypt( $ciphertext ): bool|string
+    private function p_decrypt( $ciphertext )
     {
         $cipher = "aes-256-cbc";
 
