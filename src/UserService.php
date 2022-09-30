@@ -88,14 +88,14 @@ class UserService extends Main
     public function deleteUserFavorite($food_id)
     {
         $sql = "DELETE FROM `user_favorit` WHERE `food_id` = ?;";
-        $this->executeQuery($sql,"i", array($food_id));
+        $this->executeQuery($sql,"i", array($food_id), "index");
     }
 
     public function addUserFavorite($food_id)
     {
         if(!$this->chekUserFavorite($food_id)){
             $sql = "INSERT INTO `user_favorit`(`user_id`, `food_id`) VALUES (?,?);";
-            $this->executeQuery($sql,"ii", array($this->user_id,$food_id));
+            $this->executeQuery($sql,"ii", array($this->user_id,$food_id), "index");
             return true;
         } else {
             $this->deleteUserFavorite($food_id);
@@ -128,7 +128,7 @@ class UserService extends Main
                 FROM `user` 
                 WHERE `id` = ?";
 
-        $result = mysqli_fetch_array($this->loadDataWithParameters($sql,"i", array($user_id)));
+        $result = mysqli_fetch_array($this->loadDataWithParameters($sql,"i", array($user_id),"index"));
         $this->user_name = $result["user_name"];
         $this->email = $result["email"];
         $this->user_forename = $result["user_forename"];
@@ -165,7 +165,7 @@ class UserService extends Main
                 JOIN `category` AS c ON c.id = f.category_id
                 WHERE uf.`user_id` = ?";
 
-        $result = $this->loadDataWithParameters($sql,"i", array($user_id));
+        $result = $this->loadDataWithParameters($sql,"i", array($user_id), "index");
         foreach ($result as $favorite) {
             $this->user_favorites[] = $favorite;
         }
@@ -174,7 +174,7 @@ class UserService extends Main
     private function setUserOrders($user_id)
     {
         $sql = "SELECT `id` FROM `ordering` WHERE `user_id` = ?";
-        $result = $this->loadDataWithParameters($sql,"i", array($user_id));
+        $result = $this->loadDataWithParameters($sql,"i", array($user_id), "index");
         foreach ($result as $order) {
             $this->user_orders[] = $order;
         }
@@ -183,7 +183,7 @@ class UserService extends Main
     private function setUserReservation($user_id)
     {
         $sql = "SELECT `id` FROM `tbl_reservation` WHERE `user_id` = ?";
-        $result = $this->loadDataWithParameters($sql,"i", array($user_id));
+        $result = $this->loadDataWithParameters($sql,"i", array($user_id), "index");
 
         foreach ($result as $reservation) {
             $this->user_favorites[] = $reservation;
@@ -195,7 +195,7 @@ class UserService extends Main
             if ($item != $this->$key){
                 $this->$key = $item;
                 $sql = "UPDATE `user` SET `$key`= ? WHERE id = ". $_SESSION["user_id"];
-                $this->executeQuery($sql,"s",array($item));
+                $this->executeQuery($sql,"s",array($item), "index");
             }
         }
     }

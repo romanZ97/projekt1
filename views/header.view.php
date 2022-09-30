@@ -2,12 +2,11 @@
 // Session start
 session_start();
 
-// Zugriff zu jeweiligen Klassen
+// Zugriff zu jeweiligen Klassen und zu dem globalen Pfad
 require __DIR__ . "/../src/FoodService.php";
 require __DIR__ . "/../src/DeliveryService.php";
+require __DIR__ . "/../config/globalpath.php";
 
-// Erzeugung von globalem Pfad
-$globalpath = "http://localhost:8888/projekt1";
 
 
 // Prüfen, ob ein User angemeldet ist
@@ -43,15 +42,17 @@ $foodS->loadActiveData();
 
 <body>
 <head>
-    <!-- Bootstrap CSS -->
-<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">-->
+    <!-- Link zur OpenSource Bootstrap CSS Datei -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <!-- Zugriff auf interne CSS Datei-->
     <link rel="stylesheet" href="<?php echo $globalpath ?>/assets/css/style.css">
 
+<!--    Navigationsleiste -->
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark ">
         <div class="container-fluid ">
+<!--            Linke Seite mit Verweise -->
             <ul class="navbar-nav align-items-center p-0">
                 <a id="home-link" class="navbar-brand p-0 m-0" href="<?php echo $globalpath ?>/index.php" style="margin: 10px">
                     <img src="<?php echo $globalpath ?>/assets/images/logo1_xs.png" height="30" alt="">
@@ -74,11 +75,7 @@ $foodS->loadActiveData();
                     </a>
                 </li>
             </ul>
-            <!--            <a class="navbar-brand  p-0 m-0" href="-->
-            <?php //echo $globalpath ?><!--/index.php" style="margin: 10px">-->
-            <!--                <img src="-->
-            <?php //echo $globalpath ?><!--/assets/images/logo1_s.png" height="30" alt="">-->
-            <!--            </a>-->
+<!--            Rechteseite mit Favoriten-, Bestellungs-Liste, KontoDaten, Anmelden/Abmelden-->
             <ul class="navbar-nav flex-row">
                 <?php if (!isset($_SESSION["user_id"])): ?>
                     <!-- --- -->
@@ -104,13 +101,9 @@ $foodS->loadActiveData();
                             <?php require __DIR__ . "/../assets/icons/user_icon.php"; ?>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-text-right">
-                            <form id="signout-form" action="<?php echo $globalpath ?>/includes/sign.inc.php"
-                                  method="post" style="margin: 0">
-                                <input name="signout" value="out" hidden>
-                                <a id="nav-sign-btn" class="dropdown-item" onclick="document.getElementById('signout-form').submit();">
-                                    <?php require __DIR__ . "/../assets/icons/exit_icon.php"; ?>
-                                    Anmelden</a>
-                            </form>
+                            <a id="nav-sign-btn" class="dropdown-item" href="<?php echo $globalpath ?>/signin.php"">
+                                <?php require __DIR__ . "/../assets/icons/exit_icon.php"; ?>
+                                Anmelden</a>
                         </div>
                     </li>
                 <?php else: ?>
@@ -156,7 +149,7 @@ $foodS->loadActiveData();
                                 <?php require __DIR__ . "/../assets/icons/profile_icon.php"; ?>
                                 Konto</a>
                             <div class="dropdown-divider"></div>
-                            <form id="signout-form" action="<?php echo $globalpath ?>/includes/signout.inc.php"
+                            <form id="signout-form" action="<?php echo $globalpath ?>/includes/sign.inc.php"
                                   method="post" style="margin: 0">
                                 <input name="signout" value="out" hidden>
                                 <a id="nav-sign-btn" class="dropdown-item" onclick="document.getElementById('signout-form').submit();">
@@ -170,5 +163,6 @@ $foodS->loadActiveData();
         </div>
     </nav>
 </head>
+<!-- Content Container -->
 <div class="container container-content">
 

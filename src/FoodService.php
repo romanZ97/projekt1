@@ -38,6 +38,11 @@ class FoodService extends Main
         }
     }
 
+    /**
+     * Baut einem HTML-Gerüst für jeweilige Kategorie mit dazugehörenden aktiven Speisen als Karten mit entsprechenden Buttons und Modalfenster und gibt das aus.
+     *
+     * @return void
+     */
     public function showActiveFood(){
         foreach ($this->active_categories as $category){
             echo '
@@ -129,6 +134,11 @@ class FoodService extends Main
         }
     }
 
+    /**
+     * Baut einem HTML-Gerüst für jeweilige Kategorie als Karussell Element und gibt das aus.
+     *
+     * @return void
+     */
     public function showDashboardCategories()
     {
         $first = true;
@@ -164,6 +174,11 @@ class FoodService extends Main
         }
     }
 
+    /**
+     * Baut einem HTML-Gerüst für jeweilige aktive, hervorgehobene Speise als eine Karte mit jeweiligen Buttons und angebundenen Modalfenster und gibt das aus.
+     *
+     * @return void
+     */
     public function showDashboardFood()
     {
         foreach ($this->dashboard_food as $food) {

@@ -2,13 +2,16 @@
     <h1 class="fw-light text-left text-lg-start mt-4 mb-2" style="padding-left: 20px">Speisen</h1>
     <div class="col-12">
         <div class="input-group mb-3">
+<!--            Selektor mit aktiven Speisen, die nicht als Bestellposition angelegt wurden-->
             <select id="food-to-position" class="form-control">
                 <option value="">Hier die Speisen auswählen</option>
+<!--                Durchlauf über alle aktiven Kategorien-->
                 <?php foreach ($foodS->getActiveCategories() as $category){
                     echo '
                 <optgroup label="'. $category["category_name"] . '">';
 
                     foreach ($foodS->getFootByCategory($category["id"]) as $food) {
+//                        Deklarieren von Selektorauswahl-Option mit unbestellten Speisen
                         if(!$dS->isPosition($food["id"])){
                             echo '
                 <option id="select-foot-' . $food["id"] . '" value="' . $food["id"] . '">' . $food["title"] . '</option>';
@@ -21,6 +24,7 @@
             </div>
         </div>
     </div>
+<!--    Bestellposition-Übersicht mit Gesamtpreis und Gesamtmenge-->
     <div class="col-12">
         <div id="order-positions-summ" class="d-flex justify-content-between order-positions-summ">
             <div class="d-flex flex-row align-items-center">
@@ -40,7 +44,3 @@
         </div>
     </div>
 </div>
-
-
-
-

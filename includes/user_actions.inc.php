@@ -3,11 +3,13 @@ session_start();
 require __DIR__ . "/../src/UserService.php";
 require __DIR__ . "/../src/DeliveryService.php";
 require __DIR__ . "/../src/FoodService.php";
+require __DIR__ . "/../config/globalpath.php";
+
 if (isset($_SESSION['user_id']))
     $uS = new UserService($_SESSION["user_id"]);
 $dS  = new DeliveryService();
 $foodS = new FoodService();
-$globalpath = "http://localhost:8888/projekt1";
+
 
 
 if(isset($_POST["submit-order"])){

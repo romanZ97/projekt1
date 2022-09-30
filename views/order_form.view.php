@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <?php
-require_once "../views/header.view.php";
+require_once "header.view.php";
 ?>
 
 <!-- Bestellformular -->
@@ -83,5 +83,5 @@ require_once "../views/header.view.php";
     </div>
 <?php endif; ?>
 <?php
-require_once "../views/footer.view.php";
+require_once "footer.view.php";
 ?>

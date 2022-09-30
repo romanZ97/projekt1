@@ -1,5 +1,5 @@
 <?php
-$globalpath = "http://localhost:8888/projekt1";
+require __DIR__ . "/../config/globalpath.php";
 $order = null;
 if (isset($_POST["order_positions"])){
     $order = $data = json_decode($_POST["order_positions"],true);

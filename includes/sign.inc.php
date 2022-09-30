@@ -21,7 +21,6 @@ if( isset($_SESSION["user_id"]) ){
     $user_id = $sInS->decrypt($_COOKIE["remember"]);
 
     $sql = "SELECT COUNT(*), id FROM user WHERE id = ?";
-    $stmt = mysqli_stmt_init($conn);
     $result = $sInS->loadDataWithParameters($sql, "i", array($user_id),"signin");
     $count = $result["cntUser"];
 
@@ -35,8 +34,8 @@ if( isset($_SESSION["user_id"]) ){
 
 if(isset($_POST['login-submit'])) {
 
-    $mail_username = mysqli_real_escape_string($conn, $_POST['mail-username']);
-    $pwd = mysqli_real_escape_string($conn, $_POST['pwd']);
+    $mail_username = $_POST["mail-username"];
+    $pwd = $_POST["pwd"];
 
     if(empty($mail_username) || empty($pwd)){
         header("Location: ../signin.php?error=emptyfields");
@@ -86,9 +85,6 @@ if (!isset($_POST['signup-submit'])) {
     exit();
 
 } else {
-    require_once __DIR__ . "/../config/db_connect.php";
-    require __DIR__ . "/../src/SignService.php";
-    $SignupService = new SignService();
 
     $user_name = $_POST['user_name'];
     $email = $_POST['email'];
@@ -100,7 +96,7 @@ if (!isset($_POST['signup-submit'])) {
         header("Location: ../signup.php?error=empty-fields-signup&user_name=" . $user_name . "&email=" . $email);
         exit();
 
-    } else if (!$SignupService->checkMailValidation($email)) {
+    } else if (!$sInS->checkMailValidation($email)) {
         header("Location: ../signup.php?error=invalid-mail");
         exit();
 
@@ -109,13 +105,13 @@ if (!isset($_POST['signup-submit'])) {
         exit();
 
     } else {
-        if ($SignupService->checkUser($user_name, "signup")) {
+        if ($sInS->checkUser($user_name, "signup")) {
             header("Location: ../signup.php?error=usertaken&mail=" . $user_name);
             exit();
 
         } else {
-            $SignupService->addUser($user_name, $email, $pwd);
-            $user_id = $SignupService->getUserIdByName($user_name, "signup");
+            $sInS->addUser($user_name, $email, $pwd);
+            $user_id = $sInS->getUserIdByName($user_name, "signup");
 
             header("Location: ../signin.php?signup=success");
             exit();

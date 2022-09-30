@@ -100,5 +100,5 @@ async function userUserDashAction(food_id, element_id, post_name, alert_text){
 }
 
 function sendUserData(data){
-    sendJSON("includes/user_action.inc.php",'order-user-data',data).then()
+    sendJSON("includes/user_actions.inc.php",'order-user-data',data).then()
 }

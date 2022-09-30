@@ -66,7 +66,7 @@ class SignService extends Main
      */
     public function addUser($user_name, $email, $pwd)
     {
-        $sql = "INSERT INTO user (user_name, email, password, token_password) VALUES (?, ?, ?, null)";
+        $sql = "INSERT INTO user (user_name, email, password) VALUES (?, ?, ?)";
 
         $pwd = password_hash($pwd, PASSWORD_DEFAULT);
         $this->executeQuery($sql, "sss", array($user_name, $email, $pwd), "signup");

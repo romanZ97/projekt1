@@ -1,28 +1,34 @@
 <!DOCTYPE html>
 <?php
+require __DIR__ . "/config/globalpath.php";
 session_start();
-$globalpath = "http://localhost:8888/projekt1";
 if (isset($_SESSION['user_id'])) {
     header("Location: $globalpath/index.php");
 }
 ?>
-<html lang="de" >
+<html lang="de">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- Link zur OpenSource Bootstrap CSS Datei -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    <!-- Link zu den Opensource JavaScript Dateien von Bootstrap-->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/blog/">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
             crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
             integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
             crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
-            integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+            integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
             crossorigin="anonymous"></script>
+
 
     <title>Login</title>
 
@@ -107,7 +113,8 @@ if (isset($_SESSION['user_id'])) {
         }
     }
     ?>
-    <button class="btn btn-lg btn-primary btn-block mb-5" id="login-submit" name="login-submit" type="submit" style="">Sign in
+    <button class="btn btn-lg btn-primary btn-block mb-5" id="login-submit" name="login-submit" type="submit" style="">
+        Sign in
     </button>
     <a class="text-reset" href="signup.php">Noch keinen Account? Jetzt registrieren!</a>
 </form>
