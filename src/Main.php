@@ -1,21 +1,28 @@
 <?php
 
 /**
+ * Klasse Main
+ * Autor: Roman Zhuravel
  *
+ * -Sammlung der Funktionen für Unterstützung der Anwendungsverläufe
  */
 class Main
 {
     /**
+    * Übergezogene Variable für MYSQLI-Connection
      * @var
      */
     protected $conn;
+
     /**
+     * Übergezogener globaler Pfad zu dem Host
      * @var string
      */
     protected string $globalpath = "http://localhost:8888/projekt1";
 
     /**
-     *
+     * Konstruktor der KLasse
+     * erzeugt die Verbindung zur Datenbank und setzt die Connection-Variable ein
      */
     public function __construct()
     {
@@ -24,6 +31,8 @@ class Main
     }
 
     /**
+     * Ruft eine über gegebene SQL-Query mit Parametern-Array mit angepassten Datentypen auf und gibt den MSQLI-Result zurück.
+     *
      * @param $query
      * @param $types
      * @param $data
@@ -35,6 +44,8 @@ class Main
     }
 
     /**
+     * Abruffunktion einer Query ohne Übergabeparametern mit der Rückgabe von MYSQLI-Result
+     *
      * @param $query
      * @return false|mysqli_result|null
      */
@@ -44,6 +55,8 @@ class Main
     }
 
     /**
+     * Aufruf einer Query mit Übergabeparametern ohne Result
+     *
      * @param $query
      * @param $types
      * @param $data
@@ -139,6 +152,8 @@ class Main
     }
 
     /**
+     * Wandelt die über gegebene Parametern in sicheren Format um
+     *
      * @param $conn
      * @param $query
      * @return void

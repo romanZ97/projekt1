@@ -1,5 +1,12 @@
 <?php
 require_once "Main.php";
+
+/**
+ * Klasse SignService
+ * Autor: Roman Zhuravel
+ *
+ * -Sammlung der Funktionen für Anlegen von User relevanten Daten (Favoriten, Kontaktdaten)
+ */
 class UserService extends Main
 {
 

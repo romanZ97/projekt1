@@ -1,6 +1,12 @@
 <?php
 require "Main.php";
 
+/**
+ * Klasse SignService
+ * Autor: Roman Zhuravel
+ *
+ * -Sammlung der Funktionen für Unterstützung der Registrierung- und Anmeldevorläufe
+ */
 class SignService extends Main
 {
 

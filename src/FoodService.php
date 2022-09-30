@@ -1,6 +1,13 @@
 <?php
 require_once "Main.php";
 
+/**
+ * Klasse FoodService
+ * Autor: Roman Zhuravel
+ *
+ * -Sammlung der Funktionen für Aufladen von angelegten Speisen Daten
+ *
+ */
 class FoodService extends Main
 {
     private $dashboard_categories = array();
@@ -87,6 +94,9 @@ class FoodService extends Main
                             <div id="title-' . $food["id"] . '" class="card-heading h-100">
                                 ' . $food["title"] . '
                             </div>
+                            <div id="icon-' . $food["id"] . '" class="card-icon">
+                                    <img src="'. $this->globalpath . '/assets/icons/' . $food["icon_name"] .'.png">
+                             </div>
                             <div id="portion-' . $food["id"] . '" class="card-text-left">
                                 ' . $food["food_portion"] . ' ' . $food["food_portion_unit"] . '
                             </div>
@@ -212,8 +222,11 @@ class FoodService extends Main
                         
                         <div id="food-' . $food["id"] . '" class="card-details">
                             <div id="title-' . $food["id"] . '" class="card-heading h-100">
-                                ' . $food["title"] . '
+                                ' . $food["title"] . ' 
                             </div>
+                            <div id="icon-' . $food["id"] . '" class="card-icon">
+                                    <img src="'. $this->globalpath . '/assets/icons/' . $food["icon_name"] .'.png">
+                             </div>
                             <div id="portion-' . $food["id"] . '" class="card-text-left">
                                 ' . $food["food_portion"] . ' ' . $food["food_portion_unit"] . '
                             </div>

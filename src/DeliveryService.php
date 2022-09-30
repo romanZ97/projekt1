@@ -1,6 +1,12 @@
 <?php
 require_once "Main.php";
 
+/**
+ * Klasse DeliveryService
+ * Autor: Roman Zhuravel
+ *
+ * -Sammlung der Funktionen für Unterstützung der Bestellvorläufe
+ */
 class DeliveryService extends Main
 {
     protected $order_positions = array();
