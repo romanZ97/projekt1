@@ -1,8 +1,8 @@
 </div>
 <nav class="nav-bottom">
     <ul>
-        <li><a href="">Impressum</a></li>
-        <li><a href="">Extras</a></li>
+        <li><a href="<?php echo $globalpath ?>/views/impressum.php">Impressum</a></li>
+        <li><a href="<?php echo $globalpath ?>/views/extras.php">Extras</a></li>
     </ul>
 </nav>
 
