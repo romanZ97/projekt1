@@ -25,7 +25,8 @@ if(isset($_POST['submit']))
             // neues Bild hochladen
 
             //Bild umbenennen
-            $ext = end(explode('.', $image_name));
+            $array = explode('.', $image_name);
+            $ext = end($array);
 
             //Bild umbenennen
             $image_name = "SpeiseKategorie_".rand(000, 999).'.'.$ext; //beispeil:  SpeiseKategorie_834.jpg
@@ -106,4 +107,3 @@ if(isset($_POST['submit']))
     header('location:' . URLRACINE . 'admin/categoryManage.php');
 
 }
-

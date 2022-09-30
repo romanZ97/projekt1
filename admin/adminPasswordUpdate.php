@@ -28,16 +28,18 @@ require_once(__DIR__ . '/partials/header.php');
                 <tr>
                     <td>Neues Passwort:</td>
                     <td>
-                        <input type="password" name="new_password" placeholder="Neues Passwort">
+                        <input type="password" name="new_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Neues Passwort">
                     </td>
                 </tr>
 
                 <tr>
                     <td>Passwort bestätigen: </td>
                     <td>
-                        <input type="password" name="confirm_password" placeholder="Passwort bestätigen">
+                        <input type="password" name="confirm_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Passwort bestätigen">
                     </td>
                 </tr>
+
+
 
                 <tr>
                     <td colspan="2">
@@ -47,6 +49,10 @@ require_once(__DIR__ . '/partials/header.php');
                 </tr>
 
             </table>
+<br> <br>
+            <p>
+                Beacten Sie, dass Ihr neues Passwort mindestens eine Zahl, einen Groß- und Kleinbuchstaben und mindestens 8 oder mehr Zeichen enthalten muss.
+            </p>
 
         </form>
 

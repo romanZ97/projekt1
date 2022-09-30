@@ -3,31 +3,31 @@
 require_once (__DIR__ . '/partials/header.php');
 ?>   <!-- Header hinzufügen (Inklusiv Verbindung mit der DB) -->
 
-<div class="main-content">
-    <div class="wrapper">
-        <h1>Kategorie aktualisieren</h1>
+    <div class="main-content">
+        <div class="wrapper">
+            <h1>Kategorie aktualisieren</h1>
 
-        <br><br>
+            <br><br>
 
 
-        <?php
-        require_once (__DIR__ . '/includes/categoryUpdate_GETID_includes.php');
-        ?>   <!-- Funktion getid -->
+            <?php
+            require_once (__DIR__ . '/includes/categoryUpdate_GETID_includes.php');
+            ?>   <!-- Funktion getid -->
 
-        <form action="" method="POST" enctype="multipart/form-data">
+            <form action="" method="POST" enctype="multipart/form-data">
 
-            <table class="tbl-30">
-                <tr>
-                    <td>Name der Kategorie: </td>
-                    <td>
-                        <input type="text" name="title" value="<?php echo $title; ?>">
-                    </td>
-                </tr>
+                <table class="tbl-30">
+                    <tr>
+                        <td>Name der Kategorie: </td>
+                        <td>
+                            <input type="text" name="title" value="<?php echo $title; ?>">
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>Aktuelles Bild: </td>
-                    <td>
-                        <?php 
+                    <tr>
+                        <td>Aktuelles Bild: </td>
+                        <td>
+                            <?php
                             if($current_image != "")
                             {
                                 //Bild anzeigen
@@ -40,59 +40,59 @@ require_once (__DIR__ . '/partials/header.php');
                                 //Fehlermeldung anzeigen
                                 echo "<div class='error'>Kein Bild hinzugefügt</div>";
                             }
-                        ?>
-                    </td>
-                </tr>
+                            ?>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>Neues Bild: </td>
-                    <td>
-                        <input type="file" name="image">
-                    </td>
-                </tr>
+                    <tr>
+                        <td>Neues Bild: </td>
+                        <td>
+                            <input type="file" name="image">
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>Hervorheben? </td>
-                    <td>
-                        <input <?php if($featured=="Ja"){echo "checked";} ?> type="radio" name="featured" value="Ja"> Ja
+                    <tr>
+                        <td>Hervorheben? </td>
+                        <td>
+                            <input <?php if($featured=="Ja"){echo "checked";} ?> type="radio" name="featured" value="Ja"> Ja
 
-                        <input <?php if($featured=="Nein"){echo "checked";} ?> type="radio" name="featured" value="Nein"> Nein
-                    </td>
-                </tr>
+                            <input <?php if($featured=="Nein"){echo "checked";} ?> type="radio" name="featured" value="Nein"> Nein
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>Aktivieren? </td>
-                    <td>
-                        <input <?php if($active=="Ja"){echo "checked";} ?> type="radio" name="active" value="Ja"> Ja
+                    <tr>
+                        <td>Aktivieren? </td>
+                        <td>
+                            <input <?php if($active=="Ja"){echo "checked";} ?> type="radio" name="active" value="Ja"> Ja
 
-                        <input <?php if($active=="Nein"){echo "checked";} ?> type="radio" name="active" value="Nein"> Nein
-                    </td>
-                </tr>
+                            <input <?php if($active=="Nein"){echo "checked";} ?> type="radio" name="active" value="Nein"> Nein
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>Icon: </td>
-                    <td>
-                        <b><?php echo $icon_name; ?></b>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>Icon: </td>
+                        <td>
+                            <b><?php echo $icon_name; ?></b>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>
-                        <input type="hidden" name="current_image" value="<?php echo $current_image; ?>">
-                        <input type="hidden" name="id" value="<?php echo $id; ?>">
-                        <input type="submit" name="submit" value="Kategorie aktualisieren" class="btn-secondary">
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            <input type="hidden" name="current_image" value="<?php echo $current_image; ?>">
+                            <input type="hidden" name="id" value="<?php echo $id; ?>">
+                            <input type="submit" name="submit" value="Kategorie aktualisieren" class="button1">
+                        </td>
+                    </tr>
 
-            </table>
+                </table>
 
-        </form>
+            </form>
 
-        <?php
-        require_once (__DIR__ . '/includes/categoryUpdate_UPDATE_includes.php');
-        ?>   <!-- Funktion UPDATE KATEGORY -->
+            <?php
+            require_once (__DIR__ . '/includes/categoryUpdate_UPDATE_includes.php');
+            ?>   <!-- Funktion UPDATE KATEGORY -->
 
+        </div>
     </div>
-</div>
 
 <?php include('partials/footer.php'); ?>

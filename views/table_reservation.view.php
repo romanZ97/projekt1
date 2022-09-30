@@ -107,7 +107,8 @@ include("./config/db_connect.php");
                         reservation_time = '$time',
                         table_id  = $peaple,
                         customer_name = '$name',
-                        customer_contact = '$email',
+                        customer_contact = '$phone',
+                        customer_email = '$email',
                         message = '$message'
                     ";
 
@@ -119,7 +120,6 @@ include("./config/db_connect.php");
             if ($res2) {
                 //Ja
                 echo "<div class='success text-center'>Vielen Dank für Ihre Reservierung</div>";
-                header('location:' . $globalpath . 'admin/add-category.php');
             } else {
                 //Nein
                 echo "<div class='error text-center'>Ein Fehler ist aufgetretten</div>";

@@ -65,16 +65,7 @@
 
         <td>
             <a href="<?php echo URLRACINE; ?>adminManage/adminUpdate.php?id=<?php echo $id; ?>" class="button1"> Admin aktualisieren</a>
-            <a onclick="ConfirmDelete()" class="button2">Admin löschen</a>
-
-            <script type="text/javascript">
-                const baseUrl='<?php echo URLRACINE; ?>adminManage/adminDelete.php?id=<?php echo $id; ?>';
-                function ConfirmDelete()
-                {
-                    if (confirm("Wollen Sie diesen Admin wirklich löschen ?"))
-                        location.href=baseUrl;
-                }
-            </script>
+            <a href="<?php echo URLRACINE; ?>adminManage/adminDelete.php?id=<?php echo $id; ?>" onclick="ConfirmDelete()" class="button2">Admin löschen</a>
 
         </td>
 

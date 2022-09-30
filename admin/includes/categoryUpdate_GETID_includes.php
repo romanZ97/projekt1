@@ -37,5 +37,3 @@ else
     //gehe zur Seite manage-category
     header('location:'.URLRACINE.'admin/categoryManage.php');
 }
-
-

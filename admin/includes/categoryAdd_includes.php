@@ -44,7 +44,8 @@ if(isset($_POST['submit']))
 
             //Unser Bild automatisch umbenennen
             //Holen Sie sich die Erweiterung unseres Bildes (jpg, png, gif, etc) e.g. "produkt1.jpg"
-            $ext = end(explode('.', $image_name));
+            $array = explode('.', $image_name);
+            $ext = end($array);
 
             //Rename the Image
             $image_name = "SpeiseKategorie_".rand(000, 999).'.'.$ext; // Beispiel SpeiseKategorie_834.jpg

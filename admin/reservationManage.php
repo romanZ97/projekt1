@@ -17,7 +17,7 @@
 
         <div class="container mt-5">
 
-            <table class="table table-borderless table-responsive card-1 p-4">
+            <table class="table table-fit-content table-borderless table-responsive card-1 p-4">
                 <thead>
                 <tr class="border-bottom">
                     <th>
@@ -28,6 +28,9 @@
                     </th>
                     <th>
                         <span class="ml-2">Email</span>
+                    </th>
+                    <th>
+                        <span class="ml-2">Kontaktnummer</span>
                     </th>
                     <th>
                         <span class="ml-2">Datum</span>
@@ -70,6 +73,7 @@
                                 $reservation_date = $row['reservation_date'];
                                 $reservation_time = $row['reservation_time'];
                                 $customer_name = $row['customer_name'];
+                                $customer_email = $row['customer_email'];
                                 $customer_contact = $row['customer_contact'];
                                 $message = $row['message'];
 
@@ -79,6 +83,7 @@
                                     <tr>
                                         <td><?php echo $sn++; ?>. </td>
                                         <td><?php echo $customer_name; ?></td>
+                                        <td><?php echo $customer_email; ?></td>
                                         <td><?php echo $customer_contact; ?></td>
                                         <td><?php echo $reservation_date; ?></td>
                                         <td><?php echo $reservation_time; ?></td>

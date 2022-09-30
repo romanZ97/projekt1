@@ -110,17 +110,8 @@ require_once (__DIR__ . '/partials/header.php');
                 <td>
                     <a href="<?php echo URLRACINE; ?>admin/categoryUpdate.php?id=<?php echo $id; ?>" class="button1">Kategorie aktualisieren</a>
 
-                    <a onclick="ConfirmDelete()"  class="button2">Kategorie löschen</a>
+                    <a href="<?php echo URLRACINE; ?>admin/categoryDelete.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>"  class="button2">Kategorie löschen</a>
 
-                    <script type="text/javascript">
-                        const baseUrl='<?php echo URLRACINE; ?>admin/categoryDelete.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>';
-                        function ConfirmDelete()
-                        {
-                            if (confirm("Wollen Sie die Kategorie wirklich löschen ?")) {
-                                location.href = baseUrl;
-                            }
-                        }
-                    </script>
 
                 </td>
             </tr>

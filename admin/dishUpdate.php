@@ -403,13 +403,15 @@ else
                 {
                     //Abfrage ausgeführt und das Produkt wurde aktualisiert
                     $_SESSION['update'] = "<div class='success'>Produkt erfolgreich aktualisiert</div>";
+                    echo  "<div class='success'>Produkt erfolgreich aktualisiert</div>";
                 }
                 else
                 {
                     //Produkt konnte nicht aktualisiert werden
                     $_SESSION['update'] = "<div class='error'>Produkt konnte nicht aktualisiert werden</div>";
+                    echo   "<div class='error'>Produkt konnte nicht aktualisiert werden</div>";
                 }
-                header('location:'.URLRACINE.'admin/dishManage.php');
+
 
 
             }

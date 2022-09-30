@@ -131,18 +131,8 @@ require_once (__DIR__ . '/partials/header.php');
                                     <td><?php echo $active; ?></td>
                                     <td>
                                         <a href="<?php echo URLRACINE; ?>admin/dishUpdate.php?id=<?php echo $id; ?>" class="button1">Gericht aktualisiren</a>
-                                        <a onclick="ConfirmDelete()" class="button2">Gerict löschen</a>
+                                        <a href="<?php echo URLRACINE; ?>admin/dishDelete.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>" class="button2">Gerict löschen</a>
                                     </td>
-
-                                    <script type="text/javascript">
-                                        const baseUrl='<?php echo URLRACINE; ?>admin/dishDelete.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>';
-                                        function ConfirmDelete()
-                                        {
-                                            if (confirm("Wollen Sie dieses Gericht wirklich löschen ?"))
-                                                location.href=baseUrl;
-                                        }
-                                    </script>
-
 
                                 </tr>
 

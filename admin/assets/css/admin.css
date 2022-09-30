@@ -247,9 +247,9 @@ body {
 
 }
 
-
-
-
+.table-fit-content{
+    width: fit-content;
+}
 
 #brrr {
     background-color: #E7E7E7;

@@ -1,4 +1,5 @@
-<?php include('partials/header.php');
+<?php
+include('partials/header.php');
 require 'includes/PHPMailer.php';
 require 'includes/SMTP.php';
 require 'includes/Exception.php';
@@ -39,6 +40,7 @@ use PHPMailer\PHPMailer\Exception;
                     $reservation_date = $row['reservation_date'];
                     $reservation_time = $row['reservation_time'];
                     $customer_name = $row['customer_name'];
+                    $customer_email = $row['customer_email'];
                     $customer_contact = $row['customer_contact'];
                     $message = $row['message'];
                 }
@@ -67,6 +69,14 @@ use PHPMailer\PHPMailer\Exception;
 
                 <tr>
                     <td>Email</td>
+                    <td>
+                        <b>  <?php echo $customer_email; ?></b>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td>Kontaktnummer</td>
                     <td>
                         <b>  <?php echo $customer_contact; ?></b>
                     </td>
@@ -145,7 +155,8 @@ use PHPMailer\PHPMailer\Exception;
 
                     $row=mysqli_fetch_assoc($res3);
 
-                    $customer_contact = $row['customer_contact']; // mail des empfänger
+                    $customer_email = $row['customer_email'];
+                    $customer_contact = $row['customer_contact'];
                     $customer_name = $row['customer_name'];
                     $reservation_date = $row['reservation_date'];
                     $reservation_time = $row['reservation_time'];
@@ -195,7 +206,7 @@ use PHPMailer\PHPMailer\Exception;
                         ";
 
                     try {
-                        $mail->addAddress($customer_contact);
+                        $mail->addAddress($customer_email);
                     } catch (Exception $e) {
                     }
 
@@ -218,7 +229,8 @@ use PHPMailer\PHPMailer\Exception;
 
                 $row=mysqli_fetch_assoc($res4);
 
-                $customer_contact = $row['customer_contact']; // mail des empfänger
+                $customer_email = $row['customer_email'];
+                $customer_contact = $row['customer_contact'];
                 $customer_name = $row['customer_name'];
                 $reservation_date = $row['reservation_date'];
                 $reservation_time = $row['reservation_time'];
@@ -268,8 +280,8 @@ use PHPMailer\PHPMailer\Exception;
                         ";
 
                 try {
-                    if (!empty($customer_contact)) {
-                        $mail->addAddress($customer_contact);
+                    if (!empty($customer_email)) {
+                        $mail->addAddress($customer_email);
                     }
                 } catch (Exception $e) {
                 }
@@ -292,7 +304,8 @@ use PHPMailer\PHPMailer\Exception;
 
                 $row=mysqli_fetch_assoc($res4);
 
-                $customer_contact = $row['customer_contact']; // mail des empfänger
+                $customer_email = $row['customer_email'];
+                $customer_contact = $row['customer_contact'];
                 $customer_name = $row['customer_name'];
                 $reservation_date = $row['reservation_date'];
                 $reservation_time = $row['reservation_time'];
@@ -344,7 +357,7 @@ use PHPMailer\PHPMailer\Exception;
                         ";
 
                 try {
-                    $mail->addAddress($customer_contact);
+                    $mail->addAddress($customer_email);
                 } catch (Exception $e) {
                 }
 

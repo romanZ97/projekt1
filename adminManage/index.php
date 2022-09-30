@@ -39,7 +39,7 @@ require_once (__DIR__ . '/partials/header.php');
 ?>
     <br /> <br />
     <!-- Button zum Hinzufügen des Administrators -->
-            <a href="adminAdd.php" class="btn-primary">Admin hinzufügen</a>
+            <a href="adminAdd.php" class="button1">Admin hinzufügen</a>
 
 
             <!-- Gesamte Liste der Administratoren-->

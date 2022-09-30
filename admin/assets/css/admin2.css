@@ -8,6 +8,10 @@
 .text-center{
     text-align: center;
 }
+.text-centerLogin{
+    text-align: center;
+    margin-top: auto;
+}
 
 
 .btn-primary{
@@ -134,11 +138,12 @@
     width: 300px;
     padding: 40px;
     position: absolute;
-    top: 60%;
+    top: 70%;
     left: 50%;
     transform: translate(-50%,-50%);
     background: #f5f5f5;
     text-align: center;
+
 }
 .box h1{
     color: #303481;

@@ -143,7 +143,7 @@ class FoodService extends Main
     {
         $first = true;
         $count = 1;
-        foreach ($this->active_categories as $category){
+        foreach ($this->dashboard_categories as $category){
 
             if($first){
                 echo '

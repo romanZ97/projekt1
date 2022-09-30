@@ -43,8 +43,7 @@ require_once (__DIR__ . '/partials/header.php');
                     <tr>
                         <td>Preis: </td>
                         <td>
-
-                                <input type="number" name="price">
+                             <input type="text" name="price">
 
                         </td>
                     </tr>
@@ -347,7 +346,7 @@ require_once (__DIR__ . '/partials/header.php');
                 $sql2 = "INSERT INTO food SET 
                     title = '$title',
                     description = '$description',
-                    price = $price,
+                    price = '$price',
                     image_name = '$image_name',
                     category_id = $category,
                     meat_type_id = $meat_type,
@@ -367,14 +366,16 @@ require_once (__DIR__ . '/partials/header.php');
                 {
                     //Daten erfolgreich eingefügt
                     $_SESSION['add'] = "<div class='success'>Das Gericht wurde erfolgreich hinzugefügt.</div>";
+                    echo "<div class='success'>Das Gericht wurde erfolgreich hinzugefügt.</div>";
                 }
                 else
                 {
                     //Daten nicht eingefügt
                     $_SESSION['add'] = "<div class='error'>das Gericht wurde nicht eingefügt.</div>";
+                    echo "<div class='error'>das Gericht wurde nicht eingefügt.</div>";
 
                 }
-                header('location:'.URLRACINE.'admin/dishManage.php');
+
 
             }
 
